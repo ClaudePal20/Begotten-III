@@ -1101,3 +1101,87 @@ local FACTION = Clockwork.faction:New("Hillkeeper");
 	};
 
 FACTION_HILLKEEPER = FACTION:Register();
+
+
+local FACTION = Clockwork.faction:New("Voltists");
+	FACTION.disabled = false; -- For events.
+	FACTION.whitelist = true;
+	FACTION.useFullName = false;
+	FACTION.material = "begotten/faction/faction_logo_voltists";
+	FACTION.color = Color(100, 100, 100);
+	FACTION.description = " "
+	FACTION.availablefaiths = {"Faith of the Light"};
+	FACTION.characterLimit = 1; -- # of characters of this faction a player can have.
+	FACTION.ratio = 0.3; -- 0.2 slots per player (6 at 30 players).
+	FACTION.imposters = true;
+	FACTION.names = "voltist";
+	FACTION.subfactions = {
+		{name = "Forgeborn", startingRank = 9, subtitle = "Heavy-duty enforcers and builders.", 
+		description = "Made to shape and protect Voltist territory, their bodies are usually reinforced with industrial-grade armor and serve as the primary melee force of the tribe.", 
+		attributes = {{Color(0, 225, 0), "(+) Starts with +25 HP and +10 stamina"}}}
+		{name = "Neuralynx", startingRank = 13, subtitle = "Agile, tech-savvy scouts, gunners and saboteurs.", 
+		description = "Equipped with neural implants and stealth tech, they excel in communications infiltration and data warfare.", 
+		attributes = {{Color(0, 225, 0), "(+) Starts with +10% speed and +10 stamina"}}}}
+
+
+	FACTION.models = {
+		male = {
+			clothes = "models/begotten/wanderers/voltist_medium.mdl",
+			heads = {
+				"male_90",
+				"male_91",
+				"male_92",
+				"male_93",
+				"male_94",
+				"male_95",
+				"male_96"
+			},
+		},
+	};
+	
+	if !Schema.Ranks then
+		Schema.Ranks = {};
+	end
+	
+	if !Schema.RankTiers then
+		Schema.RankTiers = {};
+	end
+	
+	if !Schema.RanksToBuffs then
+		Schema.RanksToBuffs = {};
+	end
+
+	if !Schema.RanksToSubfaction then
+		Schema.RanksToSubfaction = {};
+	end
+	
+	Schema.Ranks["Voltists"] = {
+		[1] = "",
+		[2] = "Housecarl",
+		[3] = "Soothsayer",
+		[4] = "Seer",
+	};
+	
+	Schema.RankTiers["Goreic Warrior"] = {
+		[1] = {"", "Soothsayer", "Marauder"},
+		[2] = {"Housecarl", "Seer", "Admiral", "Ironborn", "Red Wolf"},
+		[3] = {"Chieftain", "Elder", "Grand Admiral"},
+		[4] = {"King's Chosen"},
+		[5] = {"King"},
+	};
+	
+	Schema.RanksToBuffs["Goreic Warrior"] = {
+		["King"] = {health = 50, stamina = 50},
+	};
+	
+	Schema.RanksToSubfaction["Goreic Warrior"] = {
+		["Admiral"] = "Clan Harald",
+		["Grand Admiral"] = "Clan Harald",
+		["Soothsayer"] = "Clan Crast",
+		["Seer"] = "Clan Crast",
+		["Elder"] = "Clan Crast",
+		["Ironborn"] = "Clan Shagalax",
+		["Marauder"] = "Clan Reaver",
+		["Red Wolf"] = "Clan Reaver",
+	};
+FACTION_GOREIC = FACTION:Register();
