@@ -859,135 +859,124 @@ local ringcolors = {
 function COMMAND:OnRun(player, arguments)
 	local faith = player:GetFaith();
 	
-	if not faith then
-		Schema:EasyText(player, "chocolate", "You have no gods to pray to!");
-		return;
-	end
-
-	local subfaith = player:GetSubfaith();
-	if not subfaith or subfaith == "" or subfaith == "N/A" then
-		Schema:EasyText(player, "chocolate", "You must select a subfaith in the 'Beliefs' menu before you can pray!");
-		return;
-	end
-
-	local curTime = CurTime();
-	local lastPray = player.lastPray or 0;
-	local timeSince = curTime - lastPray;
-
-	if timeSince < 1200 then
-		Schema:EasyText(player, "chocolate", "You must wait another " .. math.ceil(1200 - timeSince) .. " seconds before praying again!");
-		return;
-	end
-
-	player.lastPray = curTime;
-	player:HandleXP(cwBeliefs.xpValues["pray"]);
-
-	local message = table.concat(arguments, " ", 1)
-	local faith_str = string.upper(string.gsub(faith, "Faith of the ", ""));
-	local ofaithstr = faith_str
-	local marked = player:GetNetVar("marked");
-	local favored = player:GetNetVar("favored");
-	local markedstr = "";
-
-	faith_str = string.upper(string.gsub(subfaith, "Faith of the ", ""));
-
-	local ringcolor = "ivory";
-	local color = "ivory";
-	local markedcolor = "red";
-	local favoredcolor = "blue";
-	local admins = {};
-
-	if (ringcolors[ofaithstr]) then
-		ringcolor = ringcolors[ofaithstr];
-	end
+	if faith then
+		local subfaith = player:GetSubfaith();
 	
-	if (faithcolors[faith_str]) then
-		color = faithcolors[faith_str];
-	end
-
-	if favored then
-		markedstr = " FAVORED";
-		markedcolor = "mediumblue";
-	elseif marked then
-		markedstr = " MARKED";
-	end
-
-	for _, v in _player.Iterator() do
-		if (Clockwork.player:IsAdmin(v)) then
-			admins[#admins + 1] = v;
-		end
-	end
-
-	local plycol = _team.GetColor(player:Team());
-
-	if (player:GetFaction() == FACTION_GOREIC) then
-		plycol = plycol:Lighten(100);
-	end
-
-	-- Handle imbecile trait
-	if player:HasTrait("imbecile") then
-		-- Same imbecile logic unchanged...
-		local imbecileText = message;
-		if #imbecileText > 2 then
-			local fillers = {"uh", "uhh", "uhhh", "erm", "ehh", "like"};
-			local suffixes = {".", ",", ";", "!", ":", "?"};
-			local splitText = string.Split(imbecileText, " ");
-			local tourettes = {"ASSHOLE", "FUCKING", "FUCK", "ASS", "BITCH", "CUNT", "PENIS"};
-			local vowels = {["upper"] = {"A", "E", "I", "O", "U"}, ["lower"] = {"a", "e", "i", "o", "u"}};
-
-			for i = 1, #splitText do
-				local currentSplit = splitText[i];
-
-				if math.random(1, 2) == 1 then
-					for j = 1, #currentSplit do
-						for k = 1, 5 do
-							local vowelShuffle = math.random(1, 5);
-							currentSplit = string.gsub(currentSplit, vowels["upper"][k], vowels["upper"][vowelShuffle]);
-							currentSplit = string.gsub(currentSplit, vowels["lower"][k], vowels["lower"][vowelShuffle]);
-						end
-					end
-				elseif #currentSplit >= 2 then
-					local characterToRepeat = math.random(1, #currentSplit - 1);
-					local str = string.utf8sub(currentSplit, characterToRepeat, characterToRepeat);
-					currentSplit = string.gsub(string.utf8setchar(currentSplit, characterToRepeat, "#"), "#", str.."-"..string.utf8lower(str));
-				end
-
-				if #currentSplit >= 2 and math.random(1, 3) == 1 then
-					local suffix_found = false;
-					for j = 1, #suffixes do
-						if string.utf8endswith(currentSplit, suffixes[j]) then
-							suffix_found = true;
-							break;
-						end
-					end
-
-					if not suffix_found then
-						if math.random(1, 10) == 1 then
-							currentSplit = currentSplit.."- "..tourettes[math.random(1, #tourettes)].."!";
-						else
-							currentSplit = fillers[math.random(1, #fillers)];
-						end
-					end
-				end
-
-				if math.random(1, 6) == 1 then
-					currentSplit = string.utf8upper(currentSplit);
-				end
-
-				splitText[i] = currentSplit;
+		if subfaith and subfaith ~= "" and subfaith ~= "N/A" then
+			local message = table.concat(arguments, " ", 1)
+			local faith_str = string.upper(string.gsub(faith, "Faith of the ", ""));
+			local ofaithstr = faith_str
+			local marked = player:GetNetVar("marked");
+			local favored = player:GetNetVar("favored");
+			local markedstr = "";
+			local subfaith = player:GetSubfaith();
+			
+			faith_str = string.upper(string.gsub(subfaith, "Faith of the ", ""));
+			
+			local ringcolor = "ivory";
+			local color = "ivory";
+			local markedcolor = "red";
+			local favoredcolor = "blue";
+			local admins = {};
+			
+			if (ringcolors[ofaithstr]) then
+				ringcolor = ringcolors[ofaithstr]
+			end;
+			
+			if (faithcolors[faith_str]) then
+				color = faithcolors[faith_str];
+			end;
+			
+			if favored then
+				markedstr = " FAVORED";
+				markedcolor = "mediumblue";
+			elseif marked then
+				markedstr = " MARKED";
 			end
 
-			message = table.concat(splitText, " ");
+			for _, v in _player.Iterator() do
+				if (Clockwork.player:IsAdmin(v)) then
+					admins[#admins + 1] = v;
+				end;
+			end;
+			
+			local plycol = _team.GetColor(player:Team());
+			
+			if (player:GetFaction() == FACTION_GOREIC) then
+				plycol = plycol:Lighten(100)
+			end;
+
+			-- Make it work with imbeciles!
+			if player:HasTrait("imbecile") then
+				local imbecileText = message;
+				
+				if #imbecileText > 2 then
+					local fillers = {"uh", "uhh", "uhhh", "erm", "ehh", "like"};
+					local suffixes = {".", ",", ";", "!", ":", "?"};
+					local splitText = string.Split(imbecileText, " ");
+					local tourettes = {"ASSHOLE", "FUCKING", "FUCK", "ASS", "BITCH", "CUNT", "PENIS"};
+					local vowels = {["upper"] = {"A", "E", "I", "O", "U"}, ["lower"] = {"a", "e", "i", "o", "u"}};
+					
+					for i = 1, #splitText do
+						local currentSplit = splitText[i];
+						
+						if math.random(1, 2) == 1 then
+							for j = 1, #currentSplit do
+								for k = 1, 5 do
+									local vowelShuffle = math.random(1, 5);
+									
+									currentSplit = string.gsub(currentSplit, vowels["upper"][k], vowels["upper"][vowelShuffle]);
+									currentSplit = string.gsub(currentSplit, vowels["lower"][k], vowels["lower"][vowelShuffle]);
+								end
+							end
+						elseif #currentSplit >= 2 then
+							local characterToRepeat = math.random(1, #currentSplit - 1);
+							local str = string.utf8sub(currentSplit, characterToRepeat, characterToRepeat);
+							
+							currentSplit = string.gsub(string.utf8setchar(currentSplit, characterToRepeat, "#"), "#", str.."-"..string.utf8lower(str));
+						end
+						
+						if #currentSplit >= 2 and math.random(1, 3) == 1 then
+							local suffix_found = false;
+							
+							for j = 1, #suffixes do
+								if string.utf8endswith(currentSplit, suffixes[j]) then
+									suffix_found = true;
+									break;
+								end
+							end
+							
+							if not suffix_found then
+								if math.random(1, 10) == 1 then
+									currentSplit = currentSplit.."- "..tourettes[math.random(1, #tourettes)].."!";
+								else
+									currentSplit = fillers[math.random(1, #fillers)];
+								end
+							end
+						end
+						
+						if math.random(1, 6) == 1 then
+							currentSplit = string.utf8upper(currentSplit);
+						end
+						
+						splitText[i] = currentSplit;
+					end
+					
+					message = table.concat(splitText, " ");
+				end
+			end
+			
+			Schema:EasyText(admins, ringcolor, "[PRAYER ", color, faith_str, markedcolor, markedstr, ringcolor, "] ", plycol, player:Name(), "ivory", ": "..message)
+			Schema:EasyText(player, color, "You make a prayer: \""..message.."\"")
+			
+			Clockwork.chatBox:AddInTargetRadius(player, "me", "mumbles a short prayer to the gods.", player:GetPos(), Clockwork.config:Get("talk_radius"):Get() * 2);
+		else
+			Schema:EasyText(player, "chocolate", "You must select a subfaith in the 'Beliefs' menu before you can pray!");
 		end
+	else
+		Schema:EasyText(player, "chocolate", "You have no gods to pray to!");
 	end
-
-	Schema:EasyText(admins, ringcolor, "[PRAYER ", color, faith_str, markedcolor, markedstr, ringcolor, "] ", plycol, player:Name(), "ivory", ": "..message)
-	Schema:EasyText(player, color, "You make a prayer: \""..message.."\"")
-
-	Clockwork.chatBox:AddInTargetRadius(player, "me", "mumbles a short prayer to the gods.", player:GetPos(), Clockwork.config:Get("talk_radius"):Get() * 2);
 end;
-
-
 
 COMMAND:Register();
 
