@@ -990,10 +990,8 @@ function COMMAND:OnRun(player, arguments)
 			if not lastXPTime or (CurTime() - lastXPTime) >= cooldown then
 				player:HandleXP(cwBeliefs.xpValues["pray"])
 				player.characterCooldowns[charName] = CurTime()
-				Schema:EasyText(player, "chocolate", "You feel spiritually rewarded. (+XP)") -- just for debugging
 			else
 				local timeLeft = math.ceil(cooldown - (CurTime() - lastXPTime))
-				Schema:EasyText(player, "tan", "You pray, but feel no new insight yet. (Wait " .. timeLeft .. "s for XP again)") -- just for debugging
 			end
 
 		else
