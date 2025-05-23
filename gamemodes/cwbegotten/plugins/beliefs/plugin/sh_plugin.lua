@@ -854,6 +854,10 @@ local ringcolors = {
 	["DARK"] = "firebrick",
 	["FAMILY"] = "grey",
 }
+-- Cooldowns per character name
+local characterCooldowns = characterCooldowns or {}
+-- Table to track cooldowns per character ID
+local characterCooldowns = {}
 
 -- Called when the command has been run.
 function COMMAND:OnRun(player, arguments)
@@ -968,14 +972,28 @@ function COMMAND:OnRun(player, arguments)
 			
 			Schema:EasyText(admins, ringcolor, "[PRAYER ", color, faith_str, markedcolor, markedstr, ringcolor, "] ", plycol, player:Name(), "ivory", ": "..message)
 			Schema:EasyText(player, color, "You make a prayer: \""..message.."\"")
-			local curTime = CurTime();
-			if (!player.lastPray or curTime()-player.lastPray<=1200) then
-				player:HandleXP(cwBeliefs.xpValues["pray"]);
-				player.lastPray = CurTime();
-			else
-				Schema:EasyText(player, "chocolate", "You must wait another"..-math.ceil(curTime()-player.lastPray).." seconds before praying again!");
+
 			
-			Clockwork.chatBox:AddInTargetRadius(player, "me", "mumbles a short prayer to the gods.", player:GetPos(), Clockwork.config:Get("talk_radius"):Get() * 2);
+			local charName = player:GetName()
+			
+			if not charName then
+				Schema:EasyText(player, "red", "Error: Character name is nil.")
+				return
+			end
+			-- feature ready to deploy
+			local cooldown = 2700 -- 45 minutes
+			Schema:EasyText(player, "chocolate", "Character name: " .. tostring(charName))
+			
+			player.characterCooldowns = player.characterCooldowns or {}
+			local lastXPTime = player.characterCooldowns[charName]
+			
+			if not lastXPTime or (CurTime() - lastXPTime) >= cooldown then
+				player:HandleXP(cwBeliefs.xpValues["pray"])
+				player.characterCooldowns[charName] = CurTime()
+			else
+				local timeLeft = math.ceil(cooldown - (CurTime() - lastXPTime))
+			end
+
 		else
 			Schema:EasyText(player, "chocolate", "You must select a subfaith in the 'Beliefs' menu before you can pray!");
 		end
@@ -983,6 +1001,7 @@ function COMMAND:OnRun(player, arguments)
 		Schema:EasyText(player, "chocolate", "You have no gods to pray to!");
 	end
 end;
+
 
 COMMAND:Register();
 
