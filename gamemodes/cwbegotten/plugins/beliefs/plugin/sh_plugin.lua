@@ -980,7 +980,7 @@ function COMMAND:OnRun(player, arguments)
 				Schema:EasyText(player, "red", "Error: Character name is nil.")
 				return
 			end
-			
+			-- feature ready to deploy
 			local cooldown = 2700 -- 45 minutes
 			Schema:EasyText(player, "chocolate", "Character name: " .. tostring(charName))
 			
