@@ -1968,24 +1968,28 @@ function Schema:ModifyItemMarkupTooltip(category, maximumWeight, weight, conditi
 					frame:AddText("Has Coup de Grace: Deal double damage and 100% AP damage to knocked over enemies. Each hit will slightly increase the time it takes for knocked over enemies to get up.", Color(110, 30, 30), nil, 0.9);
 				end
 				
-				if itemTable.requireFaction and not table.IsEmpty(itemTable.requireFaction) and itemTable.requireFaction[1] ~= "Wanderer" then
-					frame:AddText("Required Faction: "..table.concat(itemTable.requireFaction, ", "), Color(110, 30, 30), nil, 0.9);
+				if itemTable.requiredFactions and not table.IsEmpty(itemTable.requiredFactions) and itemTable.requiredFactions[1] ~= "Wanderer" then
+					frame:AddText("Required Faction: "..table.concat(itemTable.requiredFactions, ", "), Color(110, 30, 30), nil, 0.9);
 				end
 				
-				if itemTable.requireFaith and not table.IsEmpty(itemTable.requireFaith) then
-					frame:AddText("Required Faith: "..table.concat(itemTable.requireFaith, " or "), Color(110, 30, 30), nil, 0.9);
+				if itemTable.requiredFaiths and not table.IsEmpty(itemTable.requiredFaiths) then
+					frame:AddText("Required Faith: "..table.concat(itemTable.requiredFaiths, " or "), Color(110, 30, 30), nil, 0.9);
 				end
 				
-				if itemTable.requireSubfaction and not table.IsEmpty(itemTable.requireSubfaction) then
-					frame:AddText("Required Subfaction: "..table.concat(itemTable.requireSubfaction, ", "), Color(110, 30, 30), nil, 0.9);
+				if itemTable.requiredSubfactions and not table.IsEmpty(itemTable.requiredSubfactions) then
+					frame:AddText("Required Subfaction: "..table.concat(itemTable.requiredSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
 				end
 				
-				if itemTable.excludeFactions and not table.IsEmpty(itemTable.excludeFactions) then
-					frame:AddText("Excluded Factions: "..table.concat(itemTable.excludeFactions, ", "), Color(110, 30, 30), nil, 0.9);
+				if itemTable.excludedFactions and not table.IsEmpty(itemTable.excludedFactions) then
+					frame:AddText("Excluded Factions: "..table.concat(itemTable.excludedFactions, ", "), Color(110, 30, 30), nil, 0.9);
+					
+					if table.HasValue(itemTable.excludedFactions, Clockwork.Client:GetFaction()) and itemTable.excludedSubfactions and not table.IsEmpty(itemTable.excludedSubfactions) then
+						frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludedSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
+					end
 				end
 				
-				if Clockwork.Client:GetFaction() == "Goreic Warrior" and itemTable.excludeSubfactions and not table.IsEmpty(itemTable.excludeSubfactions) then
-					frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludeSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
+				if itemTable.excludedSubfactions and not table.IsEmpty(itemTable.excludedSubfactions) then
+					frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludedSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
 				end
 				
 				frame:AddText("Weapon Stats: ", Color(225, 225, 225), "nov_IntroTextSmallDETrooper", 1.15);
@@ -2911,24 +2915,28 @@ function Schema:ModifyItemMarkupTooltip(category, maximumWeight, weight, conditi
 					end
 				end
 				
-				if itemTable.requireFaction and not table.IsEmpty(itemTable.requireFaction) and itemTable.requireFaction[1] ~= "Wanderer" then
-					frame:AddText("Required Faction: "..table.concat(itemTable.requireFaction, ", "), Color(110, 30, 30), nil, 0.9);
+				if itemTable.requiredFactions and not table.IsEmpty(itemTable.requiredFactions) and itemTable.requiredFactions[1] ~= "Wanderer" then
+					frame:AddText("Required Faction: "..table.concat(itemTable.requiredFactions, ", "), Color(110, 30, 30), nil, 0.9);
 				end
 				
-				if itemTable.requireFaith and not table.IsEmpty(itemTable.requireFaith) then
-					frame:AddText("Required Faith: "..table.concat(itemTable.requireFaith, " or "), Color(110, 30, 30), nil, 0.9);
+				if itemTable.requiredFaiths and not table.IsEmpty(itemTable.requiredFaiths) then
+					frame:AddText("Required Faith: "..table.concat(itemTable.requiredFaiths, " or "), Color(110, 30, 30), nil, 0.9);
 				end
 				
-				if itemTable.requireSubfaction and not table.IsEmpty(itemTable.requireSubfaction) then
-					frame:AddText("Required Subfaction: "..table.concat(itemTable.requireSubfaction, ", "), Color(110, 30, 30), nil, 0.9);
+				if itemTable.requiredSubfactions and not table.IsEmpty(itemTable.requiredSubfactions) then
+					frame:AddText("Required Subfaction: "..table.concat(itemTable.requiredSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
 				end
 				
-				if itemTable.excludeFactions and not table.IsEmpty(itemTable.excludeFactions) then
-					frame:AddText("Excluded Factions: "..table.concat(itemTable.excludeFactions, ", "), Color(110, 30, 30), nil, 0.9);
+				if itemTable.excludedFactions and not table.IsEmpty(itemTable.excludedFactions) then
+					frame:AddText("Excluded Factions: "..table.concat(itemTable.excludedFactions, ", "), Color(110, 30, 30), nil, 0.9);
+					
+					if table.HasValue(itemTable.excludedFactions, Clockwork.Client:GetFaction()) and itemTable.excludedSubfactions and not table.IsEmpty(itemTable.excludedSubfactions) then
+						frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludedSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
+					end
 				end
 				
-				if Clockwork.Client:GetFaction() == "Goreic Warrior" and itemTable.excludeSubfactions and not table.IsEmpty(itemTable.excludeSubfactions) then
-					frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludeSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
+				if itemTable.excludedSubfactions and not table.IsEmpty(itemTable.excludedSubfactions) then
+					frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludedSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
 				end
 				
 				frame:AddText("Shield Stats: ", Color(225, 225, 225), "nov_IntroTextSmallDETrooper", 1.15);
@@ -3151,7 +3159,6 @@ function Schema:ModifyItemMarkupTooltip(category, maximumWeight, weight, conditi
 
 			if(table.HasValue(itemTable.attributes, "banner_blessing")) then
 				frame:AddText("Blessing of the Banner (Shieldless): While a support banner is equipped, it does not need to be held to receive its effects.", Color(110, 30, 30), nil, 0.9)
-
 			end
 			
 			if table.HasValue(itemTable.attributes, "mothers_blessing") then
@@ -3168,6 +3175,18 @@ function Schema:ModifyItemMarkupTooltip(category, maximumWeight, weight, conditi
 
 			if table.HasValue(itemTable.attributes, "rage") then
 				frame:AddText("Rage (Shieldless): Movement speed is increased by 7%. Warcries return +15 stamina.", Color(110, 30, 30), nil, 0.9);
+			end
+			
+			if table.HasValue(itemTable.attributes, "godless") then
+				frame:AddText("Godless (Shieldless): Increases melee, stamina, and stability damage by 25% while at or below 40% sanity. Increases stability damage of throwing stones by 25%.", Color(110, 30, 30), nil, 0.9);
+			end
+			
+			if table.HasValue(itemTable.attributes, "iconoclast") then
+				frame:AddText("Iconoclast (Shieldless): Your warcry bless all members of Clan Grock in talking distance with +25 stamina, 25% damage resistance and +15% movement speed for 15 seconds. Targets affected by this buff are highlighted in grey, and you will lose 5 points of sanity per warcry.", Color(110, 30, 30), nil, 0.9);
+			end
+			
+			if table.HasValue(itemTable.attributes, "lesserlifeleech") then
+				frame:AddText("Lesser Lifeleech (Shieldless): 70% of damage in Light Armor, 50% in Medium Armor, 30% in Heavy Armor is returned as health.", Color(110, 30, 30), nil, 0.9);
 			end
 			
 			if table.HasValue(itemTable.attributes, "seafarer") then
@@ -3212,24 +3231,28 @@ function Schema:ModifyItemMarkupTooltip(category, maximumWeight, weight, conditi
 			end
 		--end
 		
-		if itemTable.requireFaction and not table.IsEmpty(itemTable.requireFaction) and itemTable.requireFaction[1] ~= "Wanderer" then
-			frame:AddText("Required Faction: "..table.concat(itemTable.requireFaction, ", "), Color(110, 30, 30), nil, 0.9);
+		if itemTable.requiredFactions and not table.IsEmpty(itemTable.requiredFactions) and itemTable.requiredFactions[1] ~= "Wanderer" then
+			frame:AddText("Required Faction: "..table.concat(itemTable.requiredFactions, ", "), Color(110, 30, 30), nil, 0.9);
 		end
 		
-		if itemTable.requireFaith and not table.IsEmpty(itemTable.requireFaith) then
-			frame:AddText("Required Faith: "..table.concat(itemTable.requireFaith, " or "), Color(110, 30, 30), nil, 0.9);
+		if itemTable.requiredFaiths and not table.IsEmpty(itemTable.requiredFaiths) then
+			frame:AddText("Required Faith: "..table.concat(itemTable.requiredFaiths, " or "), Color(110, 30, 30), nil, 0.9);
 		end
 		
-		if itemTable.requireSubfaction and not table.IsEmpty(itemTable.requireSubfaction) then
-			frame:AddText("Required Subfaction: "..table.concat(itemTable.requireSubfaction, ", "), Color(110, 30, 30), nil, 0.9);
+		if itemTable.requiredSubfactions and not table.IsEmpty(itemTable.requiredSubfactions) then
+			frame:AddText("Required Subfaction: "..table.concat(itemTable.requiredSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
 		end
 		
-		if itemTable.excludeFactions and not table.IsEmpty(itemTable.excludeFactions) then
-			frame:AddText("Excluded Factions: "..table.concat(itemTable.excludeFactions, ", "), Color(110, 30, 30), nil, 0.9);
+		if itemTable.excludedFactions and not table.IsEmpty(itemTable.excludedFactions) then
+			frame:AddText("Excluded Factions: "..table.concat(itemTable.excludedFactions, ", "), Color(110, 30, 30), nil, 0.9);
+			
+			if table.HasValue(itemTable.excludedFactions, Clockwork.Client:GetFaction()) and itemTable.excludedSubfactions and not table.IsEmpty(itemTable.excludedSubfactions) then
+				frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludedSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
+			end
 		end
 		
-		if Clockwork.Client:GetFaction() == "Goreic Warrior" and itemTable.excludeSubfactions and not table.IsEmpty(itemTable.excludeSubfactions) then
-			frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludeSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
+		if itemTable.excludedSubfactions and not table.IsEmpty(itemTable.excludedSubfactions) then
+			frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludedSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
 		end
 		
 		local addedStats = false;
@@ -3413,8 +3436,8 @@ function Schema:ModifyItemMarkupTooltip(category, maximumWeight, weight, conditi
 			frame:AddSpacer(2, Color(0, 0, 0, 0));
 		end
 		
-		if itemTable.requireFaith and not table.IsEmpty(itemTable.requireFaith) then
-			frame:AddText("Required Faith: "..table.concat(itemTable.requireFaith, " or "), Color(110, 30, 30), nil, 0.9);
+		if itemTable.requiredFaiths and not table.IsEmpty(itemTable.requiredFaiths) then
+			frame:AddText("Required Faith: "..table.concat(itemTable.requiredFaiths, " or "), Color(110, 30, 30), nil, 0.9);
 		end
 
 		if weaponClass then
@@ -3697,8 +3720,28 @@ function Schema:ModifyItemMarkupTooltip(category, maximumWeight, weight, conditi
 			frame:AddSpacer(2, Color(0, 0, 0, 0));
 		end;
 		
-		if itemTable.requireFaith and not table.IsEmpty(itemTable.requireFaith) then
-			frame:AddText("Required Faith: "..table.concat(itemTable.requireFaith, " or "), Color(110, 30, 30), nil, 0.9);
+		if itemTable.requiredFactions and not table.IsEmpty(itemTable.requiredFactions) and itemTable.requiredFactions[1] ~= "Wanderer" then
+			frame:AddText("Required Faction: "..table.concat(itemTable.requiredFactions, ", "), Color(110, 30, 30), nil, 0.9);
+		end
+		
+		if itemTable.requiredFaiths and not table.IsEmpty(itemTable.requiredFaiths) then
+			frame:AddText("Required Faith: "..table.concat(itemTable.requiredFaiths, " or "), Color(110, 30, 30), nil, 0.9);
+		end
+		
+		if itemTable.requiredSubfactions and not table.IsEmpty(itemTable.requiredSubfactions) then
+			frame:AddText("Required Subfaction: "..table.concat(itemTable.requiredSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
+		end
+		
+		if itemTable.excludedFactions and not table.IsEmpty(itemTable.excludedFactions) then
+			frame:AddText("Excluded Factions: "..table.concat(itemTable.excludedFactions, ", "), Color(110, 30, 30), nil, 0.9);
+			
+			if table.HasValue(itemTable.excludedFactions, Clockwork.Client:GetFaction()) and itemTable.excludedSubfactions and not table.IsEmpty(itemTable.excludedSubfactions) then
+				frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludedSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
+			end
+		end
+		
+		if itemTable.excludedSubfactions and not table.IsEmpty(itemTable.excludedSubfactions) then
+			frame:AddText("Excluded Subfactions: "..table.concat(itemTable.excludedSubfactions, ", "), Color(110, 30, 30), nil, 0.9);
 		end
 		
 		frame:AddText("Effects: ", Color(225, 225, 225), "nov_IntroTextSmallDETrooper", 1.15);
