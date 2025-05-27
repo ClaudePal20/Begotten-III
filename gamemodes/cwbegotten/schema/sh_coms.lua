@@ -1778,6 +1778,79 @@ local COMMAND = Clockwork.command:New("GoreicHornSummonRaid");
 	end;
 COMMAND:Register();
 
+local COMMAND = Clockwork.command:New("TowerSiren");
+	COMMAND.tip = "Activate the tower siren.";
+	COMMAND.access = "s";
+
+	-- Called when the command has been run.
+	function COMMAND:OnRun(player, arguments)
+		-- Prevent the siren alarm from playing over eachother.
+		if cwDayNight and cwDayNight.currentCycle == "day" then
+			cwDayNight:ModifyCycleTimeLeft(120);
+		end
+		
+		local close_players = {};
+		local far_players = {};
+		
+		for _, v in _player.Iterator() do
+			if IsValid(v) and v:HasInitialized() then
+				local lastZone = v:GetCharacterData("LastZone");
+				
+				if lastZone == "tower" or lastZone == "theater" or lastZone == "hillbunker" then
+					table.insert(close_players, v);
+					Clockwork.chatBox:Add(v, nil, "event", "The klaxons of the tower come to life, signaling an immediate threat to the tower has been detected.");
+					netstream.Start(v, "FadeAmbientMusic");
+				end
+			end
+		end
+		
+		netstream.Start(close_players, "EmitSound", {name = "warhorns/fuckerjoealarm.mp3", pitch = 90, level = 60});
+		netstream.Start(far_players, "EmitSound", {name = "warhorns/fuckerjoealarm.mp3", pitch = 100, level = 75});
+	end;
+COMMAND:Register();
+
+local COMMAND = Clockwork.command:New("TowerRaid");
+	COMMAND.tip = "Disable gatekeeper and holy hierarchy faction, pilgrim trait, tower safezone and play an alarm.";
+	COMMAND.access = "s";
+
+	-- Called when the command has been run.
+	function COMMAND:OnRun(player, arguments)
+		-- Prevent the siren alarm from playing over eachother.
+		if cwDayNight and cwDayNight.currentCycle == "day" then
+			cwDayNight:ModifyCycleTimeLeft(120);
+		end
+		
+		local close_players = {};
+		local far_players = {};
+		
+		for _, v in _player.Iterator() do
+			if IsValid(v) and v:HasInitialized() then
+				local lastZone = v:GetCharacterData("LastZone");
+				
+				if lastZone == "tower" then
+					table.insert(far_players, v);
+					Clockwork.chatBox:Add(v, nil, "event", "The klaxons of the tower come to life and the dim rotating halogen bulbs begin spinning, signaling that the blessings of safety the tower provides has been disabled...");
+					netstream.Start(v, "FadeAmbientMusic");
+				else if lastZone == "tower" or lastZone == "theater" or lastZone == "hillbunker" then
+					table.insert(close_players, v);
+					Clockwork.chatBox:Add(v, nil, "event", "The klaxons of the tower come to life and the dim rotating halogen bulbs begin spinning, signaling that the blessings of safety the tower provides has been disabled...");
+					netstream.Start(v, "FadeAmbientMusic");
+					Schema.towerSafeZoneEnabled = false;
+					local factionTable_GK = Clockwork.faction:FindByID("Gatekeeper");
+					local factionTable_HH = Clockwork.faction:FindByID("Holy Hierarchy");
+					factionTable_GK.disabled = true
+					factionTable_HH.disabled = true
+					cwObserverMode.spectatorMode = true;
+
+				end
+			end
+		end
+		
+		netstream.Start(close_players, "EmitSound", {name = "warhorns/fuckerjoealarm.mp3", pitch = 90, level = 60});
+		netstream.Start(far_players, "EmitSound", {name = "warhorns/fuckerjoealarm.mp3", pitch = 100, level = 75});
+	end;
+COMMAND:Register();
+
 local COMMAND = Clockwork.command:New("CallCongregation");
 	COMMAND.tip = "Call a congregation to the Tower of Light church.";
 	COMMAND.access = "s";
