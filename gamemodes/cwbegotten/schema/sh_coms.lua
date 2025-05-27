@@ -1831,6 +1831,7 @@ local COMMAND = Clockwork.command:New("TowerRaid");
 					table.insert(far_players, v);
 					Clockwork.chatBox:Add(v, nil, "event", "The klaxons of the tower come to life and the dim rotating halogen bulbs begin spinning, signaling that the blessings of safety the tower provides has been disabled...");
 					netstream.Start(v, "FadeAmbientMusic");
+				end
 				else if lastZone == "tower" or lastZone == "theater" or lastZone == "hillbunker" then
 					table.insert(close_players, v);
 					Clockwork.chatBox:Add(v, nil, "event", "The klaxons of the tower come to life and the dim rotating halogen bulbs begin spinning, signaling that the blessings of safety the tower provides has been disabled...");
