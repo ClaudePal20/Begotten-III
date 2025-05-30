@@ -854,10 +854,6 @@ local ringcolors = {
 	["DARK"] = "firebrick",
 	["FAMILY"] = "grey",
 }
--- Cooldowns per character name
-local characterCooldowns = characterCooldowns or {}
--- Table to track cooldowns per character ID
-local characterCooldowns = {}
 
 -- Called when the command has been run.
 function COMMAND:OnRun(player, arguments)
