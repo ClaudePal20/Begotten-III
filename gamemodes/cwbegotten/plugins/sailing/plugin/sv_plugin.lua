@@ -1811,6 +1811,48 @@ concommand.Add("cw_RepairGorewatchAlarm", function(player, cmd, args)
 	end;
 end);
 
+
+concommand.Add("cw_RepairTowerAlarm", function(player, cmd, args)
+	local trace = player:GetEyeTrace();
+
+	if (trace.Entity) then
+		local entity = trace.Entity;
+
+		if (entity:GetClass() == "cw_toweralarm") and player:GetPos():Distance2D(entity:GetPos()) < 300 then
+			if !entity:GetNWBool("broken") then
+				Schema:EasyText(player, "chocolate", "The alarm system has already been repaired!");
+				
+				return;
+			end
+		
+			local itemList = Clockwork.inventory:GetItemsAsList(player:GetInventory());
+			local repairItemTable;
+
+			for k, v in pairs (itemList) do
+				if v.uniqueID == "tech" then
+					repairItemTable = v;
+					break;
+				end
+			end
+			
+			if repairItemTable then
+				Clockwork.player:SetAction(player, "repair_alarm", 30, 1, function() 
+					if entity:IsValid() and entity:GetNWBool("broken") and player:HasItemInstance(repairItemTable) then
+						entity:SetNWBool("broken", false);
+						entity:EmitSound("ambient/levels/caves/ol04_gearengage.wav");
+						
+						Clockwork.chatBox:AddInRadius(nil, "localevent", "With the clanging of gears, the repaired alarm system re-activates.", entity:GetPos(), 666);
+						
+						player:TakeItem(repairItemTable, true);
+					end
+				end);
+			else
+				Schema:EasyText(player, "chocolate", "You do not have any tech to repair the alarm system with!");
+			end
+		end
+	end;
+end);
+
 concommand.Add("cw_SteamEngineRepair", function(player, cmd, args)
 	local trace = player:GetEyeTrace();
 

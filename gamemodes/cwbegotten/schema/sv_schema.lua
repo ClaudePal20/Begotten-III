@@ -1228,47 +1228,45 @@ function Schema:SpawnBegottenEntities()
 		warhornEnt:SetAngles(Angle(43.79, 164.57, 26.77));
 		warhornEnt:Spawn();
 		
-		-- if cwSailing then
-		-- 	local alarmEnt = ents.Create("cw_gorewatchalarm");
-		-- 	local alarmPole = ents.Create("prop_dynamic");
-		-- 	local alarmSpeaker = ents.Create("prop_dynamic");
-			
-		-- 	alarmEnt:SetPos(Vector(10010, 11408, -1055));
-		-- 	alarmEnt:SetAngles(Angle(0, 135, 0));
-		-- 	alarmEnt:Spawn();
-		-- 	alarmPole:SetModel("models/props_docks/dock01_pole01a_128.mdl");
-		-- 	alarmPole:SetPos(Vector(10015, 11406, -1004));
-		-- 	alarmPole:SetAngles(Angle(0, 135, 0));
-		-- 	alarmPole:SetMoveType(MOVETYPE_VPHYSICS);
-		-- 	alarmPole:PhysicsInit(SOLID_VPHYSICS);
-		-- 	alarmPole:SetSolid(SOLID_VPHYSICS);
-		-- 	alarmPole:Spawn();
-		-- 	alarmSpeaker:SetModel("models/props_wasteland/speakercluster01a.mdl");
-		-- 	alarmSpeaker:SetPos(Vector(9999, 11420, -964));
-		-- 	alarmSpeaker:SetAngles(Angle(0, 135, 0));
-		-- 	alarmSpeaker:Spawn();
-			
-		-- 	alarmEnt.speaker = alarmSpeaker;
-		-- 	cwSailing.gorewatchAlarm = alarmEnt;
-		-- end
-		
 		if cwSailing then
+			local alarmEnt = ents.Create("cw_gorewatchalarm");
+			local alarmPole = ents.Create("prop_dynamic");
+			local alarmSpeaker = ents.Create("prop_dynamic");
+			
+			alarmEnt:SetPos(Vector(10010, 11408, -1055));
+			alarmEnt:SetAngles(Angle(0, 135, 0));
+			alarmEnt:Spawn();
+			alarmPole:SetModel("models/props_docks/dock01_pole01a_128.mdl");
+			alarmPole:SetPos(Vector(10015, 11406, -1004));
+			alarmPole:SetAngles(Angle(0, 135, 0));
+			alarmPole:SetMoveType(MOVETYPE_VPHYSICS);
+			alarmPole:PhysicsInit(SOLID_VPHYSICS);
+			alarmPole:SetSolid(SOLID_VPHYSICS);
+			alarmPole:Spawn();
+			alarmSpeaker:SetModel("models/props_wasteland/speakercluster01a.mdl");
+			alarmSpeaker:SetPos(Vector(9999, 11420, -964));
+			alarmSpeaker:SetAngles(Angle(0, 135, 0));
+			alarmSpeaker:Spawn();
+			
+			alarmEnt.speaker = alarmSpeaker;
+			cwSailing.gorewatchAlarm = alarmEnt;
+			
 			local towerEnt = ents.Create("cw_toweralarm");
 			local towerPole = ents.Create("prop_dynamic");
 			local towerSpeaker = ents.Create("prop_dynamic");
 			
-			towerEnt:SetPos(Vector(10010, 11408, -1055));
+			towerEnt:SetPos(Vector(10013, 11525, -1072));
 			towerEnt:SetAngles(Angle(0, 135, 0));
 			towerEnt:Spawn();
 			towerPole:SetModel("models/props_c17/powerbox.mdl");
-			towerPole:SetPos(Vector(10015, 11406, -1004));
+			towerPole:SetPos(Vector(10013, 11525, -1072));
 			towerPole:SetAngles(Angle(0, 135, 0));
 			towerPole:SetMoveType(MOVETYPE_VPHYSICS);
 			towerPole:PhysicsInit(SOLID_VPHYSICS);
 			towerPole:SetSolid(SOLID_VPHYSICS);
 			towerPole:Spawn();
-			towerSpeaker:SetModel("models/props_wasteland/speakercluster01a.mdl");
-			towerSpeaker:SetPos(Vector(9999, 11420, -964));
+			towerSpeaker:SetModel("models/props_c17/powerbox.mdl");
+			towerSpeaker:SetPos(Vector(10013, 11525, -1072));
 			towerSpeaker:SetAngles(Angle(0, 135, 0));
 			towerSpeaker:Spawn();
 			
@@ -1392,31 +1390,29 @@ function Schema:SpawnBegottenEntities()
 		warhornEnt:SetAngles(Angle(43.79, 164.57, 26.77));
 		warhornEnt:Spawn();
 		
-		-- if cwSailing then
-		-- 	local alarmEnt = ents.Create("cw_gorewatchalarm");
-		-- 	local alarmSpeaker = ents.Create("prop_dynamic");
-			
-		-- 	alarmEnt:SetPos(Vector(-8943, -8254, 482));
-		-- 	alarmEnt:SetAngles(Angle(0, -135, 0));
-		-- 	alarmEnt:Spawn();
-		-- 	alarmSpeaker:SetModel("models/props_wasteland/speakercluster01a.mdl");
-		-- 	alarmSpeaker:SetPos(Vector(-9253, -8357, 576));
-		-- 	alarmSpeaker:SetAngles(Angle(0, 180, 0));
-		-- 	alarmSpeaker:Spawn();
-			
-		-- 	alarmEnt.speaker = alarmSpeaker;
-		-- 	cwSailing.gorewatchAlarm = alarmEnt;
-		-- end
-		
 		if cwSailing then
+			local alarmEnt = ents.Create("cw_gorewatchalarm");
+			local alarmSpeaker = ents.Create("prop_dynamic");
+			
+			alarmEnt:SetPos(Vector(-8943, -8254, 482));
+			alarmEnt:SetAngles(Angle(0, -135, 0));
+			alarmEnt:Spawn();
+			alarmSpeaker:SetModel("models/props_wasteland/speakercluster01a.mdl");
+			alarmSpeaker:SetPos(Vector(-9253, -8357, 576));
+			alarmSpeaker:SetAngles(Angle(0, 180, 0));
+			alarmSpeaker:Spawn();
+			
+			alarmEnt.speaker = alarmSpeaker;
+			cwSailing.gorewatchAlarm = alarmEnt;
+			
 			local towerEnt = ents.Create("cw_toweralarm");
 			local towerSpeaker = ents.Create("prop_dynamic");
 			
-			towerEnt:SetPos(Vector(-8943, -8254, 482));
+			towerEnt:SetPos(Vector(10013, 11525, -1072));
 			towerEnt:SetAngles(Angle(0, -135, 0));
 			towerEnt:Spawn();
 			towerSpeaker:SetModel("models/props_c17/powerbox.mdl");
-			towerSpeaker:SetPos(Vector(-9253, -8357, 576));
+			towerSpeaker:SetPos(Vector(10013, 11525, -1072));
 			towerSpeaker:SetAngles(Angle(0, 180, 0));
 			towerSpeaker:Spawn();
 			

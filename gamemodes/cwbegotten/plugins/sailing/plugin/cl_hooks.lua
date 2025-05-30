@@ -171,6 +171,32 @@ function cwSailing:CreateMenu(data)
 	menu:SetPos(scrW / 2 - (menu:GetWide() / 2), scrH / 2 - (menu:GetTall() / 2));
 end
 
+netstream.Hook("OpenTowerAlarmMenu", function(towerEnt)
+	if IsValid(towerEnt) then
+		if (IsValid(menu)) then
+			menu:Remove();
+		end;
+		
+		local scrW = ScrW();
+		local scrH = ScrH();
+		local menu = DermaMenu();
+		
+		menu:SetMinimumWidth(150);
+		
+		menu:AddOption("Examine", function()
+			Schema:EasyText("skyblue", "A jury-rigged alarm system with seismic sensors set to activate an alarm should a raid warband arrive at the Tower of Light.");
+		end);
+		
+		if towerEnt:GetNWBool("broken") then
+			menu:AddOption("Repair", function() Clockwork.Client:ConCommand("cw_RepairTowerAlarm") end);
+		end
+		
+		menu:Open();
+		menu:SetPos(scrW / 2 - (menu:GetWide() / 2), scrH / 2 - (menu:GetTall() / 2));
+	end
+end);
+
+
 netstream.Hook("OpenAlarmMenu", function(alarmEnt)
 	if IsValid(alarmEnt) then
 		if (IsValid(menu)) then
