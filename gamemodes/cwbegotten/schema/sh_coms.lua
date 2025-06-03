@@ -4222,3 +4222,59 @@ local COMMAND = Clockwork.command:New("HellPortalGaze");
 	end;
 
 COMMAND:Register();
+
+COMMAND:Register();
+
+
+local COMMAND = Clockwork.command:New("DemiGod");
+	COMMAND.tip = "Make a player a demigod by setting their armor to 100, health to 6500, blood to 35,000, stability to 5000, and giving them unlimited stamina."
+	COMMAND.text = "<string Name>"
+	COMMAND.access = "a"
+	COMMAND.arguments = 1
+	COMMAND.optionalArguments = 1
+
+	function COMMAND:OnRun(player, arguments)
+		local target = Clockwork.player:FindByID(arguments[1])
+		if not target then
+			Clockwork.player:Notify(player, arguments[1].." is not a valid player!")
+			return
+		end
+
+		local max_sanity = 100
+		local max_stability = 5000
+		local max_stamina = 50000
+
+		target:Extinguish()
+		target:ResetInjuries()
+		target:TakeAllDiseases()
+
+		-- Set health and armor
+		target:SetMaxHealth(6500)
+		target:SetHealth(6500)
+		target:SetArmor(100)
+
+		-- Reset needs
+		target:SetNeed("thirst", 0)
+		target:SetNeed("hunger", 0)
+		target:SetNeed("corruption", 0)
+		target:SetNeed("sleep", 0)
+
+		-- Sanity, stamina, stability
+		target:SetNetVar("sanity", max_sanity)
+		target:SetCharacterData("sanity", max_sanity)
+		target:SetCharacterData("Stamina", max_stamina)
+		target:SetNWInt("Stamina", max_stamina)
+		target:SetCharacterData("stability", max_stability)
+		target:SetNWInt("stability", max_stability)
+
+		-- Misc cleanup
+		target:SetLocalVar("freeze", 0)
+		target:SetBloodLevel(35000) -- max blood not showing up changed
+		target:StopAllBleeding()
+		Clockwork.limb:HealBody(target, 100)
+		Clockwork.player:SetAction(target, "die", false)
+		Clockwork.player:SetAction(target, "die_bleedout", false)
+
+		hook.Run("PlayerHealedFull", target)
+	end
+COMMAND:Register();
