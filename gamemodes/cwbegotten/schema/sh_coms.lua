@@ -42,6 +42,7 @@ if (map == "rp_begotten3") then
 		["ship"] = Vector(-10612, 4328, -1702),
 		["toothboy"] = Vector(12646, -12983, -1074),
 		["tower"] = Vector(-84, 11626, -1081),
+		["tower_courtyard"] = Vector(88, 11151, -1232)
 	}
 elseif (map == "rp_begotten_redux") then
 	Schema.MapLocations = {
@@ -1775,6 +1776,126 @@ local COMMAND = Clockwork.command:New("GoreicHornSummonRaid");
 				Schema:EasyText(player, "firebrick", "You must be looking at a Goreic Gathering Horn to do this!");
 			end
 		end
+	end;
+COMMAND:Register();
+
+local COMMAND = Clockwork.command:New("TowerSiren");
+	COMMAND.tip = "Activate the tower siren.";
+	COMMAND.access = "s";
+
+	-- Called when the command has been run.
+	function COMMAND:OnRun(player, arguments)
+		-- Prevent the siren alarm from playing over eachother.
+		if cwDayNight and cwDayNight.currentCycle == "day" then
+			cwDayNight:ModifyCycleTimeLeft(120);
+		end
+		
+		local close_players = {};
+		local far_players = {};
+		
+		for _, v in _player.Iterator() do
+			if IsValid(v) and v:HasInitialized() then
+				local lastZone = v:GetCharacterData("LastZone");
+				
+				if lastZone == "tower" or lastZone == "theater" or lastZone == "hillbunker" then
+					table.insert(close_players, v);
+					Clockwork.chatBox:Add(v, nil, "event", "The klaxons of the tower come to life, signaling an immediate threat to the tower has been detected.");
+					netstream.Start(v, "FadeAmbientMusic");
+				end
+			end
+		end
+		
+		netstream.Start(close_players, "EmitSound", {name = "warhorns/fuckerjoealarm.mp3", pitch = 90, level = 60});
+		netstream.Start(far_players, "EmitSound", {name = "warhorns/fuckerjoealarm.mp3", pitch = 100, level = 75});
+	end;
+COMMAND:Register();
+
+local COMMAND = Clockwork.command:New("TowerRaid");
+	COMMAND.tip = "Disable gatekeeper and holy hierarchy faction, pilgrim trait, tower safezone and play an alarm.";
+	COMMAND.access = "s";
+
+	function COMMAND:OnRun(player, arguments)
+		-- Prevent alarm from overlapping with other sounds.
+		if cwDayNight and cwDayNight.currentCycle == "day" then
+			cwDayNight:ModifyCycleTimeLeft(120);
+		end
+	
+		-- Check for a valid, unbroken alarm first.
+		local alarmFound = false;
+		for _, ent in ipairs(ents.FindByClass("cw_toweralarm")) do
+			if IsValid(ent) and not ent:GetNWBool("broken", false) then
+				alarmFound = true;
+				break;
+			end
+		end
+	
+		if not alarmFound then
+			Schema:EasyText(player, "peru", "No functional tower alarm found. Aborting /TowerRaid.");
+			return;
+		end
+	
+		local close_players = {};
+		local far_players = {};
+	
+		for _, v in _player.Iterator() do
+			if IsValid(v) and v:HasInitialized() then
+				local lastZone = v:GetCharacterData("LastZone");
+	
+				if lastZone == "tower" then
+					table.insert(far_players, v);
+					Clockwork.chatBox:Add(v, nil, "event",
+						"The klaxons of the tower come to life and the dim rotating halogen bulbs begin spinning, signaling that the blessings of safety the tower provides has been disabled...");
+					netstream.Start(v, "FadeAmbientMusic");
+	
+				elseif lastZone == "theater" or lastZone == "hillbunker" then
+					table.insert(close_players, v);
+					Clockwork.chatBox:Add(v, nil, "event",
+						"The klaxons of the tower come to life and the dim rotating halogen bulbs begin spinning, signaling that the blessings of safety the tower provides has been disabled...");
+					netstream.Start(v, "FadeAmbientMusic");
+				end
+			end
+		end
+	
+		-- Now sound the alarm.
+		netstream.Start(close_players, "EmitSound", {
+			name = "warhorns/fuckerjoealarm.mp3",
+			pitch = 90,
+			level = 60
+		});
+	
+		netstream.Start(far_players, "EmitSound", {
+			name = "warhorns/fuckerjoealarm.mp3",
+			pitch = 100,
+			level = 75
+		});
+	
+		-- Disable the tower's protection and the factions.
+		Schema.towerSafeZoneEnabled = false;
+	
+		local factionTable_GK = Clockwork.faction:FindByID("Gatekeeper");
+		local factionTable_HH = Clockwork.faction:FindByID("Holy Hierarchy");
+	
+		if factionTable_GK then factionTable_GK.disabled = true end
+		if factionTable_HH then factionTable_HH.disabled = true end
+	
+		cwObserverMode.spectatorMode = true;
+	
+		Schema:EasyText(Schema:GetAdmins(), "chocolate",
+			"/TowerRaid has been used: tower safezone and holy hierarchy and gatekeeper factions have been disabled!");
+	end;
+
+COMMAND:Register();
+
+
+local COMMAND = Clockwork.command:New("GetLastZone");
+	COMMAND.tip = "Call a congregation to the Tower of Light church.";
+	COMMAND.access = "s";
+
+	-- Called when the command has been run.
+	function COMMAND:OnRun(player, arguments)
+		-- Prevent the bells from playing over eachother.
+		local lastZone = player:GetCharacterData("LastZone");
+		Schema:EasyText(Schema:GetAdmins(), "chocolate"," Last zone: ", lastZone);
 	end;
 COMMAND:Register();
 
@@ -4221,60 +4342,4 @@ local COMMAND = Clockwork.command:New("HellPortalGaze");
 		end;
 	end;
 
-COMMAND:Register();
-
-COMMAND:Register();
-
-
-local COMMAND = Clockwork.command:New("DemiGod");
-	COMMAND.tip = "Make a player a demigod by setting their armor to 100, health to 6500, blood to 35,000, stability to 5000, and giving them unlimited stamina."
-	COMMAND.text = "<string Name>"
-	COMMAND.access = "a"
-	COMMAND.arguments = 1
-	COMMAND.optionalArguments = 1
-
-	function COMMAND:OnRun(player, arguments)
-		local target = Clockwork.player:FindByID(arguments[1])
-		if not target then
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!")
-			return
-		end
-
-		local max_sanity = 100
-		local max_stability = 5000
-		local max_stamina = 50000
-
-		target:Extinguish()
-		target:ResetInjuries()
-		target:TakeAllDiseases()
-
-		-- Set health and armor
-		target:SetMaxHealth(6500)
-		target:SetHealth(6500)
-		target:SetArmor(100)
-
-		-- Reset needs
-		target:SetNeed("thirst", 0)
-		target:SetNeed("hunger", 0)
-		target:SetNeed("corruption", 0)
-		target:SetNeed("sleep", 0)
-
-		-- Sanity, stamina, stability
-		target:SetNetVar("sanity", max_sanity)
-		target:SetCharacterData("sanity", max_sanity)
-		target:SetCharacterData("Stamina", max_stamina)
-		target:SetNWInt("Stamina", max_stamina)
-		target:SetCharacterData("stability", max_stability)
-		target:SetNWInt("stability", max_stability)
-
-		-- Misc cleanup
-		target:SetLocalVar("freeze", 0)
-		target:SetBloodLevel(35000) -- max blood not showing up changed
-		target:StopAllBleeding()
-		Clockwork.limb:HealBody(target, 100)
-		Clockwork.player:SetAction(target, "die", false)
-		Clockwork.player:SetAction(target, "die_bleedout", false)
-
-		hook.Run("PlayerHealedFull", target)
-	end
 COMMAND:Register();

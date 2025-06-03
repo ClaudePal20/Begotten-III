@@ -13,6 +13,8 @@ function cwSailing:GetProgressBarInfoAction(action, percentage)
 		return {text = "You are making repairs to the longship. Click to cancel.", percentage = percentage, flash = percentage < 10};
 	elseif (action == "repair_alarm") then
 		return {text = "You are repairing the Gorewatch alarm. Click to cancel.", percentage = percentage, flash = percentage < 10};
+	elseif (action == "repair_tower_alarm") then
+		return {text = "You are repairing the Tower alarm. Click to cancel.", percentage = percentage, flash = percentage < 10};
 	elseif (action == "repair_steam_engine") then
 		return {text = "You are repairing the steam engine. Click to cancel.", percentage = percentage, flash = percentage < 10};
 	elseif (action == "refuel_ironclad") then
@@ -170,6 +172,39 @@ function cwSailing:CreateMenu(data)
 	
 	menu:SetPos(scrW / 2 - (menu:GetWide() / 2), scrH / 2 - (menu:GetTall() / 2));
 end
+
+netstream.Hook("OpenTowerAlarmMenu", function(towerAlarmEnt)
+	if IsValid(towerAlarmEnt) then
+		if (IsValid(menu)) then
+			menu:Remove();
+		end;
+
+		local scrW = ScrW();
+		local scrH = ScrH();
+		local menu = DermaMenu();
+
+		menu:SetMinimumWidth(150);
+
+		menu:AddOption("Examine", function()
+			Schema:EasyText("skyblue", "A jury-rigged alarm set to sound off manually by a gatekeeper if a raid warband arrives at the Tower of Light.");
+		end);
+
+		if towerAlarmEnt:GetNWBool("broken") then
+			menu:AddOption("Repair", function()
+				Clockwork.Client:ConCommand("cw_RepairTowerAlarm")
+			end);
+		else
+			menu:AddOption("Sound alarm", function()
+				Clockwork.Client:ConCommand("cw_TowerSiren")
+			end);
+		end
+
+		menu:Open();
+		menu:SetPos(scrW / 2 - (menu:GetWide() / 2), scrH / 2 - (menu:GetTall() / 2));
+	end
+end);
+
+
 
 netstream.Hook("OpenAlarmMenu", function(alarmEnt)
 	if IsValid(alarmEnt) then

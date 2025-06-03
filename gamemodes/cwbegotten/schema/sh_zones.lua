@@ -1176,12 +1176,24 @@ if map == "rp_begotten3" then
 		TOWER.bounds = {
 			{
 				min = Vector(2400, 15147, -2778),
-				max = Vector(-2532, 12022, 2048),
+				max = Vector(-2532, 12022, 2048), --above tower of light like 200 meters above training courtyard
 			},
 			{
-				min = Vector(-831, 12023, -883),
-				max = Vector(6, 11736, -1073),
+				min = Vector(-831, 12023, -883), --top of barracks
+				max = Vector(6, 11736, -1073), --near the coinslot
 			},
+			-- {
+			-- 	min = Vector(-4396, 10510, -643),
+			-- 	max = Vector(4395, 12986, -819),
+			-- }
+			{ 
+				min = Vector(-2195, 10513, -1552),
+				max = Vector(2925, 11144, -967)
+			},
+			{
+				min = Vector(-3849, 9902, -1484),
+				max = Vector(4544, 13052, -634)
+			}
 		};
 	TOWER:Register()
 

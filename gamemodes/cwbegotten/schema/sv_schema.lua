@@ -1250,6 +1250,31 @@ function Schema:SpawnBegottenEntities()
 			
 			alarmEnt.speaker = alarmSpeaker;
 			cwSailing.gorewatchAlarm = alarmEnt;
+			
+			local towerAlarmEnt = ents.Create("cw_toweralarm");
+			local towerAlarmPole = ents.Create("prop_dynamic")
+			local towerSpeaker = ents.Create("prop_dynamic");
+			
+			towerAlarmEnt:SetPos(Vector(364, 11454, -1020));
+			towerAlarmEnt:SetAngles(Angle(0, 135, 0));
+			towerAlarmEnt:Spawn();
+			towerAlarmPole:SetModel("models/props_docks/dock01_pole01a_128.mdl");
+			towerAlarmPole:SetPos(Vector(364, 11454, -1020));
+			towerAlarmPole:SetAngles(Angle(0, 135, 0));
+			towerAlarmPole:SetMoveType(MOVETYPE_VPHYSICS);
+			towerAlarmPole:PhysicsInit(SOLID_VPHYSICS);
+			towerAlarmPole:SetSolid(SOLID_VPHYSICS);
+			towerAlarmPole:Spawn();
+			towerSpeaker:SetModel("models/props_wasteland/speakercluster01a.mdl");
+			towerSpeaker:SetPos(Vector(364, 11454, -974));
+			towerSpeaker:SetAngles(Angle(0, 90, 0));
+			towerSpeaker:SetMoveType(MOVETYPE_VPHYSICS);
+			towerSpeaker:PhysicsInit(SOLID_VPHYSICS);
+			towerSpeaker:SetSolid(SOLID_VPHYSICS);
+			towerSpeaker:Spawn();
+			
+			towerAlarmEnt.speaker = towerSpeaker;
+			cwSailing.towerAlarm = towerAlarmEnt;
 		end
 		
 		for i = 1, #archiveEnts do
