@@ -1809,7 +1809,6 @@ local COMMAND = Clockwork.command:New("TowerSiren");
 		netstream.Start(far_players, "EmitSound", {name = "warhorns/fuckerjoealarm.mp3", pitch = 100, level = 75});
 	end;
 COMMAND:Register();
-
 local COMMAND = Clockwork.command:New("TowerRaid");
 	COMMAND.tip = "Disable gatekeeper and holy hierarchy faction, pilgrim trait, tower safezone and play an alarm.";
 	COMMAND.access = "s";
@@ -1882,10 +1881,29 @@ local COMMAND = Clockwork.command:New("TowerRaid");
 	
 		Schema:EasyText(Schema:GetAdmins(), "chocolate",
 			"/TowerRaid has been used: tower safezone and holy hierarchy and gatekeeper factions have been disabled!");
+		local pilgrimTrait = Clockwork.trait:FindByID("pilgrim")
+		
+		if not pilgrimTrait then
+			Schema:EasyText(Schema:GetAdmins(), "red", "[Pilgrim] Trait not found.")
+			print("[Pilgrim] Trait not found.")
+			return
+		end
+
+		PrintTable(pilgrimTrait)
+		
+		pilgrimTrait.eventlocked = not pilgrimTrait.eventlocked
+		
+		local status = tostring(pilgrimTrait.eventlocked)
+		local message = "[Pilgrim] Trait is now disabled" .. status
+		
+		Schema:EasyText(Schema:GetAdmins(), "chocolate", message)
+		
+		-- Also print to server console
+		print(message)
+
 	end;
 
 COMMAND:Register();
-
 
 local COMMAND = Clockwork.command:New("GetLastZone");
 	COMMAND.tip = "Call a congregation to the Tower of Light church.";
