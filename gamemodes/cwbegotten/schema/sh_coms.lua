@@ -1891,7 +1891,7 @@ local COMMAND = Clockwork.command:New("TowerRaid");
 
 		PrintTable(pilgrimTrait)
 		
-		pilgrimTrait.eventlocked = not pilgrimTrait.eventlocked
+		pilgrimTrait.eventlocked = true
 		
 		local status = tostring(pilgrimTrait.eventlocked)
 		local message = "[Pilgrim] Trait is now disabled" .. status
