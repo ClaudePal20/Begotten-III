@@ -815,7 +815,7 @@ end;
 -- A function to make a player's blood level change.
 function cwMedicalSystem:ModifyBloodLevel(player, amount)
 	local bloodAmount = player:GetCharacterData("BloodLevel", self.maxBloodLevel);
-	local newAmount = math.Clamp(math.Round(bloodAmount + amount), 0, 5000);
+	local newAmount = math.Clamp(math.Round(bloodAmount + amount), 0, 35000);
 	
 	if newAmount > self.lethalBloodLoss then
 		if Clockwork.player:GetAction(player) == "die_bleedout" then
