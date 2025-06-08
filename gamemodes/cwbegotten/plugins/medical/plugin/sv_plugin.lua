@@ -829,7 +829,7 @@ end;
 
 -- A function to set a player's blood level.
 function cwMedicalSystem:SetBloodLevel(player, amount)
-	local newAmount = math.Clamp(amount, 0, 5000);
+	local newAmount = math.Clamp(amount, 0, 35000);
 	
 	if newAmount > self.lethalBloodLoss then
 		if Clockwork.player:GetAction(player) == "die_bleedout" then
