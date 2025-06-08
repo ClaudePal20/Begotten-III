@@ -4258,7 +4258,7 @@ local COMMAND = Clockwork.command:New("DemiGod");
 		target:SetNeed("corruption", 0)
 		target:SetNeed("sleep", 0)
 
-		-- Sanity, stamina, stability
+		-- Sanity and stability
 		target:SetNetVar("sanity", max_sanity)
 		target:SetCharacterData("sanity", max_sanity)
 		target:SetCharacterData("stability", max_stability)
