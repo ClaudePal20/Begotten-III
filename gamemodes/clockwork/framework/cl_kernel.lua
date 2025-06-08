@@ -928,6 +928,13 @@ do
 						});
 					end
 				end;
+
+				if player:GetNetVar("demigod") then
+					table.insert(text, {
+						text = "*DEMIGOD*", 
+						color = Color(255, 215, 0, 255) -- Gold color
+					});
+				end
 				
 				if player:GetNetVar("favored") then
 					table.insert(text, {
