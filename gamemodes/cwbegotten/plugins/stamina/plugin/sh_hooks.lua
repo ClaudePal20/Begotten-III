@@ -12,6 +12,11 @@ function PLUGIN:Move(player, cmovedata)
 					if player.GetCharmEquipped and player:GetCharmEquipped("boot_contortionist") then
 						jumpCost = math.Round(jumpCost * 0.333);
 					end
+
+					if player:GetNetVar("demigod", false) then
+						jumpCost = 0
+						return
+					end
 					
 					local stamina = player:GetCharacterData("Stamina") or player:GetNWInt("Stamina", 100)
 
