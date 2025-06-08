@@ -4242,7 +4242,6 @@ local COMMAND = Clockwork.command:New("DemiGod");
 
 		local max_sanity = 100
 		local max_stability = 5000
-		local max_stamina = 50000
 
 		target:Extinguish()
 		target:ResetInjuries()
@@ -4262,8 +4261,6 @@ local COMMAND = Clockwork.command:New("DemiGod");
 		-- Sanity, stamina, stability
 		target:SetNetVar("sanity", max_sanity)
 		target:SetCharacterData("sanity", max_sanity)
-		target:SetCharacterData("Stamina", max_stamina)
-		target:SetNWInt("Stamina", max_stamina)
 		target:SetCharacterData("stability", max_stability)
 		target:SetNWInt("stability", max_stability)
 
