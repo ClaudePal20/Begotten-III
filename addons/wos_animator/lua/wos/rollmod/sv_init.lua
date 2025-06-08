@@ -213,6 +213,10 @@ function meta:StartRolling(a)
 			if stamina < stamina_loss then
 				return false;
 			end
+
+			if self:GetNetVar("demigod", false) then
+				stamina_loss = 0
+			end
 			
 			if self.SetCharacterData then
 				self:SetCharacterData("Stamina", math.Clamp(self:GetCharacterData("Stamina") - stamina_loss, 0, cwStamina:GetMaxStaminaPlugin(self)));
