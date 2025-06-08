@@ -70,6 +70,17 @@ function cwStamina:GetMaxStaminaPlugin(player)
 	end
 end;
 
+function cwStamina:ModifyStaminaDrain(player, drainTab)
+	if player:GetNetVar("demigod", false) then
+		drainTab.decrease = 0
+		return
+	end
+
+	local subfaction = player:GetSubfaction()
+	if subfaction == "Praeventor" or subfaction == "Outrider" then
+		drainTab.decrease = drainTab.decrease * 0.75
+	end
+end
 
 function playerMeta:GetMaxStamina()
 	return cwStamina:GetMaxStaminaPlugin(self);
