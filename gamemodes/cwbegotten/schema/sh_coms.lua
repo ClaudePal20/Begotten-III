@@ -4280,23 +4280,3 @@ local COMMAND = Clockwork.command:New("DemiGod");
 		target:SetNetVar("demigod", true)
 	end
 COMMAND:Register();
-
-local COMMAND = Clockwork.command:New("CharSetMaxStamina")
-COMMAND.tip = "Set a player's stamina to maximum (50000)."
-COMMAND.text = "<string Name>"
-COMMAND.access = "a"
-COMMAND.arguments = 1
-
-function COMMAND:OnRun(player, arguments)
-    local target = Clockwork.player:FindByID(arguments[1])
-    if not target then
-        Clockwork.player:Notify(player, arguments[1].." is not a valid player!")
-        return
-    end
-
-    local max_stamina = 50000
-    target:SetCharacterData("Stamina", max_stamina)
-    target:SetNWInt("Stamina", max_stamina)
-    Clockwork.player:Notify(player, target:Name().." now has maximum stamina.")
-end
-COMMAND:Register()
