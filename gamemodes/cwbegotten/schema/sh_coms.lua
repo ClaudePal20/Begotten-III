@@ -4269,7 +4269,7 @@ local COMMAND = Clockwork.command:New("DemiGod");
 
 		-- Misc cleanup
 		target:SetLocalVar("freeze", 0)
-		target:SetBloodLevel(35000) -- max blood not showing up changed
+		target:SetBloodLevel(35000)
 		target:StopAllBleeding()
 		Clockwork.limb:HealBody(target, 100)
 		Clockwork.player:SetAction(target, "die", false)
