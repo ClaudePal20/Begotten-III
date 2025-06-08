@@ -4276,5 +4276,7 @@ local COMMAND = Clockwork.command:New("DemiGod");
 		Clockwork.player:SetAction(target, "die_bleedout", false)
 
 		hook.Run("PlayerHealedFull", target)
+
+		target:SetNetVar("demigod", true)
 	end
 COMMAND:Register();
