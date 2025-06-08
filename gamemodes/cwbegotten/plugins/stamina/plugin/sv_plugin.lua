@@ -83,7 +83,7 @@ function playerMeta:GetMaxStamina()
 end;
 
 function playerMeta:SetStamina(amount)
-	local max_stamina = self:GetMaxStamina();
+	local max_stamina = 999999 --modifying for demigod "unlimited" stamina feature
 	local new_stamina = math.Clamp(amount, 0, max_stamina);
 	
 	self:SetCharacterData("Stamina", new_stamina);
