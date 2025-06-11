@@ -158,10 +158,21 @@ local ITEM = Clockwork.item:New();
 			return;
 		end
 		
-		if !player:HasBelief("savage_animal") then
-			Schema:EasyText(player, "olive", "You begin to feel light headed and nauseous. You feel like you're gonna throw up.");
-			player:HandleSanity(-25);
-		end
+		if player.GetCharmEquipped and player:GetCharmEquipped("bendy_straw") then
+            Schema:EasyText(player, "green", "You delicately sip through your trusty bendy straw. Somehow, it lends a strange charm to the murky drink, making it almost... pleasant.");
+            player:HandleSanity(8);
+
+        else
+            if cwMedicalSystem then
+             player:HandleDiseaseChance("water", self.infectchance or 60);
+
+            end
+
+            if not !player:HasBelief("savage_animal") then
+                Schema:EasyText(player, "olive", "You begin to feel light headed and nauseous. You feel like you're gonna throw up.");
+                player:HandleSanity(-25);
+            end
+        end
 		
 		--player:HandleXP(cwBeliefs.xpValues["drink"]);
 	end;

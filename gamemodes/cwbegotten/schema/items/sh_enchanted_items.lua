@@ -594,3 +594,15 @@ local ITEM = Clockwork.item:New("enchanted_base");
 	
 	ITEM.itemSpawnerInfo = {category = "Charms", rarity = 1100};
 ITEM:Register();
+
+local ITEM = Clockwork.item:New("enchanted_base");
+    ITEM.name = "Bendy Straw";
+    ITEM.model = "models/Gibs/HGIBS_spine.mdl"; -- Replace with an actual straw model if available
+    ITEM.weight = 0.2;
+    ITEM.uniqueID = "bendy_straw";
+    ITEM.description = "A strange, flexible straw. It's oddly clean and gives off a faint smell of mint. Seems to fill you with a childlike joy when used.";
+    ITEM.iconoverride = "materials/begotten/ui/itemicons/spine.png"; -- Use or create an icon
+    ITEM.charmEffects = "- Drinking from natural water sources slightly restores sanity and quenches more thirst.\n- Can safely drink from bottled water.";
+
+    ITEM.itemSpawnerInfo = {category = "Charms", rarity = 750};
+ITEM:Register();
