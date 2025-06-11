@@ -10718,4 +10718,37 @@ function cwRecipes:ClockworkInitialized()
 		function RECIPE:EndCraft(player)
 		end;
 	RECIPE:Register()
+
+	RECIPE = cwRecipes.recipes:New("interference_totem");
+
+		RECIPE.name = "Crackling Interference Totem";
+		RECIPE.requiredBeliefs = {"artisan", "jacobs_ladder"};
+		RECIPE.requiredSubfaiths = {"Voltism"};
+		RECIPE.requirements = {
+			["fine_steel_ingot"] = {amount = 2},
+			["wood"] = {amount = 3},
+			["tech"] = {amount = 4},
+		};
+		RECIPE.result = {
+		["begotten_polearm_interferencetotem"] = {amount = 1},
+		};
+
+		RECIPE.category = "Weapons"
+		RECIPE.finishSound = "ambient/energy/zap9.wav";
+		RECIPE.failSound = "buttons/button2.wav";
+		RECIPE.craftTime = 10;
+		RECIPE.craftVerb = "charging";
+		RECIPE.experience = 100;
+
+		function RECIPE:OnCraft(player)
+		player:EmitSound("ambient/levels/labs/electric_explosion1.wav");
+		end;
+		function RECIPE:OnFail(player)
+			player:Notify("The totem short-circuits and discharges violently!");
+		end;
+		function RECIPE:StartCraft(player)
+		end;
+		function RECIPE:EndCraft(player)
+		end;
+	RECIPE:Register();
 end
