@@ -1779,192 +1779,6 @@ local COMMAND = Clockwork.command:New("GoreicHornSummonRaid");
 	end;
 COMMAND:Register();
 
-local function GetPlayersInZones(zones)
-	local players = {}
-
-	for _, v in ipairs(player.GetAll()) do
-		if IsValid(v) and v:HasInitialized() then
-			local lastZone = v:GetCharacterData("LastZone")
-			if lastZone and table.HasValue(zones, lastZone) then
-				table.insert(players, v)
-			end
-		end
-	end
-
-	return players
-end
-
-local function NotifyPlayers(players, message)
-	for _, v in ipairs(players) do
-		Clockwork.chatBox:Add(v, nil, "event", message)
-		netstream.Start(v, "FadeAmbientMusic")
-	end
-end
-
-local function FlashTowerLights()
-	if not (cwSailing and IsValid(cwSailing.towerLightBulb)) then return end
-
-	local bulb1 = cwSailing.towerLightBulb
-	local bulb2 = cwSailing.towerLightBulb_2
-	local bulb3 = cwSailing.towerLightBulb_3
-
-	local flashName = "TowerAlarmLightFlash"
-	local flashCount = 0
-	local maxFlashes = 100
-
-	local colors = {
-		"255 0 0",
-		"255 255 0"
-	}
-
-	timer.Create(flashName, 0.4, maxFlashes, function()
-		if not IsValid(bulb1) then
-			timer.Remove(flashName)
-			return
-		end
-
-		local shouldTurnOn = (flashCount % 2 == 0)
-
-		if shouldTurnOn then
-			local color = colors[(math.floor(flashCount / 2) % #colors) + 1]
-
-			bulb1:Fire("Color", color, 0)
-			if IsValid(bulb2) then bulb2:Fire("Color", color, 0) end
-			if IsValid(bulb3) then bulb3:Fire("Color", color, 0) end
-
-			bulb1:Fire("TurnOn", "", 0)
-			if IsValid(bulb2) then bulb2:Fire("TurnOn", "", 0) end
-			if IsValid(bulb3) then bulb3:Fire("TurnOn", "", 0) end
-		else
-			bulb1:Fire("TurnOff", "", 0)
-			if IsValid(bulb2) then bulb2:Fire("TurnOff", "", 0) end
-			if IsValid(bulb3) then bulb3:Fire("TurnOff", "", 0) end
-		end
-
-		flashCount = flashCount + 1
-	end)
-end
-
-local COMMAND = Clockwork.command:New("TowerSiren")
-COMMAND.tip = "Activate the tower siren."
-COMMAND.access = "s"
-
-function COMMAND:OnRun(player, arguments)
-	if cwDayNight and cwDayNight.currentCycle == "day" then
-		cwDayNight:ModifyCycleTimeLeft(120)
-	end
-
-	local zones = {"tower", "theater", "hillbunker"}
-	local closePlayers = GetPlayersInZones(zones)
-
-	NotifyPlayers(closePlayers, "The klaxons of the tower come to life, signaling an immediate threat to the tower has been detected.")
-
-	if #closePlayers > 0 then
-		netstream.Start(closePlayers, "EmitSound", { name = "warhorns/fuckerjoealarm.mp3", pitch = 90, level = 60 })
-	end
-
-	FlashTowerLights()
-end
-
-COMMAND:Register()
-
-local COMMAND = Clockwork.command:New("TowerRaid")
-COMMAND.tip = "Disable gatekeeper and holy hierarchy faction, pilgrim trait, tower safezone and play an alarm."
-COMMAND.access = "s"
-
-function COMMAND:OnRun(player, arguments)
-	if cwDayNight and cwDayNight.currentCycle == "day" then
-		cwDayNight:ModifyCycleTimeLeft(120)
-	end
-
-	local farPlayers = GetPlayersInZones({"tower"})
-	local closePlayers = GetPlayersInZones({"theater", "hillbunker"})
-
-	NotifyPlayers(farPlayers, "[SAFEZONE DISABLED] The klaxons of the tower come to life and the dim rotating halogen bulbs begin spinning, signaling an immediate threat to the tower has been detected.")
-	NotifyPlayers(closePlayers, "[SAFEZONE DISABLED] The klaxons of the tower come to life and the dim rotating halogen bulbs begin spinning, signaling an immediate threat to the tower has been detected.")
-
-	for _, ent in ipairs(ents.FindByClass("cw_toweralarm")) do
-		if IsValid(ent) then
-			if ent:GetNWBool("broken") then
-				Schema:EasyText(Schema:GetAdmins(), "peru", "Tower alarm is broken! No alarm will sound.")
-			else
-				if #closePlayers > 0 then
-					netstream.Start(closePlayers, "EmitSound", { name = "warhorns/fuckerjoealarm.mp3", pitch = 90, level = 60 })
-				end
-				if #farPlayers > 0 then
-					netstream.Start(farPlayers, "EmitSound", { name = "warhorns/fuckerjoealarm.mp3", pitch = 100, level = 75 })
-				end
-
-				FlashTowerLights()
-			end
-			break
-		end
-	end
-
-	Schema.towerSafeZoneEnabled = false
-
-	local factionTable_GK = Clockwork.faction:FindByID("Gatekeeper")
-	local factionTable_HH = Clockwork.faction:FindByID("Holy Hierarchy")
-
-	if factionTable_GK then factionTable_GK.disabled = true end
-	if factionTable_HH then factionTable_HH.disabled = true end
-
-	cwObserverMode.spectatorMode = true
-
-	Schema:EasyText(Schema:GetAdmins(), "chocolate", "/TowerRaid has been used: tower safezone and holy hierarchy and gatekeeper factions have been disabled!")
-
-	local pilgrimTrait = Clockwork.trait:FindByID("pilgrim")
-	if not pilgrimTrait then
-		Schema:EasyText(Schema:GetAdmins(), "red", "[Pilgrim] Trait not found.")
-		print("[Pilgrim] Trait not found.")
-		return
-	end
-
-	pilgrimTrait.eventlocked = true
-
-	local status = tostring(pilgrimTrait.eventlocked)
-	Schema:EasyText(Schema:GetAdmins(), "chocolate", "[Pilgrim] Trait eventlocked is now " .. status)
-end
-
-COMMAND:Register()
-
-local COMMAND = Clockwork.command:New("TogglePilgrim")
-COMMAND.tip = "Enable or disable the Pilgrim trait lock."
-COMMAND.access = "s"
-
-function COMMAND:OnRun(player, arguments)
-	local pilgrimTrait = Clockwork.trait:FindByID("pilgrim")
-
-	if not pilgrimTrait then
-		Schema:EasyText(Schema:GetAdmins(), "red", "[Pilgrim] Trait not found.")
-		print("[Pilgrim] Trait not found.")
-		return
-	end
-
-	pilgrimTrait.eventlocked = not pilgrimTrait.eventlocked
-
-	local status = pilgrimTrait.eventlocked and "locked" or "unlocked"
-	local message = "[Pilgrim] Trait is now " .. status
-
-	Schema:EasyText(Schema:GetAdmins(), "chocolate", message)
-	print(message)
-end
-
-COMMAND:Register()
-
-
-local COMMAND = Clockwork.command:New("GetLastZone");
-	COMMAND.tip = "Call a congregation to the Tower of Light church.";
-	COMMAND.access = "s";
-
-	-- Called when the command has been run.
-	function COMMAND:OnRun(player, arguments)
-		-- Prevent the bells from playing over eachother.
-		local lastZone = player:GetCharacterData("LastZone");
-		Schema:EasyText(Schema:GetAdmins(), "chocolate"," Last zone: ", lastZone);
-	end;
-COMMAND:Register();
-
 local COMMAND = Clockwork.command:New("CallCongregation");
 	COMMAND.tip = "Call a congregation to the Tower of Light church.";
 	COMMAND.access = "s";
@@ -4408,4 +4222,189 @@ local COMMAND = Clockwork.command:New("HellPortalGaze");
 		end;
 	end;
 
+COMMAND:Register();
+
+local function GetPlayersInZones(zones)
+	local players = {}
+
+	for _, v in ipairs(player.GetAll()) do
+		if IsValid(v) and v:HasInitialized() then
+			local lastZone = v:GetCharacterData("LastZone")
+			if lastZone and table.HasValue(zones, lastZone) then
+				table.insert(players, v)
+			end
+		end
+	end
+
+	return players
+end
+
+local function NotifyPlayers(players, message)
+	for _, v in ipairs(players) do
+		Clockwork.chatBox:Add(v, nil, "event", message)
+		netstream.Start(v, "FadeAmbientMusic")
+	end
+end
+
+local function FlashTowerLights()
+	if not (cwSailing and IsValid(cwSailing.towerLightBulb)) then return end
+
+	local bulb1 = cwSailing.towerLightBulb
+	local bulb2 = cwSailing.towerLightBulb_2
+	local bulb3 = cwSailing.towerLightBulb_3
+
+	local flashName = "TowerAlarmLightFlash"
+	local flashCount = 0
+	local maxFlashes = 100
+
+	local colors = {
+		"255 0 0",
+		"255 255 0"
+	}
+
+	timer.Create(flashName, 0.4, maxFlashes, function()
+		if not IsValid(bulb1) then
+			timer.Remove(flashName)
+			return
+		end
+
+		local shouldTurnOn = (flashCount % 2 == 0)
+
+		if shouldTurnOn then
+			local color = colors[(math.floor(flashCount / 2) % #colors) + 1]
+
+			bulb1:Fire("Color", color, 0)
+			if IsValid(bulb2) then bulb2:Fire("Color", color, 0) end
+			if IsValid(bulb3) then bulb3:Fire("Color", color, 0) end
+
+			bulb1:Fire("TurnOn", "", 0)
+			if IsValid(bulb2) then bulb2:Fire("TurnOn", "", 0) end
+			if IsValid(bulb3) then bulb3:Fire("TurnOn", "", 0) end
+		else
+			bulb1:Fire("TurnOff", "", 0)
+			if IsValid(bulb2) then bulb2:Fire("TurnOff", "", 0) end
+			if IsValid(bulb3) then bulb3:Fire("TurnOff", "", 0) end
+		end
+
+		flashCount = flashCount + 1
+	end)
+end
+
+local COMMAND = Clockwork.command:New("TowerSiren")
+COMMAND.tip = "Activate the tower siren."
+COMMAND.access = "s"
+
+function COMMAND:OnRun(player, arguments)
+	if cwDayNight and cwDayNight.currentCycle == "day" then
+		cwDayNight:ModifyCycleTimeLeft(120)
+	end
+
+	local zones = {"tower", "theater", "hillbunker"}
+	local closePlayers = GetPlayersInZones(zones)
+
+	NotifyPlayers(closePlayers, "The klaxons of the tower come to life, signaling an immediate threat to the tower has been detected.")
+
+	if #closePlayers > 0 then
+		netstream.Start(closePlayers, "EmitSound", { name = "warhorns/fuckerjoealarm.mp3", pitch = 90, level = 60 })
+	end
+
+	FlashTowerLights()
+end
+
+COMMAND:Register()
+
+local COMMAND = Clockwork.command:New("TowerRaid")
+COMMAND.tip = "Disable gatekeeper and holy hierarchy faction, pilgrim trait, tower safezone and play an alarm."
+COMMAND.access = "s"
+
+function COMMAND:OnRun(player, arguments)
+	if cwDayNight and cwDayNight.currentCycle == "day" then
+		cwDayNight:ModifyCycleTimeLeft(120)
+	end
+
+	local farPlayers = GetPlayersInZones({"tower"})
+	local closePlayers = GetPlayersInZones({"theater", "hillbunker"})
+
+	NotifyPlayers(farPlayers, "[SAFEZONE DISABLED] The klaxons of the tower come to life and the dim rotating halogen bulbs begin spinning, signaling an immediate threat to the tower has been detected.")
+	NotifyPlayers(closePlayers, "[SAFEZONE DISABLED] The klaxons of the tower come to life and the dim rotating halogen bulbs begin spinning, signaling an immediate threat to the tower has been detected.")
+
+	for _, ent in ipairs(ents.FindByClass("cw_toweralarm")) do
+		if IsValid(ent) then
+			if ent:GetNWBool("broken") then
+				Schema:EasyText(Schema:GetAdmins(), "peru", "Tower alarm is broken! No alarm will sound.")
+			else
+				if #closePlayers > 0 then
+					netstream.Start(closePlayers, "EmitSound", { name = "warhorns/fuckerjoealarm.mp3", pitch = 90, level = 60 })
+				end
+				if #farPlayers > 0 then
+					netstream.Start(farPlayers, "EmitSound", { name = "warhorns/fuckerjoealarm.mp3", pitch = 100, level = 75 })
+				end
+
+				FlashTowerLights()
+			end
+			break
+		end
+	end
+
+	Schema.towerSafeZoneEnabled = false
+
+	local factionTable_GK = Clockwork.faction:FindByID("Gatekeeper")
+	local factionTable_HH = Clockwork.faction:FindByID("Holy Hierarchy")
+
+	if factionTable_GK then factionTable_GK.disabled = true end
+	if factionTable_HH then factionTable_HH.disabled = true end
+
+	cwObserverMode.spectatorMode = true
+
+	Schema:EasyText(Schema:GetAdmins(), "chocolate", "/TowerRaid has been used: tower safezone and holy hierarchy and gatekeeper factions have been disabled!")
+
+	local pilgrimTrait = Clockwork.trait:FindByID("pilgrim")
+	if not pilgrimTrait then
+		Schema:EasyText(Schema:GetAdmins(), "red", "[Pilgrim] Trait not found.")
+		print("[Pilgrim] Trait not found.")
+		return
+	end
+
+	pilgrimTrait.eventlocked = true
+
+	local status = tostring(pilgrimTrait.eventlocked)
+	Schema:EasyText(Schema:GetAdmins(), "chocolate", "[Pilgrim] Trait eventlocked is now " .. status)
+end
+
+COMMAND:Register()
+
+local COMMAND = Clockwork.command:New("TogglePilgrim")
+COMMAND.tip = "Enable or disable the Pilgrim trait lock."
+COMMAND.access = "s"
+
+function COMMAND:OnRun(player, arguments)
+	local pilgrimTrait = Clockwork.trait:FindByID("pilgrim")
+
+	if not pilgrimTrait then
+		Schema:EasyText(Schema:GetAdmins(), "red", "[Pilgrim] Trait not found.")
+		print("[Pilgrim] Trait not found.")
+		return
+	end
+
+	pilgrimTrait.eventlocked = not pilgrimTrait.eventlocked
+
+	local status = pilgrimTrait.eventlocked and "locked" or "unlocked"
+	local message = "[Pilgrim] Trait is now " .. status
+
+	Schema:EasyText(Schema:GetAdmins(), "chocolate", message)
+	print(message)
+end
+
+COMMAND:Register()
+
+local COMMAND = Clockwork.command:New("GetLastZone");
+	COMMAND.tip = "Call a congregation to the Tower of Light church.";
+	COMMAND.access = "s";
+
+	-- Called when the command has been run.
+	function COMMAND:OnRun(player, arguments)
+		-- Prevent the bells from playing over eachother.
+		local lastZone = player:GetCharacterData("LastZone");
+		Schema:EasyText(Schema:GetAdmins(), "chocolate"," Last zone: ", lastZone);
+	end;
 COMMAND:Register();
