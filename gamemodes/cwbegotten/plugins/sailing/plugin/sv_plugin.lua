@@ -1853,20 +1853,20 @@ concommand.Add("cw_RepairGorewatchAlarm", function(player, cmd, args)
 end);
 
 local sirenCooldown = 600  -- cooldown in seconds
-local lastSirenTime = 0   -- timestamp of last siren activation
+cwSailing.lastSirenTime = 0   -- timestamp of last siren activation
 
 concommand.Add("cw_TowerSiren", function(player, cmd, args)
     local curTime = os.time()
 
     -- Cooldown check
-    if curTime - lastSirenTime < sirenCooldown then
-        local timeLeft = sirenCooldown - (curTime - lastSirenTime)
+    if curTime - cwsailing.lastSirenTime < sirenCooldown then
+        local timeLeft = sirenCooldown - (curTime - cwsailing.lastSirenTime)
         Schema:EasyText(player, "red", 
             "The siren is still on cooldown. Please wait " .. timeLeft .. " seconds."
         )
         return
     end
-    lastSirenTime = curTime
+    cwsailing.lastSirenTime = curTime
 
     -- If day cycle, extend it
     if cwDayNight and cwDayNight.currentCycle == "day" then
