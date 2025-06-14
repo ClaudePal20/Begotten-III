@@ -1227,127 +1227,94 @@ function Schema:SpawnBegottenEntities()
 		warhornEnt:SetPos(Vector(-215.81, -8982.75, 11807.88));
 		warhornEnt:SetAngles(Angle(43.79, 164.57, 26.77));
 		warhornEnt:Spawn();
+		if not cwSailing then return end
 		
-		if cwSailing then
-			local alarmEnt = ents.Create("cw_gorewatchalarm");
-			local alarmPole = ents.Create("prop_dynamic");
-			local alarmSpeaker = ents.Create("prop_dynamic");
-			
-			alarmEnt:SetPos(Vector(10010, 11408, -1055));
-			alarmEnt:SetAngles(Angle(0, 135, 0));
-			alarmEnt:Spawn();
-			alarmPole:SetModel("models/props_docks/dock01_pole01a_128.mdl");
-			alarmPole:SetPos(Vector(10015, 11406, -1004));
-			alarmPole:SetAngles(Angle(0, 135, 0));
-			alarmPole:SetMoveType(MOVETYPE_VPHYSICS);
-			alarmPole:PhysicsInit(SOLID_VPHYSICS);
-			alarmPole:SetSolid(SOLID_VPHYSICS);
-			alarmPole:Spawn();
-			alarmSpeaker:SetModel("models/props_wasteland/speakercluster01a.mdl");
-			alarmSpeaker:SetPos(Vector(9999, 11420, -964));
-			alarmSpeaker:SetAngles(Angle(0, 135, 0));
-			alarmSpeaker:Spawn();
-			
-			alarmEnt.speaker = alarmSpeaker;
-			cwSailing.gorewatchAlarm = alarmEnt;
-			
-			local towerAlarmEnt = ents.Create("cw_toweralarm");
-			local towerAlarmPole = ents.Create("prop_dynamic")
-			local towerSpeaker = ents.Create("prop_dynamic");
-			
-			towerAlarmEnt:SetPos(Vector(364, 11454, -1020));
-			towerAlarmEnt:SetAngles(Angle(0, 135, 0));
-			towerAlarmEnt:Spawn();
-			towerAlarmPole:SetModel("models/props_docks/dock01_pole01a_128.mdl");
-			towerAlarmPole:SetPos(Vector(364, 11454, -1020));
-			towerAlarmPole:SetAngles(Angle(0, 135, 0));
-			towerAlarmPole:SetMoveType(MOVETYPE_VPHYSICS);
-			towerAlarmPole:PhysicsInit(SOLID_VPHYSICS);
-			towerAlarmPole:SetSolid(SOLID_VPHYSICS);
-			towerAlarmPole:Spawn();
-			towerSpeaker:SetModel("models/props_wasteland/speakercluster01a.mdl");
-			towerSpeaker:SetPos(Vector(364, 11454, -974));
-			towerSpeaker:SetAngles(Angle(0, 90, 0));
-			towerSpeaker:SetMoveType(MOVETYPE_VPHYSICS);
-			towerSpeaker:PhysicsInit(SOLID_VPHYSICS);
-			towerSpeaker:SetSolid(SOLID_VPHYSICS);
-			towerSpeaker:Spawn();
-			
-			towerAlarmEnt.speaker = towerSpeaker;
-			cwSailing.towerAlarm = towerAlarmEnt;
-									
-
-			local bulb = ents.Create("light_dynamic")
-			local bulb_2 = ents.Create("light_dynamic")
-			local bulb_3 = ents.Create("light_dynamic")
-			if IsValid(bulb) and IsValid(bulb_2) and IsValid(bulb_3) then
-			    bulb:SetPos(Vector(364, 11454, -950))
-			    bulb:SetKeyValue("brightness",        "3")  -- stronger light
-			    bulb:SetKeyValue("distance",          "250")  -- longer reach
-			    bulb:SetKeyValue("style",             "0")   -- static since flashing via script
-			    bulb:SetKeyValue("spotlight_radius",  "150") -- visible beam radius
-			    bulb:SetKeyValue("_inner_cone",       "0")   -- omnidirectional
-			    bulb:SetKeyValue("_cone",             "0")   -- no fade angle
-			    bulb:SetKeyValue("_light",            "255 100 50") -- bright orange color
-			    bulb:Spawn()
-			    bulb:Activate()
-			    bulb:Fire("TurnOff", "", 0)
-			    cwSailing.towerLightBulb = bulb
-			    
-    			local bulb_prop = ents.Create("prop_dynamic")
-    			bulb_prop:SetModel("models/props/de_nuke/emergency_lighta.mdl");
-				bulb_prop:SetPos(Vector(364, 11454, -950));
-				bulb_prop:SetAngles(Angle(0, 135, 0));
-				bulb_prop:SetMoveType(MOVETYPE_VPHYSICS);
-				bulb_prop:PhysicsInit(SOLID_VPHYSICS);
-				bulb_prop:SetSolid(SOLID_VPHYSICS);
-				bulb_prop:Spawn();
-				
-			    bulb_2:SetPos(Vector(-600, 12561, -909))
-			    bulb_2:SetKeyValue("brightness",        "2")  -- stronger light
-			    bulb_2:SetKeyValue("distance",          "200")  -- longer reach
-			    bulb_2:SetKeyValue("style",             "0")   -- static since flashing via script
-			    bulb_2:SetKeyValue("spotlight_radius",  "100") -- visible beam radius
-			    bulb_2:SetKeyValue("_inner_cone",       "0")   -- omnidirectional
-			    bulb_2:SetKeyValue("_cone",             "0")   -- no fade angle
-			    bulb_2:SetKeyValue("_light",            "255 100 50") -- bright orange color
-			    bulb_2:Spawn()
-			    bulb_2:Activate()
-			    bulb_2:Fire("TurnOff", "", 0)
-			    cwSailing.towerLightBulb_2 = bulb_2
-			    
-    			local bulb_prop_2 = ents.Create("prop_dynamic")
-    			bulb_prop_2:SetModel("models/props/de_nuke/emergency_lighta.mdl");
-				bulb_prop_2:SetPos(Vector(-595, 12560, -910));
-				bulb_prop_2:SetAngles(Angle(0, 90, 90));
-				bulb_prop_2:SetMoveType(MOVETYPE_VPHYSICS);
-				bulb_prop_2:PhysicsInit(SOLID_VPHYSICS);
-				bulb_prop_2:SetSolid(SOLID_VPHYSICS);
-				bulb_prop_2:Spawn();
-				
-			    bulb_3:SetPos(Vector(890, 13166, -906))
-			    bulb_3:SetKeyValue("brightness",        "2")  -- stronger light
-			    bulb_3:SetKeyValue("distance",          "200")  -- longer reach
-			    bulb_3:SetKeyValue("style",             "0")   -- static since flashing via script
-			    bulb_3:SetKeyValue("spotlight_radius",  "100") -- visible beam radius
-			    bulb_3:SetKeyValue("_inner_cone",       "0")   -- omnidirectional
-			    bulb_3:SetKeyValue("_cone",             "0")   -- no fade angle
-			    bulb_3:SetKeyValue("_light",            "255 100 50") -- bright orange color
-			    bulb_3:Spawn()
-			    bulb_3:Activate()
-			    bulb_3:Fire("TurnOff", "", 0)
-			    cwSailing.towerLightBulb_3 = bulb_3
-			    
-    			local bulb_prop_3 = ents.Create("prop_dynamic")
-    			bulb_prop_3:SetModel("models/props/de_nuke/emergency_lighta.mdl");
-				bulb_prop_3:SetPos(Vector(895, 13166, -908));
-				bulb_prop_3:SetAngles(Angle(0, 90, 90));
-				bulb_prop_3:SetMoveType(MOVETYPE_VPHYSICS);
-				bulb_prop_3:PhysicsInit(SOLID_VPHYSICS);
-				bulb_prop_3:SetSolid(SOLID_VPHYSICS);
-				bulb_prop_3:Spawn();
+		-- Utility function to create a dynamic prop
+		local function CreateProp(model, pos, ang)
+			local prop = ents.Create("prop_dynamic")
+			if not IsValid(prop) then return nil end
+			prop:SetModel(model)
+			prop:SetPos(pos)
+			prop:SetAngles(ang)
+			prop:SetMoveType(MOVETYPE_VPHYSICS)
+			prop:PhysicsInit(SOLID_VPHYSICS)
+			prop:SetSolid(SOLID_VPHYSICS)
+			prop:Spawn()
+			return prop
+		end
+		
+		-- Utility function to create a dynamic light
+		local function CreateDynamicLight(pos)
+			local light = ents.Create("light_dynamic")
+			if not IsValid(light) then return nil end
+			light:SetPos(pos)
+			light:SetKeyValue("brightness", "2")
+			light:SetKeyValue("distance", "200")
+			light:SetKeyValue("style", "0")
+			light:SetKeyValue("spotlight_radius", "100")
+			light:SetKeyValue("_inner_cone", "0")
+			light:SetKeyValue("_cone", "0")
+			light:SetKeyValue("_light", "255 100 50")
+			light:Spawn()
+			light:Activate()
+			light:Fire("TurnOff", "", 0)
+			return light
+		end
+		
+		-- Create Gorewatch Alarm
+		do
+			local alarmEnt = ents.Create("cw_gorewatchalarm")
+			local alarmPole = CreateProp("models/props_docks/dock01_pole01a_128.mdl", Vector(10015, 11406, -1004), Angle(0, 135, 0))
+			local alarmSpeaker = CreateProp("models/props_wasteland/speakercluster01a.mdl", Vector(9999, 11420, -964), Angle(0, 135, 0))
+		
+			if IsValid(alarmEnt) then
+				alarmEnt:SetPos(Vector(10010, 11408, -1055))
+				alarmEnt:SetAngles(Angle(0, 135, 0))
+				alarmEnt:Spawn()
+				alarmEnt.speaker = alarmSpeaker
+				cwSailing.gorewatchAlarm = alarmEnt
 			end
 		end
+		
+		-- Create Tower Alarm
+		do
+			local alarmEnt = ents.Create("cw_toweralarm")
+			local alarmPole = CreateProp("models/props_docks/dock01_pole01a_128.mdl", Vector(364, 11454, -1020), Angle(0, 135, 0))
+			local alarmSpeaker = CreateProp("models/props_wasteland/speakercluster01a.mdl", Vector(364, 11454, -974), Angle(0, 90, 0))
+		
+			if IsValid(alarmEnt) then
+				alarmEnt:SetPos(Vector(364, 11454, -1020))
+				alarmEnt:SetAngles(Angle(0, 135, 0))
+				alarmEnt:Spawn()
+				alarmEnt.speaker = alarmSpeaker
+				cwSailing.towerAlarm = alarmEnt
+			end
+		end
+		
+		-- Create Tower Light Bulbs
+		do
+			-- Bulb 1
+			local bulb1 = CreateDynamicLight(Vector(364, 11454, -950))
+			if IsValid(bulb1) then
+				cwSailing.towerLightBulb = bulb1
+				CreateProp("models/props/de_nuke/emergency_lighta.mdl", Vector(364, 11454, -950), Angle(0, 135, 0))
+			end
+		
+			-- Bulb 2
+			local bulb2 = CreateDynamicLight(Vector(-600, 12561, -909))
+			if IsValid(bulb2) then
+				cwSailing.towerLightBulb_2 = bulb2
+				CreateProp("models/props/de_nuke/emergency_lighta.mdl", Vector(-595, 12560, -910), Angle(0, 90, 90))
+			end
+		
+			-- Bulb 3
+			local bulb3 = CreateDynamicLight(Vector(890, 13166, -906))
+			if IsValid(bulb3) then
+				cwSailing.towerLightBulb_3 = bulb3
+				CreateProp("models/props/de_nuke/emergency_lighta.mdl", Vector(895, 13166, -908), Angle(0, 90, 90))
+			end
+		end
+
 		
 		for i = 1, #archiveEnts do
 			local archiveEnt = ents.Create("cw_archives");
