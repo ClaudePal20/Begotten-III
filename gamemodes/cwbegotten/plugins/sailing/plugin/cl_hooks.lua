@@ -173,6 +173,7 @@ function cwSailing:CreateMenu(data)
 	menu:SetPos(scrW / 2 - (menu:GetWide() / 2), scrH / 2 - (menu:GetTall() / 2));
 end
 
+
 netstream.Hook("OpenTowerAlarmMenu", function(towerAlarmEnt)
 	if IsValid(towerAlarmEnt) then
 		if (IsValid(menu)) then
@@ -203,7 +204,6 @@ netstream.Hook("OpenTowerAlarmMenu", function(towerAlarmEnt)
 		menu:SetPos(scrW / 2 - (menu:GetWide() / 2), scrH / 2 - (menu:GetTall() / 2));
 	end
 end);
-
 
 
 netstream.Hook("OpenAlarmMenu", function(alarmEnt)
