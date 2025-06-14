@@ -1776,7 +1776,7 @@ concommand.Add("cw_RepairTowerAlarm", function(player, cmd, args)
 	if (trace.Entity) then
 		local entity = trace.Entity;
 
-		if (entity:GetClass() == "cw_gorewatchalarm") and player:GetPos():Distance2D(entity:GetPos()) < 300 then
+		if (entity:GetClass() == "cw_toweralarm") and player:GetPos():Distance2D(entity:GetPos()) < 300 then
 			if !entity:GetNWBool("broken") then
 				Schema:EasyText(player, "chocolate", "The alarm system has already been repaired!");
 				
