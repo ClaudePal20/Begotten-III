@@ -1856,41 +1856,78 @@ local sirenCooldown = 600  -- cooldown in seconds
 local lastSirenTime = 0   -- timestamp of last siren activation
 
 concommand.Add("cw_TowerSiren", function(player, cmd, args)
-	local curTime = os.time()
+    local curTime = os.time()
 
-	-- Check cooldown
-	if curTime - lastSirenTime < sirenCooldown then
-		local timeLeft = sirenCooldown - (curTime - lastSirenTime)
-		Schema:EasyText(player, "red", "The siren is still on cooldown. Please wait " .. timeLeft .. " seconds.")
-		return
-	end
+    -- Cooldown check
+    if curTime - lastSirenTime < sirenCooldown then
+        local timeLeft = sirenCooldown - (curTime - lastSirenTime)
+        Schema:EasyText(player, "red", 
+            "The siren is still on cooldown. Please wait " .. timeLeft .. " seconds."
+        )
+        return
+    end
+    lastSirenTime = curTime
 
-	lastSirenTime = curTime  -- update last activation time
+    -- If day cycle, extend it
+    if cwDayNight and cwDayNight.currentCycle == "day" then
+        cwDayNight:ModifyCycleTimeLeft(120)
+    end
 
-	-- Optional: Check player permissions or distance here if needed
+    -- Play messages & sounds to players
+    local close_players, far_players = {}, {}
 
-	-- Prevent the siren alarm from playing over each other.
-	if cwDayNight and cwDayNight.currentCycle == "day" then
-		cwDayNight:ModifyCycleTimeLeft(120)
-	end
+    for _, v in _player.Iterator() do
+        if IsValid(v) and v:HasInitialized() then
+            local lastZone = v:GetCharacterData("LastZone")
+            if lastZone == "tower" or lastZone == "theater" or lastZone == "hillbunker" then
+                table.insert(close_players, v)
+                Clockwork.chatBox:Add(v, nil, "event", 
+                    "The klaxons of the tower come to life, signaling an immediate threat to the tower has been detected."
+                )
+                netstream.Start(v, "FadeAmbientMusic")
+            else
+                table.insert(far_players, v)
+            end
+        end
+    end
 
-	local close_players = {}
-	local far_players = {}
+    netstream.Start(close_players, "EmitSound", {
+        name = "warhorns/fuckerjoealarm.mp3", pitch = 90, level = 60
+    })
+    netstream.Start(far_players, "EmitSound", {
+        name = "warhorns/fuckerjoealarm.mp3", pitch = 100, level = 75
+    })
 
-	for _, v in _player.Iterator() do
-		if IsValid(v) and v:HasInitialized() then
-			local lastZone = v:GetCharacterData("LastZone")
+    -- Flash and color-change the dynamic light bulb
+    if cwSailing and IsValid(cwSailing.towerLightBulb) then
+        local bulb = cwSailing.towerLightBulb
+        local flashName = "TowerAlarmLightFlash"
+        local flashCount = 0
+        local maxFlashes = 100
 
-			if lastZone == "tower" or lastZone == "theater" or lastZone == "hillbunker" then
-				table.insert(close_players, v)
-				Clockwork.chatBox:Add(v, nil, "event", "The klaxons of the tower come to life, signaling an immediate threat to the tower has been detected.")
-				netstream.Start(v, "FadeAmbientMusic")
-			end
-		end
-	end
+        timer.Create(flashName, 0.5, maxFlashes, function()
+            if not IsValid(bulb) then
+                timer.Remove(flashName)
+                return
+            end
 
-	netstream.Start(close_players, "EmitSound", {name = "warhorns/fuckerjoealarm.mp3", pitch = 90, level = 60})
-	netstream.Start(far_players, "EmitSound", {name = "warhorns/fuckerjoealarm.mp3", pitch = 100, level = 75})
+            -- Alternate red & blue every two flashes
+            local r, g, b = 255, 0, 0
+            if flashCount % 4 >= 2 then
+                r, g, b = 0, 0, 255
+            end
+            bulb:Fire("Color", string.format("%d %d %d", r, g, b), 0)
+
+            -- Turn the light on/off
+            if flashCount % 2 == 0 then
+                bulb:Fire("TurnOn", "", 0)
+            else
+                bulb:Fire("TurnOff", "", 0)
+            end
+
+            flashCount = flashCount + 1
+        end)
+    end
 end)
 
 
