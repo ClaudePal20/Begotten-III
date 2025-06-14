@@ -1275,6 +1275,78 @@ function Schema:SpawnBegottenEntities()
 			
 			towerAlarmEnt.speaker = towerSpeaker;
 			cwSailing.towerAlarm = towerAlarmEnt;
+									
+
+			local bulb = ents.Create("light_dynamic")
+			local bulb_2 = ents.Create("light_dynamic")
+			local bulb_3 = ents.Create("light_dynamic")
+			if IsValid(bulb) and IsValid(bulb_2) and IsValid(bulb_3) then
+			    bulb:SetPos(Vector(364, 11454, -950))
+			    bulb:SetKeyValue("brightness",        "3")  -- stronger light
+			    bulb:SetKeyValue("distance",          "250")  -- longer reach
+			    bulb:SetKeyValue("style",             "0")   -- static since flashing via script
+			    bulb:SetKeyValue("spotlight_radius",  "150") -- visible beam radius
+			    bulb:SetKeyValue("_inner_cone",       "0")   -- omnidirectional
+			    bulb:SetKeyValue("_cone",             "0")   -- no fade angle
+			    bulb:SetKeyValue("_light",            "255 100 50") -- bright orange color
+			    bulb:Spawn()
+			    bulb:Activate()
+			    bulb:Fire("TurnOff", "", 0)
+			    cwSailing.towerLightBulb = bulb
+			    
+    			local bulb_prop = ents.Create("prop_dynamic")
+    			bulb_prop:SetModel("models/props/de_nuke/emergency_lighta.mdl");
+				bulb_prop:SetPos(Vector(364, 11454, -950));
+				bulb_prop:SetAngles(Angle(0, 135, 0));
+				bulb_prop:SetMoveType(MOVETYPE_VPHYSICS);
+				bulb_prop:PhysicsInit(SOLID_VPHYSICS);
+				bulb_prop:SetSolid(SOLID_VPHYSICS);
+				bulb_prop:Spawn();
+				
+			    bulb_2:SetPos(Vector(-600, 12561, -909))
+			    bulb_2:SetKeyValue("brightness",        "2")  -- stronger light
+			    bulb_2:SetKeyValue("distance",          "200")  -- longer reach
+			    bulb_2:SetKeyValue("style",             "0")   -- static since flashing via script
+			    bulb_2:SetKeyValue("spotlight_radius",  "100") -- visible beam radius
+			    bulb_2:SetKeyValue("_inner_cone",       "0")   -- omnidirectional
+			    bulb_2:SetKeyValue("_cone",             "0")   -- no fade angle
+			    bulb_2:SetKeyValue("_light",            "255 100 50") -- bright orange color
+			    bulb_2:Spawn()
+			    bulb_2:Activate()
+			    bulb_2:Fire("TurnOff", "", 0)
+			    cwSailing.towerLightBulb_2 = bulb_2
+			    
+    			local bulb_prop_2 = ents.Create("prop_dynamic")
+    			bulb_prop_2:SetModel("models/props/de_nuke/emergency_lighta.mdl");
+				bulb_prop_2:SetPos(Vector(-595, 12560, -910));
+				bulb_prop_2:SetAngles(Angle(0, 90, 90));
+				bulb_prop_2:SetMoveType(MOVETYPE_VPHYSICS);
+				bulb_prop_2:PhysicsInit(SOLID_VPHYSICS);
+				bulb_prop_2:SetSolid(SOLID_VPHYSICS);
+				bulb_prop_2:Spawn();
+				
+			    bulb_3:SetPos(Vector(890, 13166, -906))
+			    bulb_3:SetKeyValue("brightness",        "2")  -- stronger light
+			    bulb_3:SetKeyValue("distance",          "200")  -- longer reach
+			    bulb_3:SetKeyValue("style",             "0")   -- static since flashing via script
+			    bulb_3:SetKeyValue("spotlight_radius",  "100") -- visible beam radius
+			    bulb_3:SetKeyValue("_inner_cone",       "0")   -- omnidirectional
+			    bulb_3:SetKeyValue("_cone",             "0")   -- no fade angle
+			    bulb_3:SetKeyValue("_light",            "255 100 50") -- bright orange color
+			    bulb_3:Spawn()
+			    bulb_3:Activate()
+			    bulb_3:Fire("TurnOff", "", 0)
+			    cwSailing.towerLightBulb_3 = bulb_3
+			    
+    			local bulb_prop_3 = ents.Create("prop_dynamic")
+    			bulb_prop_3:SetModel("models/props/de_nuke/emergency_lighta.mdl");
+				bulb_prop_3:SetPos(Vector(895, 13166, -908));
+				bulb_prop_3:SetAngles(Angle(0, 90, 90));
+				bulb_prop_3:SetMoveType(MOVETYPE_VPHYSICS);
+				bulb_prop_3:PhysicsInit(SOLID_VPHYSICS);
+				bulb_prop_3:SetSolid(SOLID_VPHYSICS);
+				bulb_prop_3:Spawn();
+			end
 		end
 		
 		for i = 1, #archiveEnts do
