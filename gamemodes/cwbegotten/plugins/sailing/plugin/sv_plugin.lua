@@ -1852,28 +1852,33 @@ concommand.Add("cw_RepairGorewatchAlarm", function(player, cmd, args)
 	end;
 end);
 
-local sirenCooldown = 600  -- cooldown in seconds
-cwSailing.lastSirenTime = 0   -- timestamp of last siren activation
+local sirenCooldown = 600  -- Cooldown en segundos
+
+cwSailing.lastSirenTime = cwSailing.lastSirenTime or 0
+
+-- Función que comprueba el cooldown y retorna true si se puede ejecutar, false en caso contrario.
+local function CheckSirenCooldown(player)
+    local curTime = os.time()
+    local elapsed = curTime - cwSailing.lastSirenTime
+    if elapsed < sirenCooldown then
+        local timeLeft = sirenCooldown - elapsed
+        Schema:EasyText(player, "red", "The siren is still on cooldown. Please wait " .. timeLeft .. " seconds.")
+        return false
+    end
+    cwSailing.lastSirenTime = curTime
+    return true
+end
 
 concommand.Add("cw_TowerSiren", function(player, cmd, args)
-    local curTime = os.time()
+    -- Comprobación del cooldown
+    if not CheckSirenCooldown(player) then return end
 
-    -- Cooldown check
-    if curTime - cwsailing.lastSirenTime < sirenCooldown then
-        local timeLeft = sirenCooldown - (curTime - cwsailing.lastSirenTime)
-        Schema:EasyText(player, "red", 
-            "The siren is still on cooldown. Please wait " .. timeLeft .. " seconds."
-        )
-        return
-    end
-    cwsailing.lastSirenTime = curTime
-
-    -- If day cycle, extend it
+    -- Si es día, extender el ciclo diurno
     if cwDayNight and cwDayNight.currentCycle == "day" then
         cwDayNight:ModifyCycleTimeLeft(120)
     end
 
-    -- Play messages & sounds to players
+    -- Dividir jugadores según zonas
     local close_players, far_players = {}, {}
 
     for _, v in _player.Iterator() do
@@ -1881,7 +1886,7 @@ concommand.Add("cw_TowerSiren", function(player, cmd, args)
             local lastZone = v:GetCharacterData("LastZone")
             if lastZone == "tower" or lastZone == "theater" or lastZone == "hillbunker" then
                 table.insert(close_players, v)
-                Clockwork.chatBox:Add(v, nil, "event", 
+                Clockwork.chatBox:Add(v, nil, "event",
                     "The klaxons of the tower come to life, signaling an immediate threat to the tower has been detected."
                 )
                 netstream.Start(v, "FadeAmbientMusic")
@@ -1891,6 +1896,7 @@ concommand.Add("cw_TowerSiren", function(player, cmd, args)
         end
     end
 
+    -- Enviar sonidos a los jugadores en cada grupo
     netstream.Start(close_players, "EmitSound", {
         name = "warhorns/fuckerjoealarm.mp3", pitch = 90, level = 60
     })
@@ -1898,7 +1904,7 @@ concommand.Add("cw_TowerSiren", function(player, cmd, args)
         name = "warhorns/fuckerjoealarm.mp3", pitch = 100, level = 75
     })
 
-    -- Flash and color-change the dynamic light bulb
+    -- Parpadeo de la luz dinámica del torre, si existe
     if cwSailing and IsValid(cwSailing.towerLightBulb) then
         local bulb = cwSailing.towerLightBulb
         local flashName = "TowerAlarmLightFlash"
@@ -1911,14 +1917,14 @@ concommand.Add("cw_TowerSiren", function(player, cmd, args)
                 return
             end
 
-            -- Alternate red & blue every two flashes
+            -- Alterna entre rojo y azul cada dos flashes
             local r, g, b = 255, 0, 0
             if flashCount % 4 >= 2 then
                 r, g, b = 0, 0, 255
             end
             bulb:Fire("Color", string.format("%d %d %d", r, g, b), 0)
 
-            -- Turn the light on/off
+            -- Encender y apagar la luz alternativamente
             if flashCount % 2 == 0 then
                 bulb:Fire("TurnOn", "", 0)
             else
@@ -1929,6 +1935,7 @@ concommand.Add("cw_TowerSiren", function(player, cmd, args)
         end)
     end
 end)
+
 
 
 
