@@ -2558,6 +2558,40 @@ local COMMAND = Clockwork.command:New("PlyHealFullAll");
 	end;
 COMMAND:Register();
 
+
+local COMMAND = Clockwork.command:New("CharSetMaxStamina");
+COMMAND.tip = "Set a players maximum possible stamina.";
+COMMAND.text = "<string Name> [number Amount]";
+COMMAND.flags = CMD_DEFAULT;
+COMMAND.access = "a";
+COMMAND.arguments = 1;
+COMMAND.optionalArguments = 1;
+function COMMAND:OnRun(player, arguments)
+	local target = Clockwork.player:FindByID(arguments[1]);
+
+	if (target) then
+		local amount = tonumber(arguments[2]);
+		
+		if not amount then
+			amount = 0;
+		else
+			amount = math.Clamp(amount, 0, amount);
+		end
+		
+		target:SetCharacterData("custom_stamina", amount);
+
+		target:SetStamina(amount);
+
+		if (player != target)	then
+			Schema:EasyText(player, "cornflowerblue", "You have set "..target:Name().."'s max stamina to "..amount..".");
+		else
+			Schema:EasyText(player, "cornflowerblue", "You have set your own max stamina to "..amount..".");
+		end;
+	else
+		Schema:EasyText(player, "grey", arguments[1].." is not a valid player!");
+	end;
+end;
+
 local COMMAND = Clockwork.command:New("CharSetStability");
 COMMAND.tip = "Set a players Stability level.";
 COMMAND.text = "<string Name> [number Amount]";
