@@ -17,14 +17,14 @@ cwStamina.regenScale = Clockwork.config:Get("stam_regen_scale"):Get();
 function cwStamina:GetMaxStaminaPlugin(player)
 	if player:GetCharacterData("isDemon", false) then
 		return 1000;
+		
+	elseif player:GetCharacterData("custom_stamina") then
+		return player:GetCharacterData("custom_stamina")
+
 	else
 		local max_stamina = hook.Run("GetMaxStamina", player, 90);
 		local faction = player:GetFaction();
 		local subfaction = player:GetSubfaction();
-		
-		if player:GetCharacterData("isDemon", false) then
-			return 1000;
-		end
 		
 		if subfaction == "Servus" then
 			max_stamina = max_stamina + 5;
