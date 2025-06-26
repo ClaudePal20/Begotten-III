@@ -193,3 +193,46 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.requiredFaiths = {"Faith of the Light"};
 	ITEM.kinisgerOverride = true;
 ITEM:Register();
+
+local ITEM = Clockwork.item:New("weapon_base");
+	ITEM.name = "Crackling Interference Totem";
+	ITEM.model = "models/begotten_apocalypse/items/cla_rome_standard_signum_1.mdl"; -- ⚠️ Replace with actual model once available
+	ITEM.weight = 6.0;
+	ITEM.uniqueID = "begotten_polearm_interferencetotem";
+	ITEM.category = "Melee";
+	ITEM.description = "A totem wrapped in coils and humming with residual power. The air around it crackles. It distorts more than just the senses—speech itself falters near it.";
+	ITEM.iconoverride = "materials/begotten_apocalypse/ui/itemicons/cla_rome_standard_signum_1.png";
+
+	ITEM.meleeWeapon = true;
+	ITEM.isAttachment = true;
+	ITEM.isPolearm = true;
+	ITEM.hasMinimumRange = true;
+
+	ITEM.attachmentBone = "ValveBiped.Bip01_Spine2";
+	ITEM.attachmentOffsetAngles = Angle(114.36, 271.49, 152.15);
+	ITEM.attachmentOffsetVector = Vector(-2.83, 6, 53.75);
+
+	-- Requirement: belief tied to Voltist lore
+	ITEM.requiredbeliefs = {"wriggle_fucking_eel"};
+
+	-- Item breakdown
+	ITEM.components = {
+	breakdownType = "meltdown",
+	items = {
+		"fine_steel_chunks", "fine_steel_chunks", "tech", "tech",
+		"scrap", "scrap", "wood", "wood", "wood"
+	}
+};
+
+	-- Item attributes
+	ITEM.attributes = {"aoebuff"};
+
+	-- Item spawner info
+	ITEM.itemSpawnerInfo = {
+		category = "Melee",
+		rarity = 1000,
+		supercrateOnly = true
+	};
+
+	ITEM.kinisgerOverride = false; -- ⚠️ Check if this is needed for your game mode
+ITEM:Register();

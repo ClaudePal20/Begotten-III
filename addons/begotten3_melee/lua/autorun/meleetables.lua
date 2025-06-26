@@ -1345,6 +1345,26 @@ AttackTables.HillBannerAttackTable = {
 	["punchstrength"] = Angle(1,3,1),
 };
 
+AttackTables.InterferenceTotemAttackTable = {
+	["primarydamage"] = 12,
+	["dmgtype"] = 128, -- DMG_CLUB
+	["attacktype"] = "polearm_swing",
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.3,
+	["altattackpoisedamagemodifier"] = 0.2,
+	["altmeleearc"] = 20,
+	["armorpiercing"] = 25,
+	["altarmorpiercing"] = 20,
+	["poisedamage"] = 20,
+	["stabilitydamage"] = 35,
+	["takeammo"] = 6,
+	["delay"] = 1.5,
+	["striketime"] = 0.45,
+	["meleearc"] = 55,
+	["meleerange"] = 1400,
+	["punchstrength"] = Angle(1, 2.5, 1)
+}
+
 -- Arming Swords
 
 AttackTables.IronArmingSwordAttackTable = {
@@ -2572,6 +2592,25 @@ AttackTables.GoreHuntingDaggerAttackTable = {
 	["punchstrength"] = Angle(0,1,0),
 };
 
+AttackTables.ClanReaverDaggerAttackTable = {
+	["primarydamage"] = 21,
+	["dmgtype"] = 16,
+	["attacktype"] = "reg_swing",
+	["canaltattack"] = false,
+	["altattackdamagemodifier"] = nil,
+	["altattackpoisedamagemodifier"] = nil,
+	["armorpiercing"] = 30,
+	["altarmorpiercing"] = nil,
+	["poisedamage"] = 0,
+	["stabilitydamage"] = 0,
+	["takeammo"] = 2,
+	["delay"] = 0.65,
+	["striketime"] = 0.2,
+	["meleearc"] = 15,
+	["meleerange"] = 475,
+	["punchstrength"] = Angle(0,1,0),
+};
+
 AttackTables.QuickshankAttackTable = {
 	["primarydamage"] = 10,
 	["dmgtype"] = 16,
@@ -3720,6 +3759,7 @@ AddTable("FlangedMaceAttackTable", AttackTables.FlangedMaceAttackTable)
 AddTable("MorningStarAttackTable", AttackTables.MorningStarAttackTable)  
 AddTable("BoneMaceAttackTable", AttackTables.BoneMaceAttackTable)          
 AddTable("GoreHuntingDaggerAttackTable", AttackTables.GoreHuntingDaggerAttackTable)
+AddTable("ClanReaverDaggerAttackTable", AttackTables.ClanReaverDaggerAttackTable)
 AddTable("QuickshankAttackTable", AttackTables.QuickshankAttackTable)    
 AddTable("ParryingDaggerAttackTable", AttackTables.ParryingDaggerAttackTable)
 AddTable("KnightsbaneAttackTable", AttackTables.KnightsbaneAttackTable)  
@@ -3814,7 +3854,8 @@ AddTable("GunAxeAttackTable", AttackTables.GunAxeAttackTable)
 AddTable("DemonKnightSwordAttackTable", AttackTables.DemonKnightSwordAttackTable)
 AddTable("DemonKnightSwordAttackTableFire", AttackTables.DemonKnightSwordAttackTableFire)
 AddTable("DemonKnightSwordAttackTableIce", AttackTables.DemonKnightSwordAttackTableIce)
-AddTable("GrocklingSwordAttackTable", AttackTables.GrocklingSwordAttackTable) 
+AddTable("GrocklingSwordAttackTable", AttackTables.GrocklingSwordAttackTable)
+AddTable("InterferenceTotemAttackTable", AttackTables.InterferenceTotemAttackTable) 
 
 -- Block Stat Tables
 
@@ -4735,6 +4776,24 @@ BlockTables.GoreHuntingDaggerBlockTable = {
 	["raisespeed"] = 1.25,
 	["instantraise"] = true,
 	["parrydifficulty"] = 0.2,
+	["parrytakestamina"] = 5,
+	["canparry"] = true,
+	["candeflect"] = true,
+};
+
+BlockTables.ClanReaverDaggerBlockTable = {
+	["guardblockamount"] = 10,
+	["specialeffect"] = false,
+	["blockeffect"] = "MetalSpark",
+	["blockeffectforward"] = 30,
+	["blockeffectpos"] = (Vector(5, 0, 60)),
+	["blockcone"] = 135,
+	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+	["partialbulletblock"] = false,
+	["poiseresistance"] = 0,
+	["raisespeed"] = 1.25,
+	["instantraise"] = true,
+	["parrydifficulty"] = 0.25,
 	["parrytakestamina"] = 5,
 	["canparry"] = true,
 	["candeflect"] = true,
@@ -6382,6 +6441,24 @@ BlockTables.GrocklingSwordBlockTable = {
 	["candeflect"] = true,
 };
 
+BlockTables.InterferenceTotemBlockTable = {
+	["guardblockamount"] = 12,
+	["specialeffect"] = true,
+	["blockeffect"] = "StunstickImpact",
+	["blockeffectforward"] = 30,
+	["blockeffectpos"] = Vector(0, 0, 55),
+	["blockcone"] = 165,
+	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_SHOCK},
+	["partialbulletblock"] = false,
+	["poiseresistance"] = 25,
+	["raisespeed"] = 1.6,
+	["instantraise"] = false,
+	["parrydifficulty"] = 0.25,
+	["parrytakestamina"] = 18,
+	["canparry"] = true,
+	["candeflect"] = true
+}
+
 AddTable("DefaultBlockTable", BlockTables.DefaultBlockTable) 
 AddTable("AdminTwistedMacheteBlockTable", BlockTables.AdminTwistedMacheteBlockTable)
 AddTable("FistBlockTable", BlockTables.FistBlockTable) 
@@ -6434,6 +6511,7 @@ AddTable("ElegantEpeeBlockTable", BlockTables.ElegantEpeeBlockTable)
 AddTable("FlangedMaceBlockTable", BlockTables.FlangedMaceBlockTable)  
 AddTable("MorningStarBlockTable", BlockTables.MorningStarBlockTable)    
 AddTable("GoreHuntingDaggerBlockTable", BlockTables.GoreHuntingDaggerBlockTable)    
+AddTable("ClanReaverDaggerBlockTable", BlockTables.ClanReaverDaggerBlockTable)  
 AddTable("QuickshankBlockTable", BlockTables.QuickshankBlockTable)    
 AddTable("ParryingDaggerBlockTable", BlockTables.ParryingDaggerBlockTable) 
 AddTable("KnightsbaneBlockTable", BlockTables.KnightsbaneBlockTable)   
@@ -6524,6 +6602,7 @@ AddTable("OrdainedGorefellerBlockTable", BlockTables.OrdainedGorefellerBlockTabl
 AddTable("GunAxeBlockTable", BlockTables.GunAxeBlockTable) 
 AddTable("DemonKnightSwordBlockTable", BlockTables.DemonKnightSwordBlockTable)
 AddTable("GrocklingSwordBlockTable", BlockTables.GrocklingSwordBlockTable)
+AddTable("InterferenceTotemBlockTable", BlockTables.InterferenceTotemBlockTable)
 
 -- Shield Stat Tables
 

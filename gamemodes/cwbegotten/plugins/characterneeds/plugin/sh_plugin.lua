@@ -69,10 +69,16 @@ function COMMAND:OnRun(player, arguments)
 					player:EmitSound("npc/barnacle/barnacle_gulp1.wav");
 					Schema:EasyText(player, "olivedrab", "You drink from the yummy Begotten waters.");
 				else
-					if cwMedicalSystem then
-						if cwBeliefs and player:HasBelief("sanitary") then
+					if player.GetCharmEquipped and player:GetCharmEquipped("bendy_straw") then
+                        player:HandleNeed("thirst", -25);
+                        player:HandleSanity(8); -- Gain sanity
+                        player:EmitSound("npc/barnacle/barnacle_gulp1.wav");
+                        Schema:EasyText(player, "green", "You sip cautiously through your trusty bendy straw. Somehow, it makes this vile water feel a little more refined.");
+					else
+						if cwMedicalSystem then
+						 if cwBeliefs and player:HasBelief("sanitary") then
 							player:HandleDiseaseChance("water", 33);
-						else
+						 else
 							player:HandleDiseaseChance("water", 80);
 						end
 					end

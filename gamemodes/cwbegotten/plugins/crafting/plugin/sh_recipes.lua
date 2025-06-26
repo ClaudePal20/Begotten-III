@@ -1799,6 +1799,36 @@ function cwRecipes:ClockworkInitialized()
 		function RECIPE:EndCraft(player)
 		end;
 	RECIPE:Register()
+	
+	RECIPE = cwRecipes.recipes:New("clan_reaver_dagger");
+		RECIPE.name = "Clan Reaver Dagger";
+		RECIPE.requiresSmithy = true;
+		RECIPE.requiredBeliefs = {"artisan"};
+		RECIPE.requiredFactions = {"Goreic Warrior"};
+		RECIPE.requirements = {
+			["steel_ingot"] = {amount = 1},
+			["belphegor_catalyst"] = {amount = 1},
+			["down_catalyst"] = {amount = 1},
+		};
+		RECIPE.result = {
+			["begotten_dagger_clanreaverdagger"] = {amount = 1},
+		};
+		RECIPE.category = "Weapons"
+		RECIPE.finishSound = "generic_ui/smelt_success_02.wav";
+		RECIPE.failSound = "buttons/button2.wav"
+		RECIPE.craftTime = 8
+		RECIPE.craftVerb = "smithing"
+		RECIPE.experience = 45;
+		
+		function RECIPE:OnCraft(player)
+		end;
+		function RECIPE:OnFail(player)
+		end;
+		function RECIPE:StartCraft(player)
+		end;
+		function RECIPE:EndCraft(player)
+		end;
+	RECIPE:Register()
 
 	RECIPE = cwRecipes.recipes:New("iron_dagger");
 		RECIPE.name = "Iron Dagger";
@@ -10718,4 +10748,37 @@ function cwRecipes:ClockworkInitialized()
 		function RECIPE:EndCraft(player)
 		end;
 	RECIPE:Register()
+
+	RECIPE = cwRecipes.recipes:New("interference_totem");
+
+		RECIPE.name = "Crackling Interference Totem";
+		RECIPE.requiredBeliefs = {"artisan", "jacobs_ladder"};
+		RECIPE.requiredSubfaiths = {"Voltism"};
+		RECIPE.requirements = {
+			["fine_steel_ingot"] = {amount = 2},
+			["wood"] = {amount = 3},
+			["tech"] = {amount = 4},
+		};
+		RECIPE.result = {
+		["begotten_polearm_interferencetotem"] = {amount = 1},
+		};
+
+		RECIPE.category = "Weapons"
+		RECIPE.finishSound = "ambient/energy/zap9.wav";
+		RECIPE.failSound = "buttons/button2.wav";
+		RECIPE.craftTime = 10;
+		RECIPE.craftVerb = "charging";
+		RECIPE.experience = 100;
+
+		function RECIPE:OnCraft(player)
+		player:EmitSound("ambient/levels/labs/electric_explosion1.wav");
+		end;
+		function RECIPE:OnFail(player)
+			player:Notify("The totem short-circuits and discharges violently!");
+		end;
+		function RECIPE:StartCraft(player)
+		end;
+		function RECIPE:EndCraft(player)
+		end;
+	RECIPE:Register();
 end
