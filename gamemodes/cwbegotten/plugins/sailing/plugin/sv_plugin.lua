@@ -263,7 +263,7 @@ function cwSailing:SpawnLongship(owner, location, itemTable)
 				else
 					local longshipHealth = 500;
 					
-					if owner:GetSubfaction() == "Clan Harald" then
+					if owner:GetSubfaction() == "Clan Harald" or owner:GetSubfaction() == "Clan Ghorst" then
 						longshipHealth = 1000;
 						longshipEnt:SetSkin(1);
 					end
