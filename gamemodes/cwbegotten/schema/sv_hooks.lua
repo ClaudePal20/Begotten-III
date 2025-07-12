@@ -3302,10 +3302,8 @@ function Schema:EntityTakeDamageNew(entity, damageInfo)
 			local attacker = damageInfo:GetAttacker();
 			
 			if attacker:IsPlayer() then
-				if attacker:GetSubfaction() == "Clan Gore" then
+				if attacker:GetSubfaction() == "Clan Gore" or attacker:GetSubfaction() == "Clan Ghorst" then
 					damageInfo:ScaleDamage(1.5);
-				elseif attacker:GetSubfaction() == "Clan Ghorst" then
-					damageInfo:ScaleDamage(1.25);
 				end
 			end
 			
