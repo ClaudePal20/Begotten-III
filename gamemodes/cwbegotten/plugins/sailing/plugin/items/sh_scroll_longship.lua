@@ -57,7 +57,7 @@ local ITEM = Clockwork.item:New();
 				
 				if longshipEnt.longshipType ~= "ironclad" then
 					if self:GetData("health") == -1 then
-						if player:GetSubfaction() == "Clan Harald" then
+						if player:GetSubfaction() == "Clan Harald" or player:GetSubfaction() == "Clan Ghorst" then
 							longshipEnt.health = 1000;
 						else
 							longshipEnt.health = 500;
