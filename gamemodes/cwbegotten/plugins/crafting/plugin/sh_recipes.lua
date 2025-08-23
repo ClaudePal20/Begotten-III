@@ -1917,7 +1917,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("quickshank");
 		RECIPE.name = "Quickshank";
 		RECIPE.requiredBeliefs = {"ingenious"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrap"] = {amount = 1},
 			["wood"] = {amount = 1},
@@ -3565,7 +3565,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("pipe_mace");
 		RECIPE.name = "Pipe Mace";
 		RECIPE.requiredBeliefs = {"ingenious"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["begotten_1h_pipe"] = {amount = 1},
 			["scrap"] = {amount = 1},
@@ -3645,7 +3645,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("scrap_axe");
 		RECIPE.name = "Scrap Axe";
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["begotten_1h_tireiron"] = {amount = 1},
 			["scrap"] = {amount = 2},
@@ -4426,7 +4426,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("scrap_spear");
 		RECIPE.name = "Scrap Spear";
 		RECIPE.requiredBeliefs = {"ingenious"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrap"] = {amount = 2},
 			["wood"] = {amount = 2},
@@ -5841,7 +5841,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("scrap_shield");
 		RECIPE.name = "Scrap Shield";
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrap"] = {amount = 5},
 		};
@@ -6071,7 +6071,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Blunderbuss";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["iron_ingot"] = {amount = 2},
 			["scrap"] = {amount = 3},
@@ -6101,7 +6101,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Wooden Crossbow";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["bindings"] = {amount = 1},
 			["iron_ingot"] = {amount = 2},
@@ -6130,7 +6130,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("scrap_crossbow");
 		RECIPE.name = "Scrap Crossbow";
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["bindings"] = {amount = 1},
 			["scrap"] = {amount = 5},
@@ -6160,7 +6160,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Musket";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["steel_ingot"] = {amount = 1},
 			["iron_ingot"] = {amount = 2},
@@ -6189,7 +6189,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Peppershot";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrap"] = {amount = 3},
 			["iron_ingot"] = {amount = 1},
@@ -6218,7 +6218,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Scavenger Gun";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["fine_steel_ingot"] = {amount = 1},
 			["steel_ingot"] = {amount = 1},
@@ -6307,7 +6307,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Scavenger Gun Magazine";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["iron_ingot"] = {amount = 1},
 			["scrap"] = {amount = 1},
@@ -6336,7 +6336,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Scavenger Gun Large Magazine";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["iron_ingot"] = {amount = 1},
 			["scavenger_gun_magazine"] = {amount = 1},
@@ -6394,7 +6394,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Gunpowder";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["fertilizer"] = {amount = 1},
 			["charcoal"] = {amount = 1},
@@ -8674,7 +8674,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("scrapper_grunt_plate");
 		RECIPE.name = "Scrapper Grunt Plate";
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrap"] = {amount = 5},
 			["cloth"] = {amount = 1},
@@ -8702,7 +8702,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("scrapper_machinist_plate");
 		RECIPE.name = "Scrapper Machinist Plate";
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrapper_grunt_plate"] = {amount = 1},
 			["scrap"] = {amount = 6},
@@ -8730,7 +8730,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("wanderer_oppressor_armor");
 		RECIPE.name = "Wanderer Oppressor Armor";
 		RECIPE.requiredBeliefs = {"artisan"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrapper_grunt_plate"] = {amount = 1},
 			["leather"] = {amount = 4},
@@ -8959,7 +8959,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("scrap_helmet");
 		RECIPE.name = "Scrap Helmet";
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrap"] = {amount = 4},
 		};
@@ -8986,7 +8986,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("scrapper_machinist_plate_helmet");
 		RECIPE.name = "Scrapper Machinist Plate Helmet";
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrap_helmet"] = {amount = 1},
 			["scrap"] = {amount = 6},
@@ -9015,7 +9015,7 @@ function cwRecipes:ClockworkInitialized()
 	RECIPE = cwRecipes.recipes:New("scrapper_smog_priest_helmet");
 		RECIPE.name = "Scrapper Smog Priest Helmet";
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrap_helmet"] = {amount = 1},
 			["steel_ingot"] = {amount = 1},
@@ -9702,7 +9702,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "(10x) Pop-a-Shot";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["iron_ingot"] = {amount = 1},
 			["gunpowder"] = {amount = 1},
@@ -9731,7 +9731,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "(4x) Longshot";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["iron_ingot"] = {amount = 1},
 			["gunpowder"] = {amount = 1},
@@ -9760,7 +9760,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "(2x) Grapeshot";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"mechanic"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["iron_ingot"] = {amount = 1},
 			["gunpowder"] = {amount = 2},
@@ -9789,7 +9789,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "(15x) Scrapshot";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Crast", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrap"] = {amount = 1},
 			["gunpowder"] = {amount = 1},
@@ -9846,7 +9846,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "(4x) Iron Bolt";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["iron_ingot"] = {amount = 1},
 			["wood"] = {amount = 3},
@@ -9875,7 +9875,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Iron Bolt (Incendiary)";
 		RECIPE.requiresSmithy = false;
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["iron_bolt"] = {amount = 1},
 			["small_oil"] = {amount = 1},
@@ -9904,7 +9904,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Scrap Bolt";
 		RECIPE.requiresSmithy = true;
 		RECIPE.requiredBeliefs = {"craftsman"};
-		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Grock"};
+		RECIPE.excludedSubfactions = {"Clan Gore", "Clan Harald", "Clan Reaver", "Clan Gotnarh", "Clan Ghorst"};
 		RECIPE.requirements = {
 			["scrap"] = {amount = 1},
 		};
