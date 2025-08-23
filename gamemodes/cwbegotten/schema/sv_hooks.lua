@@ -4,7 +4,7 @@
 --]]
 
 local map = game.GetMap();
-local bMap = map == "rp_begotten3" or map == "rp_district21";
+local bMap = map == "rp_begotten3" or map == "rp_district21" or map == "bg_district34";
 
 function Schema:ClockworkInitialized()
 	if !self.bountyData then
@@ -2485,7 +2485,7 @@ function Schema:PlayerCanUseDoor(player, door)
 				
 				return false;
 			end
-		elseif doorName == "castle_bigdoor1" or doorName == "castle_bigdoor2" or doorName == "gate_door" then
+		elseif doorName == "castle_bigdoor1" or doorName == "castle_bigdoor2" or doorName == "gate_door" or (doors["hell"] and table.HasValue(doors["hell"], doorName)) then
 			return false;
 		end
 	end
