@@ -4,7 +4,7 @@
 --]]
 
 local map = game.GetMap();
-local bMap = map == "rp_begotten3" or map == "rp_district21";
+local bMap = map == "rp_begotten3" or map == "rp_district21" or map == "bg_district34";
 
 function Schema:ClockworkInitialized()
 	if !self.bountyData then
@@ -1027,7 +1027,7 @@ function Schema:PlayerAdjustCharacterScreenInfo(player, character, info)
 
 	info.necropolisData = character.data["necropolisData"];
 	
-	if character.subfaction == "Clan Grock" then
+	if character.subfaction == "Clan Grock" or character.subfaction == "Clan Gotnarh" then
 		info.subfaith = "The Old Ways";
 	end
 end;
@@ -2485,7 +2485,7 @@ function Schema:PlayerCanUseDoor(player, door)
 				
 				return false;
 			end
-		elseif doorName == "castle_bigdoor1" or doorName == "castle_bigdoor2" or doorName == "gate_door" then
+		elseif doorName == "castle_bigdoor1" or doorName == "castle_bigdoor2" or doorName == "gate_door" or (doors["hell"] and table.HasValue(doors["hell"], doorName)) then
 			return false;
 		end
 	end
@@ -3013,6 +3013,10 @@ function Schema:PlayerCharacterLoaded(player)
 		player:SetModelScale(1.12, FrameTime());
 		player:SetViewOffset(Vector(0, 0, 72))
 		player:SetViewOffsetDucked(Vector(0, 0, 32))
+	elseif subfaction == "Clan Gotnarh" then
+		player:SetModelScale(1.35, FrameTime());
+		player:SetViewOffset(Vector(0, 0, 90))
+		player:SetViewOffsetDucked(Vector(0, 0, 32))
 	else
 		player:SetModelScale(1, FrameTime());
 		player:SetViewOffset(Vector(0, 0, 64));
@@ -3307,9 +3311,14 @@ function Schema:EntityTakeDamageNew(entity, damageInfo)
 		if string.find(entity:GetClass(), "npc_drg_animals_") then
 			local attacker = damageInfo:GetAttacker();
 			
-			if attacker:IsPlayer() and attacker:GetSubfaction() == "Clan Gore" then
-				damageInfo:ScaleDamage(1.5);
+			if attacker:IsPlayer() then
+				if attacker:GetSubfaction() == "Clan Gore" then
+					damageInfo:ScaleDamage(1.5);
+				elseif attacker:GetSubfaction() == "Clan Ghorst" then
+					damageInfo:ScaleDamage(1.25);
+				end
 			end
+			
 		end
 	end
 	
@@ -3568,6 +3577,9 @@ function Schema:ModifyPlayerSpeed(player, infoTable, action)
 		end
 	elseif subfaction == "Watchman" then
 		infoTable.runSpeed = infoTable.runSpeed * 0.95
+
+	elseif subfaction == "Clan Gotnarh" then
+		infoTable.runSpeed = infoTable.runSpeed * 0.90
 	end
 	
 	local shieldItem = player:GetShieldEquipped();
