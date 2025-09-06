@@ -183,48 +183,69 @@ function playerMeta:HandleNeed(need, amount)
 					Clockwork.chatBox:Add(self, nil, "itnofake", "This thirst is getting to me. I must find clean water soon.");
 				end;
 			elseif need == "sleep" then
-				if amount > 0 then
-					if self:GetRagdollState() == RAGDOLL_KNOCKEDOUT then
-						return;
-					end
-				end
+			    if amount > 0 then
+			        if self:GetRagdollState() == RAGDOLL_KNOCKEDOUT then
+			            return;
+			        end
+			    end
 			
-				if newAmount >= 100 then
-					if cwBeliefs and self:HasBelief("yellow_and_black") then
-						self:DeathCauseOverride("Ran out of battery.");
-						self:Kill();
-						
-						return;
-					end
-
-					if player.OverEncumbered then
-						self.sleepData = {health = 1, hunger = 1, thirst = 2, rest = -2};
-						Clockwork.player:SetRagdollState(self, RAGDOLL_KNOCKEDOUT, 15);
-						Schema:EasyText(self, "olive", "You finally collapse from exhaustion, but as you are overencumbered you do not rest well.");
-					else
-						self.sleepData = {health = 10, hunger = 15, thirst = 30, rest = -30};
-						Clockwork.player:SetRagdollState(self, RAGDOLL_KNOCKEDOUT, 300)
-						Schema:EasyText(self, "olive", "You finally collapse from exhaustion.");
-					end
-				elseif newAmount >= 90 and currentAmount < 90 then
-					if cwBeliefs and self:HasBelief("yellow_and_black") then
-						Clockwork.chatBox:Add(self, nil, "itnofake", "My systems are starting to shut down, I NEED TECH!");
-					else
-						Clockwork.chatBox:Add(self, nil, "itnofake", "I'm gonna pass out soon if I can't find somewhere to go to bed...");
-					end
-				elseif newAmount >= 75 and currentAmount < 75 then
-					if cwBeliefs and self:HasBelief("yellow_and_black") then
-						Clockwork.chatBox:Add(self, nil, "itnofake", "My battery is getting very low, I must find tech and soon!");
-					else
-						Clockwork.chatBox:Add(self, nil, "itnofake", "I'm feeling very tired...");
-					end
-				elseif newAmount >= 50 and currentAmount < 50 then
-					if cwBeliefs and self:HasBelief("yellow_and_black") then
-						Clockwork.chatBox:Add(self, nil, "itnofake", "My battery is at 50%, I must be mindful of it.");
-					else
-						Clockwork.chatBox:Add(self, nil, "itnofake", "I'm starting to get a bit drowsy.");
-					end
-				end;
+			    -- Crypt Walker damage for sleep > 50
+			    if self:GetSubfaction() == "Crypt Walkers" then
+			        if newAmount > 50 and currentAmount <= 50 then
+			            Clockwork.chatBox:Add(self, nil, "itnofake", "Necrosis is tearing me apart!");
+			        end
+			
+			        if newAmount > 50 then
+			            local excessFatigue = newAmount - math.max(currentAmount, 50)
+			            local health = self:Health()
+			            local damage = excessFatigue -- 1 damage per point above 50
+			            local newHealth = math.max(health - damage, 0)
+			
+			            self:SetHealth(newHealth)
+			
+			            if newHealth <= 0 then
+			                self:DeathCauseOverride("Collapsed from extreme fatigue and necrosis.")
+			                self:Kill()
+			                return
+			            end
+			        end
+			    end
+			
+			    if newAmount >= 100 then
+			        if cwBeliefs and self:HasBelief("yellow_and_black") then
+			            self:DeathCauseOverride("Ran out of battery.");
+			            self:Kill();
+			            return;
+			        end
+			
+			        if player.OverEncumbered then
+			            self.sleepData = {health = 1, hunger = 1, thirst = 2, rest = -2};
+			            Clockwork.player:SetRagdollState(self, RAGDOLL_KNOCKEDOUT, 15);
+			            Schema:EasyText(self, "olive", "You finally collapse from exhaustion, but as you are overencumbered you do not rest well.");
+			        else
+			            self.sleepData = {health = 10, hunger = 15, thirst = 30, rest = -30};
+			            Clockwork.player:SetRagdollState(self, RAGDOLL_KNOCKEDOUT, 300)
+			            Schema:EasyText(self, "olive", "You finally collapse from exhaustion.");
+			        end
+			    elseif newAmount >= 90 and currentAmount < 90 then
+			        if cwBeliefs and self:HasBelief("yellow_and_black") then
+			            Clockwork.chatBox:Add(self, nil, "itnofake", "My systems are starting to shut down, I NEED TECH!");
+			        else
+			            Clockwork.chatBox:Add(self, nil, "itnofake", "I'm gonna pass out soon if I can't find somewhere to go to bed...");
+			        end
+			    elseif newAmount >= 75 and currentAmount < 75 then
+			        if cwBeliefs and self:HasBelief("yellow_and_black") then
+			            Clockwork.chatBox:Add(self, nil, "itnofake", "My battery is getting very low, I must find tech and soon!");
+			        else
+			            Clockwork.chatBox:Add(self, nil, "itnofake", "I'm feeling very tired...");
+			        end
+			    elseif newAmount >= 50 and currentAmount < 50 then
+			        if cwBeliefs and self:HasBelief("yellow_and_black") then
+			            Clockwork.chatBox:Add(self, nil, "itnofake", "My battery is at 50%, I must be mindful of it.");
+			        else
+			            Clockwork.chatBox:Add(self, nil, "itnofake", "I'm starting to get a bit drowsy.");
+			        end
+			    end;
 			elseif need == "corruption" then
 				if amount > 0 then
 					if self:GetSubfaction() == "Rekh-khet-sa" then
