@@ -16,28 +16,33 @@ ITEM.itemSpawnerInfo = {category = "Rituals", rarity = 600, supercrateOnly = tru
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, position)
-    if (player:Alive() and !player:IsRagdolled()) then
-        netstream.Start(player, "Stunned", 7);
-        netstream.Start(player, "PlaySound", "begotten/ui/sanity_gain.mp3");
+	if (player:Alive() and !player:IsRagdolled()) then
+		netstream.Start(player, "Stunned", 7);
+		netstream.Start(player, "PlaySound", "begotten/ui/sanity_gain.mp3");
+		
+		if cwSanity then
+			player:HandleNeed("sanity", -20); -- instead of HandleSanity, now consistent
+		end
+		
+		player:HandleNeed("corruption", -30);
 
-        if cwSanity then
-            player:HandleSanity(20);
-        end
-
-        player:HandleNeed("corruption", -30);
-
-        -- Reduce sleep need by 50 if the player is a Crypt Walker
-        if player:GetSubfaction() == "Crypt Walkers" then
-            local currentSleep = player:GetCharacterData("sleep", 0)
-            player:SetCharacterData("sleep", math.max(currentSleep - 50, 0))
-            Clockwork.chatBox:Add(player, nil, "itnofake", "You feel a wave of energy rejuvenating your body and mind. Fatigue is greatly reduced!");
-        else
-            Clockwork.chatBox:Add(player, nil, "itnofake", "You crush the purifying stone in your hand and can immediately feel the corruption leaving your body.");
-        end
-    else
-        Schema:EasyText(player, "firebrick", "You cannot do this action at this moment.")
-    end
+		-- If Crypt Walker, restore sleep by reducing need
+		if player:GetSubfaction() == "Crypt Walkers" then
+			player:HandleNeed("sleep", -50);
+			Clockwork.chatBox:Add(player, nil, "itnofake", "The purifying stone floods you with unnatural energy, staving off your exhaustion.");
+		else
+			Clockwork.chatBox:Add(player, nil, "itnofake", "You crush the purifying stone in your hand and can immediately feel the corruption leaving your body.");
+		end
+	else
+		Schema:EasyText(player, "firebrick", "You cannot do this action at this moment.")
+	end
 end;
+
+-- Called when a player drops the item.
+function ITEM:OnDrop(player, position) end;
+
+ITEM:Register();
+
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
