@@ -542,12 +542,12 @@ local FACTION = Clockwork.faction:New("Goreic Warrior");
 				{Color(0, 225, 0), "(+) Throwing stones deal 50% more stability damage; unlocks heavy runestone weapons"},
 				{Color(0, 225, 0), "(+) Starts at Sacrament Level 10"},
 				{Color(0, 225, 0), "(+) +10kg extra weight capacity"},
-				{Color(0, 225, 0), "(+) Able to harvest unique and default resource nodes by hand"},
+				{Color(0, 225, 0), "(+) Gatherers: Capable of harvesting resources by hand"},
 				{Color(225, 0, 0), "(-) Cannot wear Medium or Heavy armor"},
-				{Color(225, 0, 0), "(-) Subfaith Tree is locked"},
-				{Color(225, 0, 0), "(-) Litheness Tree is locked"},
-				{Color(225, 0, 0), "(-) Movement speed decreased by 20%"},
-				{Color(225, 0, 0), "(-) Starts with the Gluttony trait enabled"}
+				{Color(225, 0, 0), "(-) The subfaith tree is locked and cannot be progressed"},
+				{Color(225, 0, 0), "(-) Towering: The dexterity belief is locked and cannot be progressed"},
+				{Color(225, 0, 0), "(-) Overall movement speed decreased by 10%"},
+				{Color(225, 0, 0), "(-) Insatiable: Starts with the Gluttony trait enabled"}
 			}
 		},
 		{
