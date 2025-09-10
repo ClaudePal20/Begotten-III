@@ -556,7 +556,7 @@ local FACTION = Clockwork.faction:New("Goreic Warrior");
 			description = "PENDING",
 			rivalry = "Clan Gore, Clan Shagalax, Clan Gotnarh, Clan Grock",
 			attributes = {
-				{Color(0, 225, 0), "(+) Starts with +35 maximum health"},
+				{Color(0, 225, 0), "(+) Starts with +40 maximum health"},
 				{Color(0, 225, 0), "(+) Conquerors: Access to Greater Longships"},
 				{Color(0, 225, 0), "(+) Arbalests: Allows use of Crossbows"},
 				{Color(0, 225, 0), "(+) Starts at Sacrament Level 7"},
