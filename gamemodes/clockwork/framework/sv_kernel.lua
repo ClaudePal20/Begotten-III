@@ -1701,7 +1701,7 @@ function playerMeta:GetMaxHealth(health)
 		elseif  subfaction == "Clan Gotnarh" then
 			maxHealth = maxHealth + 225;
 		elseif subfaction == "Clan Ghorst" then
-			maxHealth = maxHealth + 35;
+			maxHealth = maxHealth + 40;
 		elseif subfaction == "Knights of Sol" then
 			maxHealth = maxHealth + 75;
 		elseif subfaction == "Inquisition" or subfaction == "Philimaxio" then
