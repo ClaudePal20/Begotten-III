@@ -501,20 +501,20 @@ local FACTION = Clockwork.faction:New("Goreic Warrior");
 				{Color(0, 225, 0), "(+) +5kg extra weight capacity"}
 			}
 		},
-		-- {
-		-- 	name = "Clan Crast",
-		-- 	startingRank = 3,
-		-- 	subtitle = "Followers of the Mother - Shamans and Mystics",
-		-- 	description = [[Once reviled as weak, followers of the Mother were allowed to live only by royal decree. Some became mystics with the Vision — a power to see into fate. Clan Crast now warns others of impending doom, having accurately predicted the fall of the Great Tree. They commune with the Earth and wield ancient weapons in hopes of restoring what was lost.]],
-		-- 	rivalry = "Clan Shagalax",
-		-- 	attributes = {
-		-- 		{Color(0, 225, 0), "(+) Starts with +25 maximum health"},
-		-- 		{Color(0, 225, 0), "(+) Starts at Sacrament Level 12"},
-		-- 		{Color(0, 225, 0), "(+) Can unlock Ravenspeak"},
-		-- 		{Color(0, 225, 0), "(+) Can craft and use crossbows"},
-		-- 		{Color(225, 0, 0), "(-) Start with -4 Trait Points"}
-		-- 	}
-		-- },
+		{
+			name = "Clan Crast",
+			startingRank = 3,
+			subtitle = "Followers of the Mother - Shamans and Mystics",
+			description = [[Once reviled as weak, followers of the Mother were allowed to live only by royal decree. Some became mystics with the Vision — a power to see into fate. Clan Crast now warns others of impending doom, having accurately predicted the fall of the Great Tree. They commune with the Earth and wield ancient weapons in hopes of restoring what was lost.]],
+			rivalry = "Clan Shagalax",
+			attributes = {
+				{Color(0, 225, 0), "(+) Starts with +25 maximum health"},
+				{Color(0, 225, 0), "(+) Starts at Sacrament Level 12"},
+				{Color(0, 225, 0), "(+) Can unlock Ravenspeak"},
+				{Color(0, 225, 0), "(+) Can craft and use crossbows"},
+				{Color(225, 0, 0), "(-) Start with -4 Trait Points"}
+			}
+		},
 		-- {
 		-- 	name = "Clan Grock",
 		-- 	subtitle = "Followers of the Old Ways - Nomads",
