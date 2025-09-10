@@ -44,7 +44,7 @@ function ENT:OnTakeDamage(damageInfo)
 	if IsValid(player) and player:IsPlayer() then
 		local activeWeapon = player:GetActiveWeapon();
 		
-		if (damageInfo:IsDamageType(4) and damageInfo:GetDamage() >= 15) or (activeWeapon and activeWeapon.isHatchet) or (player:GetSubfaction() == "Gotnarh" and IsValid(player:GetActiveWeapon()) and player:GetActiveWeapon():GetClass() == "cw_hands") then
+		if (damageInfo:IsDamageType(4) and damageInfo:GetDamage() >= 15) or (activeWeapon and activeWeapon.isHatchet) or (player:GetSubfaction() == "Gotnarh" and IsValid(player:GetActiveWeapon()) and player:GetActiveWeapon():GetClass() == "begotten_fists") then
 			self:EmitSound(self.BreakSounds[math.random(1, #self.BreakSounds)]);
 			
 			if !self.woodLeft then
