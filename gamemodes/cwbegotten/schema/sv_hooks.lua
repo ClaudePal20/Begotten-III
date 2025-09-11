@@ -1169,85 +1169,93 @@ end;
 
 -- Called when a player's footstep sound should be played.
 function Schema:PlayerFootstep(player, position, foot, soundString, volume, recipientFilter)
-	-- Moving all of this shit to the client, but the code needs to remain for the wakeup sequence as footsteps can only be forced serverside.
-	if !player.cwWakingUp then
-		if cwPowerArmor and player.wearingPowerArmor then
-			if player:IsRunning() then
-				util.ScreenShake(player:GetPos(), 2, 1, 0.5, 750)
-			else
-				util.ScreenShake(player:GetPos(), 1, 1, 0.5, 750)
-			end
-			
-			return true;
+	local running = player:IsRunning()
+	local isGotnarh = player:GetSubfaction() == "Clan Gotnarh"
+
+	-- Special footsteps: PowerArmor or Gotnarh
+	if (cwPowerArmor and player.wearingPowerArmor) or isGotnarh then
+		local runSounds
+		local walkSounds
+
+		if isGotnarh then
+			runSounds = {
+				"trolls/gotnarh_foot_01.wav",
+				"trolls/gotnarh_foot_02.wav",
+				"trolls/gotnarh_foot_03.wav",
+				"trolls/gotnarh_foot_04.wav"
+			}
+			walkSounds = runSounds
+		else
+			runSounds = {
+				"npc/dog/dog_footstep1.wav",
+				"npc/dog/dog_footstep2.wav",
+				"npc/dog/dog_footstep3.wav",
+				"npc/dog/dog_footstep4.wav"
+			}
+			walkSounds = {
+				"npc/dog/dog_footstep_walk01.wav",
+				"npc/dog/dog_footstep_walk02.wav",
+				"npc/dog/dog_footstep_walk03.wav",
+				"npc/dog/dog_footstep_walk04.wav",
+				"npc/dog/dog_footstep_walk05.wav",
+				"npc/dog/dog_footstep_walk06.wav",
+				"npc/dog/dog_footstep_walk07.wav",
+				"npc/dog/dog_footstep_walk08.wav",
+				"npc/dog/dog_footstep_walk09.wav",
+				"npc/dog/dog_footstep_walk10.wav"
+			}
 		end
-	else
-		local running = false;
-	
-		if (player:IsRunning()) then
-			running = true;
-		end;
-	
-		if cwPowerArmor and player.wearingPowerArmor then
-			if running then
-				local runSounds = {
-					"npc/dog/dog_footstep1.wav",
-					"npc/dog/dog_footstep2.wav",
-					"npc/dog/dog_footstep3.wav",
-					"npc/dog/dog_footstep4.wav",
-				}; 
-				
-				player:EmitSound(runSounds[math.random(1, #runSounds)]);
-				util.ScreenShake(player:GetPos(), 2, 1, 0.5, 750)
-			else
-				local walkSounds = {
-					"npc/dog/dog_footstep_walk01.wav",
-					"npc/dog/dog_footstep_walk02.wav",
-					"npc/dog/dog_footstep_walk03.wav",
-					"npc/dog/dog_footstep_walk04.wav",
-					"npc/dog/dog_footstep_walk05.wav",
-					"npc/dog/dog_footstep_walk06.wav",
-					"npc/dog/dog_footstep_walk07.wav",
-					"npc/dog/dog_footstep_walk08.wav",
-					"npc/dog/dog_footstep_walk09.wav",
-					"npc/dog/dog_footstep_walk10.wav"
-				};
-				
-				player:EmitSound(walkSounds[math.random(1, #walkSounds)]);
-				util.ScreenShake(player:GetPos(), 1, 1, 0.5, 750)
-			end
-			
-			return true;
+
+		if running then
+			player:EmitSound(runSounds[math.random(#runSounds)])
+			util.ScreenShake(player:GetPos(), 2, 1, 0.5, 750)
+		else
+			player:EmitSound(walkSounds[math.random(#walkSounds)])
+			util.ScreenShake(player:GetPos(), 1, 1, 0.5, 750)
 		end
-		
-		if (player:Crouching() and player:HasBelief("nimble")) or player:GetCharmEquipped("urn_silence") or player.cloaked then
-			return true;
-		end;
-		
-		local clothesItem = player:GetClothesEquipped();
-		
-		if (clothesItem) then
-			if (running) then
-				if (clothesItem.runSound) then
-					if (type(clothesItem.runSound) == "table") then
-						player:EmitSound(clothesItem.runSound[math.random(1, #clothesItem.runSound)], 65, math.random(95, 100), 0.5);
-					else
-						player:EmitSound(clothesItem.runSound, 65, math.random(95, 100), 0.50);
-					end;
-				end;
-			elseif (clothesItem.walkSound) then
-				if (type(clothesItem.walkSound) == "table") then
-					player:EmitSound(clothesItem.walkSound[math.random(1, #clothesItem.walkSound)], 65, math.random(95, 100), 0.5);
-				else
-					player:EmitSound(clothesItem.walkSound, 65, math.random(95, 100), 0.5);
-				end;
-			end;
-		end;
-		
-		player:EmitSound(soundString);
-		
-		return true;
+
+		return true
 	end
-end;
+
+	-- If not waking up, block footsteps
+	if not player.cwWakingUp then
+		return true
+	end
+
+	-- Silent cases
+	if (player:Crouching() and player:HasBelief("nimble")) 
+	or player:GetCharmEquipped("urn_silence") 
+	or player.cloaked then
+		return true
+	end
+
+	-- Clothes item sounds
+	local clothesItem = player:GetClothesEquipped()
+	if clothesItem then
+		if running and clothesItem.runSound then
+			if type(clothesItem.runSound) == "table" then
+				player:EmitSound(clothesItem.runSound[math.random(#clothesItem.runSound)], 65, math.random(95, 100), 0.5)
+			else
+				player:EmitSound(clothesItem.runSound, 65, math.random(95, 100), 0.5)
+			end
+			return true
+		end
+
+		if not running and clothesItem.walkSound then
+			if type(clothesItem.walkSound) == "table" then
+				player:EmitSound(clothesItem.walkSound[math.random(#clothesItem.walkSound)], 65, math.random(95, 100), 0.5)
+			else
+				player:EmitSound(clothesItem.walkSound, 65, math.random(95, 100), 0.5)
+			end
+			return true
+		end
+	end
+
+	-- Default sound
+	player:EmitSound(soundString)
+	return true
+end
+
 
 -- Called when a player spawns an object.
 function Schema:PlayerSpawnObject(player)
