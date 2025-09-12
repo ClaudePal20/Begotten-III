@@ -2204,6 +2204,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Grockling Stone Maul";
 		RECIPE.requiredBeliefs = {"craftsman"};
 		RECIPE.requiredFactions = {"Goreic Warrior"};
+		
 		RECIPE.requirements = {
 			["stone"] = {amount = 6},
 			["wood"] = {amount = 3},
@@ -6932,7 +6933,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Grockling Rattleshirt Armor";
 		RECIPE.requiredBeliefs = {"ingenious", "primeval"};
 		RECIPE.requiredFactions = {"Goreic Warrior"};
-		RECIPE.requiredSubfactions = {"Clan Grock"};
+		RECIPE.requiredSubfactions = {"Clan Grock", "Clan Gotnarh"};
 		RECIPE.requirements = {
 			["human_bone"] = {amount = 7},
 			["cloth"] = {amount = 2},
@@ -10414,7 +10415,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Grockling Godless Garb";
 		RECIPE.requiredBeliefs = {"ingenious", "primeval"};
 		RECIPE.requiredFactions = {"Goreic Warrior"};
-		RECIPE.requiredSubfactions = {"Clan Grock"};
+		RECIPE.requiredSubfactions = {"Clan Grock", "Clan Gotnarh"};
 		RECIPE.requirements = {
 			["human_bone"] = {amount = 6},
 			["cloth"] = {amount = 1},
@@ -10443,7 +10444,7 @@ function cwRecipes:ClockworkInitialized()
 		RECIPE.name = "Grockling Iconoclast Garb";
 		RECIPE.requiredBeliefs = {"ingenious", "primeval"};
 		RECIPE.requiredFactions = {"Goreic Warrior"};
-		RECIPE.requiredSubfactions = {"Clan Grock"};
+		RECIPE.requiredSubfactions = {"Clan Grock", "Clan Gotnarh"};
 		RECIPE.requirements = {
 			["grockling_godless_garb"] = {amount = 1},
 			["quill"] = {amount = 6},
