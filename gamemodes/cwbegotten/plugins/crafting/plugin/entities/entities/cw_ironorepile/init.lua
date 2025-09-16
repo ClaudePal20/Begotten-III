@@ -44,7 +44,7 @@ function ENT:OnTakeDamage(damageInfo)
 	if IsValid(player) and player:IsPlayer() then
 		local activeWeapon = player:GetActiveWeapon();
 		
-		if (damageInfo:IsDamageType(128) and damageInfo:GetDamage() >= 15) or activeWeapon.isPickaxe then
+		if (damageInfo:IsDamageType(128) and damageInfo:GetDamage() >= 15) or activeWeapon.isPickaxe or (player:GetSubfaction() == "Clan Gotnarh" and IsValid(player:GetActiveWeapon()) and player:GetActiveWeapon():GetClass() == "begotten_fists") then
 			self:EmitSound(self.BreakSounds[math.random(1, #self.BreakSounds)]);
 			
 			if !self.oreLeft then
@@ -145,19 +145,9 @@ function ENT:OnTakeDamage(damageInfo)
 			
 			if !activeWeapon.isPickaxe then
 				local weaponItemTable = item.GetByWeapon(activeWeapon);
-				
+
 				if weaponItemTable then
-					if cwBeliefs then
-						if !player:HasBelief("ingenuity_finisher") or weaponItemTable.unrepairable then
-							if player:HasBelief("scour_the_rust") then
-								weaponItemTable:TakeCondition(0.325);
-							else
-								weaponItemTable:TakeCondition(0.5);
-							end
-						end
-					else
-						weaponItemTable:TakeCondition(0.5);
-					end
+					weaponItemTable:TakeConditionByPlayer(player, 0.5);
 				end
 			end
 			

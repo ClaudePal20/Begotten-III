@@ -780,6 +780,28 @@ AttackTables.ScrapBoltAttackTable = {
 	["punchstrength"] = Angle(0,2,0),
 };
 
+AttackTables.StoneThrowingSpearAttackTable = {
+    ["primarydamage"] = 25,
+    ["mimimumdistancedamage"] = 20,
+    ["maximumdistancedamage"] = 145,
+    ["dmgtype"] = DMG_VEHICLE,
+    ["canaltattack"] = true,
+    ["altattackpoisedamagemodifier"] = 0.1,
+    ["altattackstabilitydamagemodifier"] = 0,
+    ["altmeleearc"] = 15,
+    ["altmeleerange"] = 1050,
+    ["alttakeammo"] = 3,
+    ["armorpiercing"] = 30,
+    ["poisedamage"] = 40,
+    ["stabilitydamage"] = 45,
+    ["minimumdistancestabilitydamage"] = 30,
+    ["maximumdistancestabilitydamage"] = 100,
+    ["takeammo"] = 20,
+    ["delay"] = 0.9,
+    ["striketime"] = 0.4,
+    ["punchstrength"] = Angle(0,1,0),
+};
+
 -- Fisted
 
 AttackTables.FistAttackTable = {
@@ -860,6 +882,26 @@ AttackTables.CaestusAttackTable = {
 	["meleerange"] = 555,
 	["punchstrength"] = Angle(0,2,0),
 };
+
+AttackTables.GauntletsOfPenanceAttackTable = {
+    ["primarydamage"] = 20,
+    ["dmgtype"] = 128,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = false,
+    ["altattackdamagemodifier"] = 0,
+    ["altattackpoisedamagemodifier"] = 0,
+    ["armorpiercing"] = 60,
+    ["altarmorpiercing"] = 0,
+    ["poisedamage"] = 35,
+    ["stabilitydamage"] = 35,
+    ["takeammo"] = 6,
+    ["delay"] = 0.75,
+    ["striketime"] = 0.3,
+    ["meleearc"] = 20,
+    ["meleerange"] = 555,
+    ["punchstrength"] = Angle(0,2,0),
+};
+
 
 -- Shortswords
 
@@ -1102,6 +1144,26 @@ AttackTables.FamilialSwordAttackTable = {
 	["punchstrength"] = Angle(0,1,0),
 };
 
+AttackTables.RavenstoneBladeAttackTable = {
+    ["primarydamage"] = 25,
+    ["dmgtype"] = 4,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = true,
+    ["altattackdamagemodifier"] = 0.75,
+    ["altattackpoisedamagemodifier"] = 0.1,
+    ["altmeleearc"] = 15,
+    ["armorpiercing"] = 18,
+    ["altarmorpiercing"] = 25,
+    ["poisedamage"] = 10,
+    ["stabilitydamage"] = 0,
+    ["takeammo"] = 3,
+    ["delay"] = 0.75,
+    ["striketime"] = 0.3,
+    ["meleearc"] = 35,
+    ["meleerange"] = 760,
+    ["punchstrength"] = Angle(0,1,0),
+};
+
 AttackTables.SatanicShortswordAttackTable = {
 	["primarydamage"] = 40,
 	["dmgtype"] = 4,
@@ -1184,7 +1246,7 @@ AttackTables.BillhookAttackTable = {
 };
 
 AttackTables.LucerneAttackTable = {
-	["primarydamage"] = 35,
+	["primarydamage"] = 30,
 	["dmgtype"] = 128,
 	["attacktype"] = "polearm_swing",
 	["canaltattack"] = true,
@@ -1193,8 +1255,8 @@ AttackTables.LucerneAttackTable = {
 	["altmeleearc"] = 15,
 	["armorpiercing"] = 56,
 	["altarmorpiercing"] = 41,
-	["poisedamage"] = 47,
-	["stabilitydamage"] = 45,
+	["poisedamage"] = 45,
+	["stabilitydamage"] = 43,
 	["takeammo"] = 6,
 	["delay"] = 1.35,
 	["striketime"] = 0.45,
@@ -1226,7 +1288,7 @@ AttackTables.GatekeeperPoleaxeAttackTable = {
 -- Long polearms
 
 AttackTables.PolehammerAttackTable = {
-	["primarydamage"] = 35,
+	["primarydamage"] = 32,
 	["dmgtype"] = 128,
 	["attacktype"] = "polearm_swing",
 	["canaltattack"] = true,
@@ -1235,8 +1297,8 @@ AttackTables.PolehammerAttackTable = {
 	["altmeleearc"] = 15,
 	["armorpiercing"] = 56,
 	["altarmorpiercing"] = 41,
-	["poisedamage"] = 52,
-	["stabilitydamage"] = 50,
+	["poisedamage"] = 50,
+	["stabilitydamage"] = 47,
 	["takeammo"] = 9,
 	["delay"] = 1.6,
 	["striketime"] = 0.55,
@@ -1311,17 +1373,17 @@ AttackTables.GlazicBannerAttackTable = {
 	["attacktype"] = "polearm_swing",
 	["canaltattack"] = true,
 	["altattackdamagemodifier"] = 1.5,
-	["altattackpoisedamagemodifier"] = 0.1,
+	["altattackpoisedamagemodifier"] = 0.3,
 	["altmeleearc"] = 15,
-	["armorpiercing"] = 37,
+	["armorpiercing"] = 41,
 	["altarmorpiercing"] = 30,
-	["poisedamage"] = 15,
+	["poisedamage"] = 20,
 	["stabilitydamage"] = 25,
-	["takeammo"] = 8,
-	["delay"] = 1.7,
+	["takeammo"] = 7,
+	["delay"] = 1.6,
 	["striketime"] = 0.55,
 	["meleearc"] = 60,
-	["meleerange"] = 1680,
+	["meleerange"] = 1200,
 	["punchstrength"] = Angle(1,3,1),
 };
 
@@ -1335,10 +1397,10 @@ AttackTables.HillBannerAttackTable = {
 	["altmeleearc"] = 15,
 	["armorpiercing"] = 41,
 	["altarmorpiercing"] = 30,
-	["poisedamage"] = 15,
+	["poisedamage"] = 20,
 	["stabilitydamage"] = 25,
 	["takeammo"] = 7,
-	["delay"] = 1.7,
+	["delay"] = 1.6,
 	["striketime"] = 0.55,
 	["meleearc"] = 60,
 	["meleerange"] = 1200,
@@ -1899,8 +1961,8 @@ AttackTables.UnholySigilSwordAttackTable = {
 	["altarmorpiercing"] = 30,
 	["poisedamage"] = 45,
 	["stabilitydamage"] = 25,
-	["takeammo"] = 6,
-	["delay"] = 1.25,
+	["takeammo"] = 7,
+	["delay"] = 1.32,
 	["striketime"] = 0.6,
 	["meleearc"] = 50,
 	["meleerange"] = 1035,
@@ -1919,8 +1981,8 @@ AttackTables.UnholySigilSword_Fire_AttackTable = {
 	["altarmorpiercing"] = 30,
 	["poisedamage"] = 45,
 	["stabilitydamage"] = 25,
-	["takeammo"] = 6,
-	["delay"] = 1.25,
+	["takeammo"] = 7,
+	["delay"] = 1.32,
 	["striketime"] = 0.6,
 	["meleearc"] = 50,
 	["meleerange"] = 1035,
@@ -1939,8 +2001,8 @@ AttackTables.UnholySigilSword_Ice_AttackTable = {
 	["altarmorpiercing"] = 30,
 	["poisedamage"] = 45,
 	["stabilitydamage"] = 25,
-	["takeammo"] = 6,
-	["delay"] = 1.25,
+	["takeammo"] = 7,
+	["delay"] = 1.32,
 	["striketime"] = 0.6,
 	["meleearc"] = 50,
 	["meleerange"] = 1035,
@@ -2025,6 +2087,145 @@ AttackTables.DemonKnightSwordAttackTableIce = {
 	["meleearc"] = 55,
 	["meleerange"] = 1140,
 	["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.GrocklingSwordAttackTable = {
+	["primarydamage"] = 67,
+	["dmgtype"] = 4,
+	["attacktype"] = "reg_swing",
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 0.6,
+	["altattackpoisedamagemodifier"] = 0.1,
+	["altmeleearc"] = 15,
+	["armorpiercing"] = 17,
+	["altarmorpiercing"] = 25,
+	["poisedamage"] = 45,
+	["stabilitydamage"] = 25,
+	["takeammo"] = 6,
+	["delay"] = 1.35,
+	["striketime"] = 0.6,
+	["meleearc"] = 50,
+	["meleerange"] = 1035,
+	["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.SacredRunestoneSlabAttackTable = {
+    ["primarydamage"] = 95,
+    ["dmgtype"] = 4,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = false,
+    ["altattackdamagemodifier"] = nil,
+    ["altattackpoisedamagemodifier"] = nil,
+    ["armorpiercing"] = 40,
+    ["altarmorpiercing"] = nil,
+    ["poisedamage"] = 45,
+    ["stabilitydamage"] = 35,
+    ["takeammo"] = 10,
+    ["delay"] = 2,
+    ["striketime"] = 0.95,
+    ["meleearc"] = 50,
+    ["meleerange"] = 1100,
+    ["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.SalvagersLongswordAttackTable = {
+    ["primarydamage"] = 65,
+    ["dmgtype"] = 4,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = true,
+    ["altattackdamagemodifier"] = 0.75,
+    ["altattackpoisedamagemodifier"] = 0.1,
+    ["altmeleearc"] = 15,
+    ["armorpiercing"] = 16,
+    ["altarmorpiercing"] = 28,
+    ["poisedamage"] = 20,
+    ["stabilitydamage"] = 0,
+    ["takeammo"] = 5,
+    ["delay"] = 1.1,
+    ["striketime"] = 0.6,
+    ["meleearc"] = 50,
+    ["meleerange"] = 1035,
+    ["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.FlambergeAttackTable = {
+    ["primarydamage"] = 80,
+    ["dmgtype"] = 4,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = true,
+    ["altattackdamagemodifier"] = 0.75,
+    ["altattackpoisedamagemodifier"] = 0.1,
+    ["altmeleearc"] = 15,
+    ["armorpiercing"] = 20,
+    ["altarmorpiercing"] = 30,
+    ["poisedamage"] = 40,
+    ["stabilitydamage"] = 0,
+    ["takeammo"] = 8,
+    ["delay"] = 1.4,
+    ["striketime"] = 0.6,
+    ["meleearc"] = 55,
+    ["meleerange"] = 1140,
+    ["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.NoblemansSwordAttackTable = {
+    ["primarydamage"] = 70,
+    ["dmgtype"] = 4,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = true,
+    ["altattackdamagemodifier"] = 0.8,
+    ["altattackpoisedamagemodifier"] = 0.1,
+    ["altmeleearc"] = 15,
+    ["armorpiercing"] = 16,
+    ["altarmorpiercing"] = 30,
+    ["poisedamage"] = 25,
+    ["stabilitydamage"] = 0,
+    ["takeammo"] = 5,
+    ["delay"] = 1.05,
+    ["striketime"] = 0.6,
+    ["meleearc"] = 50,
+    ["meleerange"] = 1095,
+    ["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.VillaSpadoneAttackTable = {
+    ["primarydamage"] = 85,
+    ["dmgtype"] = 4,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = true,
+    ["altattackdamagemodifier"] = 0.75,
+    ["altattackpoisedamagemodifier"] = 0.1,
+    ["altmeleearc"] = 15,
+    ["armorpiercing"] = 25,
+    ["altarmorpiercing"] = 35,
+    ["poisedamage"] = 35,
+    ["stabilitydamage"] = 0,
+    ["takeammo"] = 8,
+    ["delay"] = 1.4,
+    ["striketime"] = 0.6,
+    ["meleearc"] = 55,
+    ["meleerange"] = 1140,
+    ["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.BastardSwordAttackTable = {
+    ["primarydamage"] = 70,
+    ["dmgtype"] = 4,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = true,
+    ["altattackdamagemodifier"] = 0.8,
+    ["altattackpoisedamagemodifier"] = 0.25,
+    ["altmeleearc"] = 15,
+    ["armorpiercing"] = 18,
+    ["altarmorpiercing"] = 37,
+    ["poisedamage"] = 25,
+    ["stabilitydamage"] = 0,
+    ["takeammo"] = 5,
+    ["delay"] = 1.1,
+    ["striketime"] = 0.6,
+    ["meleearc"] = 50,
+    ["meleerange"] = 1080,
+    ["punchstrength"] = Angle(0,1,0),
 };
 
 -- Axes
@@ -2123,6 +2324,28 @@ AttackTables.HillBattleAxeAttackTable = {
 	["meleerange"] = 625,
 	["punchstrength"] = Angle(0,1,0),
 };
+
+AttackTables.VoltBattleAxeAttackTable = {
+	["primarydamage"] = 60,
+	["dmgtype"] = 4,
+	["attacktype"] = "reg_swing",
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 10,
+	["altmeleearc"] = 15,
+	["armorpiercing"] = 50,
+	["altarmorpiercing"] = 45,
+	["poisedamage"] = 50,
+	["stabilitydamage"] = 10,
+	["takeammo"] = 7,
+	["delay"] = 1.5,
+	["striketime"] = 0.65,
+	["meleearc"] = 45,
+	["meleerange"] = 900,
+	["punchstrength"] = Angle(0,1,0),
+};
+
 
 -- Maces
 
@@ -2373,7 +2596,7 @@ AttackTables.PipeAttackTable = {
 	["delay"] = 0.7,
 	["striketime"] = 0.3,
 	["meleearc"] = 35,
-	["meleerange"] = 535,
+	["meleerange"] = 500,
 	["punchstrength"] = Angle(0,1,0),
 };
 
@@ -2389,10 +2612,10 @@ AttackTables.PipeMaceAttackTable = {
 	["poisedamage"] = 12,
 	["stabilitydamage"] = 27,
 	["takeammo"] = 2,
-	["delay"] = 0.7,
+	["delay"] = 0.75,
 	["striketime"] = 0.3,
 	["meleearc"] = 35,
-	["meleerange"] = 535,
+	["meleerange"] = 500,
 	["punchstrength"] = Angle(0,1,0),
 };
 
@@ -2467,7 +2690,7 @@ AttackTables.SavageClawsAttackTable = {
 	["poisedamage"] = 15,
 	["stabilitydamage"] = 0,
 	["takeammo"] = 4,
-	["delay"] = 0.65,
+	["delay"] = 0.7,
 	["striketime"] = 0.3,
 	["meleearc"] = 35,
 	["meleerange"] = 625,
@@ -2481,9 +2704,9 @@ AttackTables.SteelClawsAttackTable = {
 	["canaltattack"] = false,
 	["altattackdamagemodifier"] = nil,
 	["altattackpoisedamagemodifier"] = nil,
-	["armorpiercing"] = 22,
+	["armorpiercing"] = 25,
 	["altarmorpiercing"] = nil,
-	["poisedamage"] = 20,
+	["poisedamage"] = 25,
 	["stabilitydamage"] = 0,
 	["takeammo"] = 4,
 	["delay"] = 0.7,
@@ -2550,6 +2773,44 @@ AttackTables.GoreHuntingDaggerAttackTable = {
 	["meleearc"] = 15,
 	["meleerange"] = 475,
 	["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.ClanReaverDaggerAttackTable = {
+	["primarydamage"] = 21,
+	["dmgtype"] = 16,
+	["attacktype"] = "reg_swing",
+	["canaltattack"] = false,
+	["altattackdamagemodifier"] = nil,
+	["altattackpoisedamagemodifier"] = nil,
+	["armorpiercing"] = 30,
+	["altarmorpiercing"] = nil,
+	["poisedamage"] = 0,
+	["stabilitydamage"] = 0,
+	["takeammo"] = 2,
+	["delay"] = 0.65,
+	["striketime"] = 0.2,
+	["meleearc"] = 15,
+	["meleerange"] = 475,
+	["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.RavenstoneShardAttackTable = {
+    ["primarydamage"] = 11,
+    ["dmgtype"] = 16,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = false,
+    ["altattackdamagemodifier"] = nil,
+    ["altattackpoisedamagemodifier"] = nil,
+    ["armorpiercing"] = 18,
+    ["altarmorpiercing"] = nil,
+    ["poisedamage"] = 0,
+    ["stabilitydamage"] = 0,
+    ["takeammo"] = 2,
+    ["delay"] = 0.65,
+    ["striketime"] = 0.2,
+    ["meleearc"] = 15,
+    ["meleerange"] = 475,
+    ["punchstrength"] = Angle(0,1,0), 
 };
 
 AttackTables.QuickshankAttackTable = {
@@ -2760,6 +3021,26 @@ AttackTables.HillGoreHuntingDaggerAttackTable = {
 	["meleerange"] = 475,
 	["punchstrength"] = Angle(0,1,0),
 };
+
+AttackTables.Ancestraldagger_Masquerade_AttackTable = {
+    ["primarydamage"] = 22,
+    ["dmgtype"] = 16,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = false,
+    ["altattackdamagemodifier"] = nil,
+    ["altattackpoisedamagemodifier"] = nil,
+    ["armorpiercing"] = 40,
+    ["altarmorpiercing"] = nil,
+    ["poisedamage"] = 0,
+    ["stabilitydamage"] = 0,
+    ["takeammo"] = 2,
+    ["delay"] = 0.6,
+    ["striketime"] = 0.2,
+    ["meleearc"] = 15,
+    ["meleerange"] = 475,
+    ["punchstrength"] = Angle(0,1,0),
+};
+
 
 -- Short Spears
 
@@ -3186,17 +3467,40 @@ AttackTables.GunAxeAttackTable = {
 	["punchstrength"] = Angle(0,1,0),
 };
 
+AttackTables.ExecutionersAxeAttackTable = {
+    ["primarydamage"] = 85,
+    ["dmgtype"] = 4,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = true,
+    ["altattackdamagemodifier"] = 1.1,
+    ["altattackpoisedamagemodifier"] = 1.1,
+    ["alttakeammo"] = 10,
+    ["altmeleearc"] = 15,
+    ["armorpiercing"] = 36,
+    ["altarmorpiercing"] = 36,
+    ["poisedamage"] = 35,
+    ["stabilitydamage"] = 0,
+    ["takeammo"] = 7,
+    ["delay"] = 1.4,
+    ["striketime"] = 0.65,
+    ["meleearc"] = 45,
+    ["meleerange"] = 885,
+    ["punchstrength"] = Angle(0,1,0),
+};
+
 -- Mauls
 
 AttackTables.ClubAttackTable = {
 	["primarydamage"] = 20,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 10,
+	["altmeleearc"] = 15,
 	["armorpiercing"] = 45,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 45,
 	["poisedamage"] = 30,
 	["stabilitydamage"] = 45,
 	["takeammo"] = 7,
@@ -3208,14 +3512,16 @@ AttackTables.ClubAttackTable = {
 };
 
 AttackTables.WarClubAttackTable = {
-	["primarydamage"] = 25,
+	["primarydamage"] = 30,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 13,
+	["altmeleearc"] = 15,
 	["armorpiercing"] = 52,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 52,
 	["poisedamage"] = 50,
 	["stabilitydamage"] = 50,
 	["takeammo"] = 10,
@@ -3227,14 +3533,16 @@ AttackTables.WarClubAttackTable = {
 };
 
 AttackTables.GoreClubAttackTable = {
-	["primarydamage"] = 25,
+	["primarydamage"] = 27,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 10,
+	["altmeleearc"] = 15,
 	["armorpiercing"] = 52,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 52,
 	["poisedamage"] = 50,
 	["stabilitydamage"] = 50,
 	["takeammo"] = 7,
@@ -3246,14 +3554,16 @@ AttackTables.GoreClubAttackTable = {
 };
 
 AttackTables.SatanicMaulAttackTable = {
-	["primarydamage"] = 32,
+	["primarydamage"] = 33,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 11,
+	["altmeleearc"] = 15,
 	["armorpiercing"] = 56,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 56,
 	["poisedamage"] = 65,
 	["stabilitydamage"] = 65,
 	["takeammo"] = 8,
@@ -3265,18 +3575,20 @@ AttackTables.SatanicMaulAttackTable = {
 };
 
 AttackTables.ScraphammerAttackTable = {
-	["primarydamage"] = 25,
+	["primarydamage"] = 27,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 10,
+	["altmeleearc"] = 15,
 	["armorpiercing"] = 45,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 45,
 	["poisedamage"] = 45,
 	["stabilitydamage"] = 45,
 	["takeammo"] = 7,
-	["delay"] = 1.5,
+	["delay"] = 1.4,
 	["striketime"] = 0.65,
 	["meleearc"] = 45,
 	["meleerange"] = 900,
@@ -3287,11 +3599,13 @@ AttackTables.VolthammerAttackTable = {
 	["primarydamage"] = 40,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 11,
+	["altmeleearc"] = 15,
 	["armorpiercing"] = 60,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 60,
 	["poisedamage"] = 60,
 	["stabilitydamage"] = 60,
 	["takeammo"] = 8,
@@ -3306,11 +3620,12 @@ AttackTables.VoltsledgeAttackTable = {
 	["primarydamage"] = 25,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 10,
 	["armorpiercing"] = 56,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 56,
 	["poisedamage"] = 45,
 	["stabilitydamage"] = 45,
 	["takeammo"] = 7,
@@ -3325,11 +3640,12 @@ AttackTables.SledgeAttackTable = {
 	["primarydamage"] = 20,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 10,
 	["armorpiercing"] = 48,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 48,
 	["poisedamage"] = 30,
 	["stabilitydamage"] = 37,
 	["takeammo"] = 7,
@@ -3344,11 +3660,12 @@ AttackTables.PickaxeAttackTable = {
 	["primarydamage"] = 20,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 11,
 	["armorpiercing"] = 30,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 30,
 	["poisedamage"] = 30,
 	["stabilitydamage"] = 30,
 	["takeammo"] = 8,
@@ -3363,11 +3680,12 @@ AttackTables.EveningStarAttackTable = {
 	["primarydamage"] = 30,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 11,
 	["armorpiercing"] = 52,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 60,
 	["poisedamage"] = 60,
 	["stabilitydamage"] = 60,
 	["takeammo"] = 8,
@@ -3376,6 +3694,25 @@ AttackTables.EveningStarAttackTable = {
 	["meleearc"] = 45,
 	["meleerange"] = 825,
 	["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.BoneClubAttackTable = {
+    ["primarydamage"] = 30,
+    ["dmgtype"] = 128,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = false,
+    ["altattackdamagemodifier"] = nil,
+    ["altattackpoisedamagemodifier"] = nil,
+    ["armorpiercing"] = 40,
+    ["altarmorpiercing"] = nil,
+    ["poisedamage"] = 50,
+    ["stabilitydamage"] = 50,
+    ["takeammo"] = 10,
+    ["delay"] = 2,
+    ["striketime"] = 0.95,
+    ["meleearc"] = 45,
+    ["meleerange"] = 925,
+    ["punchstrength"] = Angle(0,1,0),
 };
 
 -- Great Mauls
@@ -3400,14 +3737,15 @@ AttackTables.BellHammerAttackTable = {
 };
 
 AttackTables.GrocklingStoneMaulAttackTable = {
-	["primarydamage"] = 30,
+	["primarydamage"] = 32,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 14,
 	["armorpiercing"] = 52,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 52,
 	["poisedamage"] = 65,
 	["stabilitydamage"] = 62,
 	["takeammo"] = 11,
@@ -3419,14 +3757,15 @@ AttackTables.GrocklingStoneMaulAttackTable = {
 };
 
 AttackTables.GrocklingSacredStoneMaulAttackTable = {
-	["primarydamage"] = 30,
+	["primarydamage"] = 33,
 	["dmgtype"] = 128,
 	["attacktype"] = "reg_swing",
-	["canaltattack"] = false,
-	["altattackdamagemodifier"] = nil,
-	["altattackpoisedamagemodifier"] = nil,
+	["canaltattack"] = true,
+	["altattackdamagemodifier"] = 1.1,
+	["altattackpoisedamagemodifier"] = 1.1,
+	["alttakeammo"] = 15,
 	["armorpiercing"] = 56,
-	["altarmorpiercing"] = nil,
+	["altarmorpiercing"] = 68,
 	["poisedamage"] = 68,
 	["stabilitydamage"] = 65,
 	["takeammo"] = 12,
@@ -3435,6 +3774,25 @@ AttackTables.GrocklingSacredStoneMaulAttackTable = {
 	["meleearc"] = 45,
 	["meleerange"] = 900,
 	["punchstrength"] = Angle(0,1,0),
+};
+
+AttackTables.GreaserBlockhammerAttackTable = {
+    ["primarydamage"] = 35,
+    ["dmgtype"] = 128,
+    ["attacktype"] = "reg_swing",
+    ["canaltattack"] = false,
+    ["altattackdamagemodifier"] = nil,
+    ["altattackpoisedamagemodifier"] = nil,
+    ["armorpiercing"] = 50,
+    ["altarmorpiercing"] = nil,
+    ["poisedamage"] = 70,
+    ["stabilitydamage"] = 70,
+    ["takeammo"] = 15,
+    ["delay"] = 2.4,
+    ["striketime"] = 0.95,
+    ["meleearc"] = 50,
+    ["meleerange"] = 1100,
+    ["punchstrength"] = Angle(0,8,0),
 };
 
 -- Great Axes
@@ -3688,6 +4046,7 @@ AddTable("GoreCleaverAttackTable", AttackTables.GoreCleaverAttackTable)
 AddTable("GoreClubAttackTable", AttackTables.GoreClubAttackTable)  
 AddTable("GrocklingStoneMaulAttackTable", AttackTables.GrocklingStoneMaulAttackTable)  
 AddTable("GrocklingSacredStoneMaulAttackTable", AttackTables.GrocklingSacredStoneMaulAttackTable)  
+AddTable("SacredRunestoneSlabAttackTable", AttackTables.SacredRunestoneSlabAttackTable)  
 AddTable("GoreWarAxeAttackTable", AttackTables.GoreWarAxeAttackTable)  
 AddTable("ReaverWarAxeAttackTable", AttackTables.ReaverWarAxeAttackTable)  
 AddTable("GoreFalchionAttackTable", AttackTables.GoreFalchionAttackTable)  
@@ -3700,6 +4059,8 @@ AddTable("FlangedMaceAttackTable", AttackTables.FlangedMaceAttackTable)
 AddTable("MorningStarAttackTable", AttackTables.MorningStarAttackTable)  
 AddTable("BoneMaceAttackTable", AttackTables.BoneMaceAttackTable)          
 AddTable("GoreHuntingDaggerAttackTable", AttackTables.GoreHuntingDaggerAttackTable)
+AddTable("ClanReaverDaggerAttackTable", AttackTables.ClanReaverDaggerAttackTable)
+AddTable("RavenstoneShardAttackTable", AttackTables.RavenstoneShardAttackTable)
 AddTable("QuickshankAttackTable", AttackTables.QuickshankAttackTable)    
 AddTable("ParryingDaggerAttackTable", AttackTables.ParryingDaggerAttackTable)
 AddTable("KnightsbaneAttackTable", AttackTables.KnightsbaneAttackTable)  
@@ -3746,6 +4107,7 @@ AddTable("DemonClawsAttackTable", AttackTables.DemonClawsAttackTable)
 AddTable("ReaverBattleAxeAttackTable", AttackTables.ReaverBattleAxeAttackTable)
 AddTable("GoreSeaxAttackTable", AttackTables.GoreSeaxAttackTable)
 AddTable("FamilialSwordAttackTable", AttackTables.FamilialSwordAttackTable)
+AddTable("RavenstoneBladeAttackTable", AttackTables.RavenstoneBladeAttackTable)
 AddTable("DruidSwordAttackTable", AttackTables.DruidSwordAttackTable)
 AddTable("BlessedDruidSwordAttackTable", AttackTables.BlessedDruidSwordAttackTable)
 AddTable("GoreMaceAttackTable", AttackTables.GoreMaceAttackTable)
@@ -3794,6 +4156,18 @@ AddTable("GunAxeAttackTable", AttackTables.GunAxeAttackTable)
 AddTable("DemonKnightSwordAttackTable", AttackTables.DemonKnightSwordAttackTable)
 AddTable("DemonKnightSwordAttackTableFire", AttackTables.DemonKnightSwordAttackTableFire)
 AddTable("DemonKnightSwordAttackTableIce", AttackTables.DemonKnightSwordAttackTableIce)
+AddTable("GrocklingSwordAttackTable", AttackTables.GrocklingSwordAttackTable) 
+AddTable("SalvagersLongswordAttackTable", AttackTables.SalvagersLongswordAttackTable)
+AddTable("FlambergeAttackTable", AttackTables.FlambergeAttackTable)
+AddTable("GauntletsOfPenanceAttackTable", AttackTables.GauntletsOfPenanceAttackTable)
+AddTable("NoblemansSwordAttackTable", AttackTables.NoblemansSwordAttackTable)
+AddTable("BoneClubAttackTable", AttackTables.BoneClubAttackTable)
+AddTable("ExecutionersAxeAttackTable", AttackTables.ExecutionersAxeAttackTable)
+AddTable("VillaSpadoneAttackTable", AttackTables.VillaSpadoneAttackTable)
+AddTable("BastardSwordAttackTable", AttackTables.BastardSwordAttackTable)
+AddTable("Ancestraldagger_Masquerade_AttackTable", AttackTables.Ancestraldagger_Masquerade_AttackTable)
+AddTable("StoneThrowingSpearAttackTable", AttackTables.StoneThrowingSpearAttackTable)
+AddTable("VoltBattleAxeAttackTable", AttackTables.VoltBattleAxeAttackTable)
 
 -- Block Stat Tables
 
@@ -4431,6 +4805,24 @@ BlockTables.ScrapBladeBlockTable = {
 	["candeflect"] = true,
 };
 
+BlockTables.BoneClubBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "GlassImpact",
+    ["blockeffectforward"] = 25,
+    ["blockeffectpos"] = (Vector(0, -10, 65)),
+    ["blockcone"] = 180,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 30,
+    ["raisespeed"] = 1.75,
+    ["instantraise"] = false,
+    ["parrydifficulty"] = 0.2,
+    ["parrytakestamina"] = 20,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+};
+
 BlockTables.BellHammerBlockTable = {
 	["guardblockamount"] = 10,
 	["specialeffect"] = false,
@@ -4718,6 +5110,43 @@ BlockTables.GoreHuntingDaggerBlockTable = {
 	["canparry"] = true,
 	["candeflect"] = true,
 };
+
+BlockTables.ClanReaverDaggerBlockTable = {
+	["guardblockamount"] = 10,
+	["specialeffect"] = false,
+	["blockeffect"] = "MetalSpark",
+	["blockeffectforward"] = 30,
+	["blockeffectpos"] = (Vector(5, 0, 60)),
+	["blockcone"] = 135,
+	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+	["partialbulletblock"] = false,
+	["poiseresistance"] = 0,
+	["raisespeed"] = 1.25,
+	["instantraise"] = true,
+	["parrydifficulty"] = 0.25,
+	["parrytakestamina"] = 5,
+	["canparry"] = true,
+	["candeflect"] = true,
+};
+
+BlockTables.RavenstoneShardBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "GlassImpact",
+    ["blockeffectforward"] = 30,
+    ["blockeffectpos"] = (Vector(5, 0, 60)),
+    ["blockcone"] = 135,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 0,
+    ["raisespeed"] = 1.25,
+    ["instantraise"] = true,
+    ["parrydifficulty"] = 0.2,
+    ["parrytakestamina"] = 5,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+};
+
 
 BlockTables.QuickshankBlockTable = {
 	["guardblockamount"] = 10,
@@ -5528,6 +5957,24 @@ BlockTables.FamilialSwordBlockTable = {
 	["parrytakestamina"] = 15,
 	["canparry"] = true,
 	["candeflect"] = true,
+};
+
+BlockTables.RavenstoneBladeBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "GlassImpact",
+    ["blockeffectforward"] = 15,
+    ["blockeffectpos"] = (Vector(0, 0, 65)),
+    ["blockcone"] = 180,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 10,
+    ["raisespeed"] = 0.75,
+    ["instantraise"] = false,
+    ["parrydifficulty"] = 0.2,
+    ["parrytakestamina"] = 15,
+    ["canparry"] = true,
+    ["candeflect"] = true,
 };
 
 BlockTables.DruidSwordBlockTable = {
@@ -6343,6 +6790,222 @@ BlockTables.DemonKnightSwordBlockTable = {
 	["candeflect"] = true,
 };
 
+BlockTables.GrocklingSwordBlockTable = {
+	["guardblockamount"] = 10,
+	["specialeffect"] = false,
+	["blockeffect"] = "MetalSpark",
+	["blockeffectforward"] = 25,
+	["blockeffectpos"] = (Vector(0, -10, 65)),
+	["blockcone"] = 180,
+	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+	["partialbulletblock"] = false,
+	["poiseresistance"] = 30,
+	["raisespeed"] = 1.75,
+	["instantraise"] = false,
+	["parrydifficulty"] = 0.2,
+	["parrytakestamina"] = 20,
+	["canparry"] = true,
+	["candeflect"] = true,
+};
+
+BlockTables.SacredRunestoneSlabBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "MetalSpark",
+    ["blockeffectforward"] = 25,
+    ["blockeffectpos"] = (Vector(0, -10, 65)),
+    ["blockcone"] = 180,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 25,
+    ["raisespeed"] = 2,
+    ["instantraise"] = false,
+    ["parrydifficulty"] = 0.2,
+    ["parrytakestamina"] = 20,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+};
+
+BlockTables.SalvagersLongswordBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "MetalSpark",
+    ["blockeffectforward"] = 25,
+    ["blockeffectpos"] = (Vector(0, -10, 65)),
+    ["blockcone"] = 180,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 20,
+    ["raisespeed"] = 1.75,
+    ["instantraise"] = false,
+    ["parrydifficulty"] = 0.2,
+    ["parrytakestamina"] = 15,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+}; 
+
+BlockTables.GauntletsOfPenanceBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "GlassImpact",
+    ["blockeffectforward"] = 25,
+    ["blockeffectpos"] = (Vector(0, -10, 65)),
+    ["blockcone"] = 135,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 15,
+    ["raisespeed"] = 1.25,
+    ["instantraise"] = true,
+    ["parrydifficulty"] = 0.2,
+    ["parrytakestamina"] = 12,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+}; 
+
+BlockTables.NoblemansSwordBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "MetalSpark",
+    ["blockeffectforward"] = 25,
+    ["blockeffectpos"] = (Vector(0, -10, 65)),
+    ["blockcone"] = 180,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 25,
+    ["raisespeed"] = 1.75,
+    ["instantraise"] = false,
+    ["parrydifficulty"] = 0.25,
+    ["parrytakestamina"] = 12,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+}; 
+
+BlockTables.FlambergeBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "MetalSpark",
+    ["blockeffectforward"] = 25,
+    ["blockeffectpos"] = (Vector(0, -10, 65)),
+    ["blockcone"] = 180,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 25,
+    ["raisespeed"] = 1.75,
+    ["instantraise"] = false,
+    ["parrydifficulty"] = 0.2,
+    ["parrytakestamina"] = 18,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+};
+
+BlockTables.ExecutionersAxeBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "MetalSpark",
+    ["blockeffectforward"] = 25,
+    ["blockeffectpos"] = (Vector(0, -10, 65)),
+    ["blockcone"] = 180,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 10,
+    ["raisespeed"] = 1.75,
+    ["instantraise"] = false,
+    ["parrydifficulty"] = 0.2,
+    ["parrytakestamina"] = 15,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+};
+
+BlockTables.VillaSpadoneBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "MetalSpark",
+    ["blockeffectforward"] = 25,
+    ["blockeffectpos"] = (Vector(0, -10, 65)),
+    ["blockcone"] = 180,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 25,
+    ["raisespeed"] = 1.75,
+    ["instantraise"] = false,
+    ["parrydifficulty"] = 0.2,
+    ["parrytakestamina"] = 20,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+};
+
+BlockTables.GreaserBlockhammerBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "MetalSpark",
+    ["blockeffectforward"] = 25,
+    ["blockeffectpos"] = (Vector(0, -10, 65)),
+    ["blockcone"] = 180,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 30,
+    ["raisespeed"] = 2,
+    ["instantraise"] = false,
+    ["parrydifficulty"] = 0.2,
+    ["parrytakestamina"] = 30,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+};
+
+BlockTables.BastardSwordBlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "MetalSpark",
+    ["blockeffectforward"] = 25,
+    ["blockeffectpos"] = (Vector(0, -10, 65)),
+    ["blockcone"] = 180,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 25,
+    ["raisespeed"] = 1.75,
+    ["instantraise"] = false,
+    ["parrydifficulty"] = 0.25,
+    ["parrytakestamina"] = 15,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+};
+
+BlockTables.Ancestraldagger_Masquerade_BlockTable = {
+    ["guardblockamount"] = 10,
+    ["specialeffect"] = false,
+    ["blockeffect"] = "MetalSpark",
+    ["blockeffectforward"] = 30,
+    ["blockeffectpos"] = (Vector(5, 0, 60)),
+    ["blockcone"] = 135,
+    ["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+    ["partialbulletblock"] = false,
+    ["poiseresistance"] = 0,
+    ["raisespeed"] = 1.25,
+    ["instantraise"] = true,
+    ["parrydifficulty"] = 0.3,
+    ["parrytakestamina"] = 2,
+    ["canparry"] = true,
+    ["candeflect"] = true,
+};
+
+BlockTables.VoltBattleAxeBlockTable = {
+	["guardblockamount"] = 10,
+	["specialeffect"] = false,
+	["blockeffect"] = "GlassImpact",
+	["blockeffectforward"] = 25,
+	["blockeffectpos"] = (Vector(0, -10, 65)),
+	["blockcone"] = 180,
+	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE},
+	["partialbulletblock"] = false,
+	["poiseresistance"] = 20,
+	["raisespeed"] = 1.75,
+	["instantraise"] = false,
+	["parrydifficulty"] = 0.2,
+	["parrytakestamina"] = 15,
+	["canparry"] = true,
+	["candeflect"] = true,
+};
+
 AddTable("DefaultBlockTable", BlockTables.DefaultBlockTable) 
 AddTable("AdminTwistedMacheteBlockTable", BlockTables.AdminTwistedMacheteBlockTable)
 AddTable("FistBlockTable", BlockTables.FistBlockTable) 
@@ -6384,6 +7047,7 @@ AddTable("GoreCleaverBlockTable", BlockTables.GoreCleaverBlockTable)
 AddTable("GoreClubBlockTable", BlockTables.GoreClubBlockTable)  
 AddTable("GrocklingStoneMaulBlockTable", BlockTables.GrocklingStoneMaulBlockTable)  
 AddTable("GrocklingSacredStoneMaulBlockTable", BlockTables.GrocklingSacredStoneMaulBlockTable)  
+AddTable("SacredRunestoneSlabBlockTable", BlockTables.SacredRunestoneSlabBlockTable)  
 AddTable("GoreWarAxeBlockTable", BlockTables.GoreWarAxeBlockTable)  
 AddTable("ReaverWarAxeBlockTable", BlockTables.ReaverWarAxeBlockTable)  
 AddTable("GoreFalchionBlockTable", BlockTables.GoreFalchionBlockTable)  
@@ -6395,6 +7059,8 @@ AddTable("ElegantEpeeBlockTable", BlockTables.ElegantEpeeBlockTable)
 AddTable("FlangedMaceBlockTable", BlockTables.FlangedMaceBlockTable)  
 AddTable("MorningStarBlockTable", BlockTables.MorningStarBlockTable)    
 AddTable("GoreHuntingDaggerBlockTable", BlockTables.GoreHuntingDaggerBlockTable)    
+AddTable("ClanReaverDaggerBlockTable", BlockTables.ClanReaverDaggerBlockTable)  
+AddTable("RavenstoneShardBlockTable", BlockTables.RavenstoneShardBlockTable)  
 AddTable("QuickshankBlockTable", BlockTables.QuickshankBlockTable)    
 AddTable("ParryingDaggerBlockTable", BlockTables.ParryingDaggerBlockTable) 
 AddTable("KnightsbaneBlockTable", BlockTables.KnightsbaneBlockTable)   
@@ -6439,6 +7105,7 @@ AddTable("DemonClawsBlockTable", BlockTables.DemonClawsBlockTable)
 AddTable("ReaverBattleAxeBlockTable", BlockTables.ReaverBattleAxeBlockTable)
 AddTable("GoreSeaxBlockTable", BlockTables.GoreSeaxBlockTable)
 AddTable("FamilialSwordBlockTable", BlockTables.FamilialSwordBlockTable)
+AddTable("RavenstoneBladeBlockTable", BlockTables.RavenstoneBladeBlockTable)
 AddTable("DruidSwordBlockTable", BlockTables.DruidSwordBlockTable)
 AddTable("BlessedDruidSwordBlockTable", BlockTables.BlessedDruidSwordBlockTable)
 AddTable("GoreMaceBlockTable", BlockTables.GoreMaceBlockTable)
@@ -6484,6 +7151,21 @@ AddTable("HillGoreHuntingDaggerBlockTable", BlockTables.HillGoreHuntingDaggerBlo
 AddTable("OrdainedGorefellerBlockTable", BlockTables.OrdainedGorefellerBlockTable)
 AddTable("GunAxeBlockTable", BlockTables.GunAxeBlockTable) 
 AddTable("DemonKnightSwordBlockTable", BlockTables.DemonKnightSwordBlockTable)
+AddTable("GrocklingSwordBlockTable", BlockTables.GrocklingSwordBlockTable)
+AddTable("SalvagersLongswordBlockTable", BlockTables.SalvagersLongswordBlockTable)  
+AddTable("FlambergeBlockTable", BlockTables.FlambergeBlockTable)
+AddTable("GauntletsOfPenanceBlockTable", BlockTables.GauntletsOfPenanceBlockTable)
+AddTable("NoblemansSwordBlockTable", BlockTables.NoblemansSwordBlockTable)
+AddTable("BoneClubBlockTable", BlockTables.BoneClubBlockTable)  
+AddTable("ExecutionersAxeBlockTable", BlockTables.ExecutionersAxeBlockTable)  
+AddTable("VillaSpadoneBlockTable", BlockTables.VillaSpadoneBlockTable)  
+AddTable("GreaserBlockhammerBlockTable", BlockTables.GreaserBlockhammerBlockTable)  
+AddTable("BastardSwordBlockTable", BlockTables.BastardSwordBlockTable)  
+AddTable("Ancestraldagger_Masquerade_BlockTable", BlockTables.Ancestraldagger_Masquerade_BlockTable)  
+AddTable("VoltBattleAxeBlockTable", BlockTables.VoltBattleAxeBlockTable)  
+
+
+
 
 -- Shield Stat Tables
 
@@ -6495,7 +7177,7 @@ BlockTables.shield1 = { -- Scrap Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 55)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_twindragon",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -6618,7 +7300,7 @@ BlockTables.shield3 = { -- Car Door Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(-5, -15, 55)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_cardoor",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -6745,7 +7427,7 @@ BlockTables.shield5 = { -- Wooden Shield
 	["blockeffect"] = "GlassImpact",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "WoodenShieldSoundTable",
@@ -6808,7 +7490,7 @@ BlockTables.shield6 = { -- Iron Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 35,
 	["blockeffectpos"] = (Vector(0, -10, 45)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -6871,7 +7553,7 @@ BlockTables.shield7 = { -- Knight's Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 35,
 	["blockeffectpos"] = (Vector(-5, -10, 45)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -6934,7 +7616,7 @@ BlockTables.shield8 = { -- Spiked Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 35,
 	["blockeffectpos"] = (Vector(-5, -10, 45)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -6998,7 +7680,7 @@ BlockTables.shield9 = { -- Sol Sentinel Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 35,
 	["blockeffectpos"] = (Vector(0, -10, 55)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7056,7 +7738,7 @@ BlockTables.shield10 = { -- Gore Guardian Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 30,
 	["blockeffectpos"] = (Vector(0, -10, 55)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_drakekeeper",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7111,7 +7793,7 @@ BlockTables.shield11 = { -- Gatekeeper Shield
 	["blockeffect"] = "GlassImpact",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_twindragon",
 	["blocksoundtable"] = "WoodenShieldSoundTable",
@@ -7165,7 +7847,7 @@ BlockTables.shield12 = { -- Warfighter Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 30,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7225,7 +7907,7 @@ BlockTables.shield13 = { -- Dreadshield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_drakekeeper",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7279,7 +7961,7 @@ BlockTables.shield14 = { -- Clan Shield
 	["blockeffect"] = "GlassImpact",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "WoodenShieldSoundTable",
@@ -7342,7 +8024,7 @@ BlockTables.shield15 = { -- Voltshield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 55)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_twindragon",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7403,7 +8085,7 @@ BlockTables.shield16 = { -- Steel Tower Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_drakekeeper",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7457,7 +8139,7 @@ BlockTables.shield17 = { -- Leather Shield
 	["blockeffect"] = "GlassImpact",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "WoodenShieldSoundTable",
@@ -7520,7 +8202,7 @@ BlockTables.shield18 = { -- Steel Gatekeeper Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_drakekeeper",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7580,7 +8262,7 @@ BlockTables.shield19 = { -- Rusted Kite Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 35,
 	["blockeffectpos"] = (Vector(-5, -10, 45)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7643,7 +8325,7 @@ BlockTables.shield20 = { -- Old Soldier Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 35,
 	["blockeffectpos"] = (Vector(-5, -10, 45)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7706,7 +8388,7 @@ BlockTables.shieldunique1 = { -- Red Wolf Skinshield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 35,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_pursuer",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7754,7 +8436,7 @@ BlockTables.shieldunique2 = { -- Sol Shield (Unique)
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 35,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["partialbulletblock"] = false,
 	["poiseresistance"] = 35,
@@ -7766,8 +8448,6 @@ BlockTables.shieldunique2 = { -- Sol Shield (Unique)
 	["candeflect"] = true,
 };
 
--- Hill shit (shields)
-
 BlockTables.shieldhill = { -- Hillkeeper Kite Shield
 	["name"] = "Hillkeeper Shield",
 	["guardblockamount"] = 5,
@@ -7776,7 +8456,7 @@ BlockTables.shieldhill = { -- Hillkeeper Kite Shield
 	["blockeffect"] = "GlassImpact",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_twindragon",
 	["blocksoundtable"] = "WoodenShieldSoundTable",
@@ -7793,12 +8473,16 @@ BlockTables.shieldhill = { -- Hillkeeper Kite Shield
 		["models/v_begottenknife.mdl"] = {pos = Vector(10.8, -8.643, 4.159), ang = Vector(0, 0, -2)},
 		["models/weapons/cstrike/c_knife_t.mdl"] = {pos = Vector(3.68, -6.835, 0.479), ang = Vector(2.111, -26.031, -4.222)},
 		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {pos = Vector(1.309, -12.061, -4.24), ang = Vector(-18.996, -60.503, 13.366)},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {pos = Vector(1.309, -12.061, -4.24), ang = Vector(-18.996, -60.503, 13.366)},
 	},
 	["ViewModelBoneMods"] = {
 		["models/v_begottenknife.mdl"] = {
 			["ValveBiped.Bip01_L_UpperArm"] = { scale = Vector(1, 1, 1), pos = Vector(6.852, -9.815, -3.149), angle = Angle(0, 0, 0) }
 		},
 		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {
+			["ValveBiped.Bip01_L_UpperArm"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) }
+		},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {
 			["ValveBiped.Bip01_L_UpperArm"] = { scale = Vector(1, 1, 1), pos = Vector(0, 0, 0), angle = Angle(0, 0, 0) }
 		},
 	},
@@ -7815,6 +8499,9 @@ BlockTables.shieldhill = { -- Hillkeeper Kite Shield
 		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {
 			["hillshield"] = { type = "Model", model = "models/begotten_apocalypse/items/hill_kite_shield.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-0.519, 5.199, -2.597), angle = Angle(108.7, -33.896, -80.65), size = Vector(0.85, 0.85, 0.85), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
 		},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {
+			["hillshield"] = { type = "Model", model = "models/begotten_apocalypse/items/hill_kite_shield.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-0.519, 5.199, -2.597), angle = Angle(108.7, -33.896, -80.65), size = Vector(0.85, 0.85, 0.85), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
 	},
 	["WElements"] = {
 		["hillshield"] = { type = "Model", model = "models/begotten_apocalypse/items/hill_kite_shield.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(3, 3, 0), angle = Angle(5.843, 146.104, 87.662), size = Vector(1.1, 1.1, 1.1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
@@ -7829,7 +8516,7 @@ BlockTables.shieldhillsteel = { -- Steel Hillkeeper Shield
 	["blockeffect"] = "MetalSpark",
 	["blockeffectforward"] = 25,
 	["blockeffectpos"] = (Vector(0, -10, 50)),
-	["blockcone"] = 220,
+	["blockcone"] = 200,
 	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
 	["blockanim"] = "a_sword_shield_block_drakekeeper",
 	["blocksoundtable"] = "MetalShieldSoundTable",
@@ -7846,6 +8533,7 @@ BlockTables.shieldhillsteel = { -- Steel Hillkeeper Shield
 		["models/v_begottenknife.mdl"] = {pos = Vector(6, -8.04, 2.68), ang = Vector(0, -9.146, -6.332)},
 		["models/weapons/cstrike/c_knife_t.mdl"] = {pos = Vector(3.559, -6.031, 1.279), ang = Vector(0, -27.438, -5.628)},
 		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {pos = Vector(5.28, -6.433, 1.279), ang = Vector(0, -35.88, 3.517)},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {pos = Vector(5.28, -6.433, 1.279), ang = Vector(0, -35.88, 3.517)},
 	},
 	["ViewModelBoneMods"] = {
 		["models/v_begottenknife.mdl"] = {
@@ -7865,9 +8553,288 @@ BlockTables.shieldhillsteel = { -- Steel Hillkeeper Shield
 		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {
 			["hillsteelshield"] = { type = "Model", model = "models/props/begotten/melee/defender_shield.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-0.519, -3.636, 17.142), angle = Angle(71.299, 132.078, -90), size = Vector(0.8, 0.8, 0.8), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
 		},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {
+			["hillsteelshield"] = { type = "Model", model = "models/props/begotten/melee/defender_shield.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-0.519, -3.636, 17.142), angle = Angle(71.299, 132.078, -90), size = Vector(0.8, 0.8, 0.8), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
 	},
 	["WElements"] = {
 		["hillsteelshield"] = { type = "Model", model = "models/props/begotten/melee/defender_shield.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(2.596, 1.557, 0.518), angle = Angle(180.844, -33.896, 90), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	},
+};
+
+BlockTables.shieldhathood1 = { -- Shagalax Tower Shield
+	["name"] = "Shagalax Tower Shield",
+	["guardblockamount"] = 3,
+	["damagereduction"] = 0.8,
+	["specialeffect"] = false,
+	["blockeffect"] = "MetalSpark",
+	["blockeffectforward"] = 25,
+	["blockeffectpos"] = (Vector(0, -10, 50)),
+	["blockcone"] = 200,
+	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
+	["blockanim"] = "a_sword_shield_block_drakekeeper",
+	["blocksoundtable"] = "MetalShieldSoundTable",
+	["partialbulletblock"] = false,
+	["poiseresistance"] = 55,
+	["raisespeed"] = 1.7,
+	["instantraise"] = false,
+	["parrydifficulty"] = 0.2,
+	["parrytakestamina"] = 40,
+	["canparry"] = true,
+	["candeflect"] = false,
+	["ironsights"] = {
+		["models/v_onehandedbegotten.mdl"] = {pos = Vector(5, -9.849, -3.481), ang = Vector(4.221, -16.885, 4.221)},
+		["models/v_begottenknife.mdl"] = {pos = Vector(9.64, -12.664, 1.6), ang = Vector(0, -15.478, 2.111)},
+		["models/weapons/cstrike/c_knife_t.mdl"] = {pos = Vector(6.48, -9.447, 1.759), ang = Vector(2.813, -46.432, -4.926)},
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {pos = Vector(3.72, -12.865, 2.48), ang = Vector(2.813, -46.432, -6.332)},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {pos = Vector(3.72, -12.865, 2.48), ang = Vector(2.813, -46.432, -6.332)},
+	},
+	["ViewModelBoneMods"] = {
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {
+			["ValveBiped.Bip01_L_UpperArm"] = { scale = Vector(1, 1, 1), pos = Vector(0, -13.148, 0), angle = Angle(0, 0, 0) }
+		},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {
+			["ValveBiped.Bip01_L_UpperArm"] = { scale = Vector(1, 1, 1), pos = Vector(0, -13.148, 0), angle = Angle(0, 0, 0) }
+		},
+		["models/v_begottenknife.mdl"] = {
+			["ValveBiped.Bip01_L_UpperArm"] = { scale = Vector(1, 1, 1), pos = Vector(6.852, -9.815, -3.149), angle = Angle(0, 0, 0) }
+		},
+	},
+	["VElements"] = {
+		["models/v_onehandedbegotten.mdl"] = {
+			["shieldhathood1"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_shagalax.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-3.636, 12.243, -3.753), angle = Angle(35, 73.636, 134.416), size = Vector(0.899, 0.899, 0.899), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/v_begottenknife.mdl"] = {
+			["shieldhathood1"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_shagalax.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-4.676, -4.676, -1.558), angle = Angle(180, 49, 19.87), size = Vector(0.898, 0.898, 0.898), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/cstrike/c_knife_t.mdl"] = {
+			["shieldhathood1"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_shagalax.mdl", bone = "ValveBiped.Bip01_L_Forearm", rel = "", pos = Vector(8.831, -7.792, -8.832), angle = Angle(24.545, -31.56, -87.664), size = Vector(0.898, 0.898, 0.898), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {
+			["shieldhathood1"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_shagalax.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(0.518, -5.715, -4.676), angle = Angle(-99.351, 129.74, 78.311), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {
+			["shieldhathood1"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_shagalax.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(0.518, -5.715, -4.676), angle = Angle(-99.351, 129.74, 78.311), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+	},
+	["WElements"] = {
+		["hathood1"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_shagalax.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(2.596, -3.636, -4.676), angle = Angle(-8.183, -36.235, -94.676), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	},
+};
+
+BlockTables.shieldhathood2 = { -- Clan Reaver Shield
+	["name"] = "Clan Reaver Shield",
+	["guardblockamount"] = 5,
+	["damagereduction"] = 0.8,
+	["specialeffect"] = false,
+	["blockeffect"] = "MetalSpark",
+	["blockeffectforward"] = 35,
+	["blockeffectpos"] = (Vector(0, -10, 45)),
+	["blockcone"] = 200,
+	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
+	["blockanim"] = "a_sword_shield_block_pursuer",
+	["blocksoundtable"] = "WoodenShieldSoundTable",
+	["partialbulletblock"] = false,
+	["poiseresistance"] = 30,
+	["raisespeed"] = 1.75,
+	["instantraise"] = false,
+	["parrydifficulty"] = 0.2,
+	["parrytakestamina"] = 35,
+	["canparry"] = true,
+	["candeflect"] = true,
+	["ironsights"] = {
+		["models/v_onehandedbegotten.mdl"] = {pos = Vector(5, -9.849, -3.481), ang = Vector(4.221, -16.885, 4.221)},
+		["models/v_begottenknife.mdl"] = {pos = Vector(2, -4.222, -3.04), ang = Vector(0, -15, 4.925)},
+		["models/weapons/cstrike/c_knife_t.mdl"] = {pos = Vector(9.96, -5.428, -2.8), ang = Vector(5.627, -20.403, 5.627)},
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {pos = Vector(5.44, -6.031, -1.481), ang = Vector(-9.146, -40.102, 1.406)},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {pos = Vector(5.44, -6.031, -1.481), ang = Vector(-9.146, -40.102, 1.406)},
+	},
+	["ViewModelBoneMods"] = {
+		["models/v_begottenknife.mdl"] = {
+			["ValveBiped.Bip01_L_UpperArm"] = { scale = Vector(1, 1, 1), pos = Vector(6.852, -9.815, -3.149), angle = Angle(0, 0, 0) }
+		},
+	},
+	["VElements"] = {
+		["models/v_onehandedbegotten.mdl"] = {
+			["shieldhathood2"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_thyrm.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-3.636, 10.243, -3.753), angle = Angle(35, 73.636, 134.416), size = Vector(1.1, 1.1, 1.1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/v_begottenknife.mdl"] = {
+			["shieldhathood2"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_thyrm.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-1.558, -0.519, 4.675), angle = Angle(3.506, 43.247, 162.468), size = Vector(0.898, 0.898, 0.898), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/cstrike/c_knife_t.mdl"] = {
+			["shieldhathood2"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_thyrm.mdl", bone = "ValveBiped.Bip01_L_Forearm", rel = "", pos = Vector(5.714, -7.792, -1.558), angle = Angle(24.545, -31.559, -87.663), size = Vector(1.1, 1.1, 1.1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {
+			["shieldhathood2"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_thyrm.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(2.596, -7.792, 11.947), angle = Angle(75.973, 160.13, 68.96), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {
+			["shieldhathood2"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_thyrm.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(2.596, -7.792, 11.947), angle = Angle(75.973, 160.13, 68.96), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+	},
+	["WElements"] = {
+		["shieldhathood2"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_thyrm.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(4.675, 1.557, 1.557), angle = Angle(-3.507, -35, -90), size = Vector(1.049, 1.049, 1.049), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	},
+};
+
+BlockTables.shieldhathood3 = { -- Clan Crast Shield
+	["name"] = "Clan Crast Shield",
+	["guardblockamount"] = 5,
+	["damagereduction"] = 0.8,
+	["specialeffect"] = false,
+	["blockeffect"] = "MetalSpark",
+	["blockeffectforward"] = 35,
+	["blockeffectpos"] = (Vector(0, -10, 45)),
+	["blockcone"] = 200,
+	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
+	["blockanim"] = "a_sword_shield_block_pursuer",
+	["blocksoundtable"] = "WoodenShieldSoundTable",
+	["partialbulletblock"] = false,
+	["poiseresistance"] = 30,
+	["raisespeed"] = 1.75,
+	["instantraise"] = false,
+	["parrydifficulty"] = 0.2,
+	["parrytakestamina"] = 35,
+	["canparry"] = true,
+	["candeflect"] = true,
+	["ironsights"] = {
+		["models/v_onehandedbegotten.mdl"] = {pos = Vector(5, -9.849, -3.481), ang = Vector(4.221, -16.885, 4.221)},
+		["models/v_begottenknife.mdl"] = {pos = Vector(8.199, -4.222, -3.04), ang = Vector(0, -19.698, 4.925)},
+		["models/weapons/cstrike/c_knife_t.mdl"] = {pos = Vector(9.96, -5.428, -2.8), ang = Vector(5.627, -20.403, 5.627)},
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {pos = Vector(5.44, -6.031, -1.481), ang = Vector(-9.146, -40.102, 1.406)},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {pos = Vector(5.44, -6.031, -1.481), ang = Vector(-9.146, -40.102, 1.406)},
+	},
+	["ViewModelBoneMods"] = {
+		["models/v_begottenknife.mdl"] = {
+			["ValveBiped.Bip01_L_UpperArm"] = { scale = Vector(1, 1, 1), pos = Vector(6.852, -9.815, -3.149), angle = Angle(0, 0, 0) }
+		},
+	},
+	["VElements"] = {
+		["models/v_onehandedbegotten.mdl"] = {
+			["shieldhathood3"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_crast.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-3.636, 10.243, -3.753), angle = Angle(35, 73.636, 134.416), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/v_begottenknife.mdl"] = {
+			["shieldhathood3"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_crast.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-1.558, 2, -3), angle = Angle(3.506, 43.247, 162.468), size = Vector(0.898, 0.898, 0.898), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/cstrike/c_knife_t.mdl"] = {
+			["shieldhathood3"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_crast.mdl", bone = "ValveBiped.Bip01_L_Forearm", rel = "", pos = Vector(5.714, -7.792, -1.558), angle = Angle(24.545, -31.559, -87.663), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {
+			["shieldhathood3"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_crast.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(2.596, -8.8955, 8.97), angle = Angle(75.973, 160.13, 68.96), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {
+			["shieldhathood3"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_crast.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(2.596, -8.8955, 8.97), angle = Angle(75.973, 160.13, 68.96), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+	},
+	["WElements"] = {
+		["shieldhathood3"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_crast.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(1.557, 2.596, 0.518), angle = Angle(-8.183, -31.559, -90), size = Vector(1.049, 1.049, 1.049), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	},
+};
+
+BlockTables.shieldhathood4 = { -- Clan Harald Shield
+	["name"] = "Clan Harald Shield",
+	["guardblockamount"] = 5,
+	["damagereduction"] = 0.8,
+	["specialeffect"] = false,
+	["blockeffect"] = "MetalSpark",
+	["blockeffectforward"] = 35,
+	["blockeffectpos"] = (Vector(0, -10, 45)),
+	["blockcone"] = 200,
+	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
+	["blockanim"] = "a_sword_shield_block_pursuer",
+	["blocksoundtable"] = "WoodenShieldSoundTable",
+	["partialbulletblock"] = false,
+	["poiseresistance"] = 30,
+	["raisespeed"] = 1.75,
+	["instantraise"] = false,
+	["parrydifficulty"] = 0.2,
+	["parrytakestamina"] = 35,
+	["canparry"] = true,
+	["candeflect"] = true,
+	["ironsights"] = {
+		["models/v_onehandedbegotten.mdl"] = {pos = Vector(5, -9.849, -3.481), ang = Vector(4.221, -16.885, 4.221)},
+		["models/v_begottenknife.mdl"] = {pos = Vector(1.679, -11.056, 1.25), ang = Vector(4.925, -25.327, -4.222)},
+		["models/weapons/cstrike/c_knife_t.mdl"] = {pos = Vector(4.239, -7.84, 1.159), ang = Vector(9.145, -21.107, -4.222)},
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {pos = Vector(5.44, -6.031, -1.481), ang = Vector(-9.146, -40.102, 1.406)},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {pos = Vector(5.44, -6.031, -1.481), ang = Vector(-9.146, -40.102, 1.406)},
+	},
+	["ViewModelBoneMods"] = {
+		["models/v_begottenknife.mdl"] = {
+			["ValveBiped.Bip01_L_UpperArm"] = { scale = Vector(1, 1, 1), pos = Vector(6.852, -9.815, -3.149), angle = Angle(0, 0, 0) }
+		},
+	},
+	["VElements"] = {
+		["models/v_onehandedbegotten.mdl"] = {
+			["shieldhathood4"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_haraldr.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-3.636, 7.243, -5.753), angle = Angle(35, 73.636, 134.416), size = Vector(1.1, 1.1, 1.1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/v_begottenknife.mdl"] = {
+			["shieldhathood4"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_haraldr.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-1.558, -0.519, 4.675), angle = Angle(3.506, 43.247, 162.468), size = Vector(0.898, 0.898, 0.898), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/cstrike/c_knife_t.mdl"] = {
+			["shieldhathood4"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_haraldr.mdl", bone = "ValveBiped.Bip01_L_Forearm", rel = "", pos = Vector(5.714, -3.636, -0.519), angle = Angle(17.531, -31.56, -87.664), size = Vector(1.1, 1.1, 1.1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {
+			["shieldhathood4"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_haraldr.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(2.596, -7.792, 11.947), angle = Angle(75.973, 160.13, 68.96), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {
+			["shieldhathood4"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_haraldr.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(2.596, -7.792, 11.947), angle = Angle(75.973, 160.13, 68.96), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+	},
+	["WElements"] = {
+		["shieldhathood4"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_haraldr.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(4.675, 1.557, 1.557), angle = Angle(-3.507, -35, -90), size = Vector(1.049, 1.049, 1.049), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+	},
+};
+
+BlockTables.shieldhathood5 = { -- Clan Gore Shield
+	["name"] = "Clan Gore Shield",
+	["guardblockamount"] = 5,
+	["damagereduction"] = 0.8,
+	["specialeffect"] = false,
+	["blockeffect"] = "MetalSpark",
+	["blockeffectforward"] = 35,
+	["blockeffectpos"] = (Vector(0, -10, 45)),
+	["blockcone"] = 200,
+	["blockdamagetypes"] = {DMG_SLASH, DMG_CLUB, DMG_VEHICLE, DMG_BULLET, DMG_BUCKSHOT},
+	["blockanim"] = "a_sword_shield_block_pursuer",
+	["blocksoundtable"] = "WoodenShieldSoundTable",
+	["partialbulletblock"] = false,
+	["poiseresistance"] = 30,
+	["raisespeed"] = 1.75,
+	["instantraise"] = false,
+	["parrydifficulty"] = 0.2,
+	["parrytakestamina"] = 35,
+	["canparry"] = true,
+	["candeflect"] = true,
+	["ironsights"] = {
+		["models/v_onehandedbegotten.mdl"] = {pos = Vector(5, -9.849, -3.481), ang = Vector(4.221, -16.885, 4.221)},
+		["models/v_begottenknife.mdl"] = {pos = Vector(8.199, -4.222, -3.04), ang = Vector(0, -19.698, 4.925)},
+		["models/weapons/cstrike/c_knife_t.mdl"] = {pos = Vector(9.96, -5.428, -2.8), ang = Vector(5.627, -20.403, 5.627)},
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {pos = Vector(5.44, -6.031, -1.481), ang = Vector(-9.146, -40.102, 1.406)},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {pos = Vector(5.44, -6.031, -1.481), ang = Vector(-9.146, -40.102, 1.406)},
+	},
+	["ViewModelBoneMods"] = {
+		["models/v_begottenknife.mdl"] = {
+			["ValveBiped.Bip01_L_UpperArm"] = { scale = Vector(1, 1, 1), pos = Vector(6.852, -9.815, -3.149), angle = Angle(0, 0, 0) }
+		},
+	},
+	["VElements"] = {
+		["models/v_onehandedbegotten.mdl"] = {
+			["shieldhathood5"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_ursa.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-3.636, 11.947, -6.753), angle = Angle(35, 73.636, 134.416), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/v_begottenknife.mdl"] = {
+			["shieldhathood5"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_ursa.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(-1.558, -0.519, 4.675), angle = Angle(3.506, 43.247, 162.468), size = Vector(0.898, 0.898, 0.898), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/cstrike/c_knife_t.mdl"] = {
+			["shieldhathood5"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_ursa.mdl", bone = "ValveBiped.Bip01_L_Forearm", rel = "", pos = Vector(5.714, -7.792, -1.558), angle = Angle(24.545, -31.559, -87.663), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/ageofchivalry/c_begotten_flail.mdl"] = {
+			["shieldhathood5"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_ursa.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(2.596, -7.792, 11.947), angle = Angle(75.973, 160.13, 68.96), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+		["models/weapons/ageofchivalry/c_begotten_solflail.mdl"] = {
+			["shieldhathood5"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_ursa.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(2.596, -7.792, 11.947), angle = Angle(75.973, 160.13, 68.96), size = Vector(1, 1, 1), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
+		},
+	},
+	["WElements"] = {
+		["shieldhathood5"] = { type = "Model", model = "models/begotten_prelude/items/goreshield_ursa.mdl", bone = "ValveBiped.Bip01_L_Hand", rel = "", pos = Vector(1.557, 2.596, 0.518), angle = Angle(-8.183, -31.559, -90), size = Vector(1.049, 1.049, 1.049), color = Color(255, 255, 255, 255), surpresslightning = false, material = "", skin = 0, bodygroup = {} }
 	},
 };
 
@@ -7895,6 +8862,11 @@ AddTable("shieldunique1", BlockTables.shieldunique1)
 AddTable("shieldunique2", BlockTables.shieldunique2)
 AddTable("shieldhill", BlockTables.shieldhill)
 AddTable("shieldhillsteel", BlockTables.shieldhillsteel)
+AddTable("shieldhathood1", BlockTables.shieldhathood1)
+AddTable("shieldhathood2", BlockTables.shieldhathood2)
+AddTable("shieldhathood3", BlockTables.shieldhathood3)
+AddTable("shieldhathood4", BlockTables.shieldhathood4)
+AddTable("shieldhathood5", BlockTables.shieldhathood5)
 
 -- Dummy tables for use with tooltips that have the min/max values.
 local meleemax = {};

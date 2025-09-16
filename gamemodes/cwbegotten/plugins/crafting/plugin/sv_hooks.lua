@@ -15,6 +15,12 @@ if map == "rp_district21" then
 		["wood"] = 20,
 		["gorewood"] = 6,
 	};
+elseif map == "bg_district34" then
+	cwRecipes.maxPiles = {
+		["ore"] = 16,
+		["wood"] = 12,
+		["gorewood"] = 6,
+	}
 else
 	cwRecipes.maxPiles = {
 		["ore"] = 8,
@@ -436,7 +442,12 @@ function cwRecipes:PlayerMeetsCraftingItemRequirements(player, recipeTable, item
 	if player:HasBelief("taste_of_iron") then
 		player.conditionAverage = 100;
 	else
-		player.conditionAverage = conditionAverage / #conditions;
+		if recipeTable.category == "Other" or recipeTable.category == "Crafting Materials" then
+			player.conditionAverage = (conditionAverage / #conditions)
+		else
+			-- Makes crafting conditionAverage scale per level (+15 condition on maxlevel)
+			player.conditionAverage = (conditionAverage / #conditions) + Lerp(math.min(player:GetCharacterData("level", 1), cwBeliefs.sacramentLevelCap) / (cwBeliefs.sacramentLevelCap), 0, 15);
+		end
 	end
 	
 	return true;

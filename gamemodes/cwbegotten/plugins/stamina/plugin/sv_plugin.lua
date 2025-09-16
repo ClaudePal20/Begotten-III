@@ -26,7 +26,7 @@ function cwStamina:GetMaxStaminaPlugin(player)
 			return 1000;
 		end
 		
-		if subfaction == "Servus" then
+		if subfaction == "Servus" or subfaction == "Crypt Walkers" then
 			max_stamina = max_stamina + 5;
 		elseif subfaction == "Watchman" or subfaction == "Auxiliary" then
 			max_stamina = max_stamina + 10;
@@ -51,6 +51,14 @@ function cwStamina:GetMaxStaminaPlugin(player)
 			
 			if player:HasBelief("man_become_beast") then
 				max_stamina = max_stamina + 10;
+			end
+		end
+		
+		if cwMedicalSystem then
+			local symptoms = player:GetNetVar("symptoms", {});
+			
+			if table.HasValue(symptoms, "Fatigue") then
+				max_stamina = max_stamina - 20;
 			end
 		end
 		

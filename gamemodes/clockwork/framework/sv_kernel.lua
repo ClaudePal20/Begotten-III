@@ -1471,16 +1471,28 @@ end
 -- A function to ignite a player.
 function playerMeta:Ignite(length, radius)
 	if hook.Run("PlayerCanBeIgnited", self) == false then return false end;
-
-	if (self:IsRagdolled()) then
-		self:GetRagdollEntity():Ignite(length, radius);
+	
+	local curTime = CurTime();
+	
+	if !self.igniteTime or self.igniteTime <= curTime then
+		self.igniteTime = curTime + length;
+	else
+		self.igniteTime = self.igniteTime + length;
 	end
 	
-	self:ClockworkIgnite(length, radius)
+	length = self.igniteTime - curTime;
+
+    if (self:IsRagdolled()) then
+        self:GetRagdollEntity():Ignite(length, radius);
+    else
+        self:ClockworkIgnite(length, radius)
+    end
 end
 
 -- A function to extinguish a player.
 function playerMeta:Extinguish()
+	self.igniteTime = nil;
+
 	if (self:IsRagdolled()) then
 		return self:GetRagdollEntity():Extinguish()
 	else
@@ -1686,12 +1698,16 @@ function playerMeta:GetMaxHealth(health)
 	if subfaction then
 		if subfaction == "Clan Grock" then
 			maxHealth = maxHealth + 175;
+		elseif  subfaction == "Clan Gotnarh" then
+			maxHealth = maxHealth + 225;
+		elseif subfaction == "Clan Ghorst" then
+			maxHealth = maxHealth + 40;
 		elseif subfaction == "Knights of Sol" then
 			maxHealth = maxHealth + 75;
 		elseif subfaction == "Inquisition" or subfaction == "Philimaxio" then
 			maxHealth = maxHealth + 50;
 		elseif subfaction == "Clan Gore" then
-			maxHealth = maxHealth + 40;
+			maxHealth = maxHealth + 45;
 		elseif subfaction == "Clan Harald" then
 			maxHealth = maxHealth + 35;
 		elseif subfaction == "Clan Shagalax" or subfaction == "Machinists" or subfaction == "Watchman" or subfaction == "Low Ministry" then
@@ -1748,7 +1764,7 @@ function playerMeta:GetMaxHealth(health)
 	end
 	
 	if factionName == "Goreic Warrior" then
-		if self:HasBelief("sorcerer") or self:HasBelief("survivalist") then
+		if self:HasBelief("survivalist") then
 			maxHealth = maxHealth + 25;
 		end
 	end

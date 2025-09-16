@@ -11,7 +11,7 @@ SWEP.Author = ""
 SWEP.Spawnable = false 
 SWEP.AutoSwitchFrom = false
 SWEP.Weight = 5
-SWEP.DrawCrosshair = false
+SWEP.DrawCrosshair = true
 
 SWEP.MeleeRangeAdditive = 0.1 --Extra time the attack entities exist
 
@@ -284,7 +284,7 @@ function SWEP:Hitscan()
 			util.Effect("BloodImpact", effect, true, true);
 			
 			--if not Clockwork.entity:GetPlayer(tr.Entity) or not Clockwork.entity:GetPlayer(tr.Entity):Alive() then
-				if self.Owner:GetNetVar("ThrustStance") != true or self.ChoppingAltAttack then
+				if self.Owner:GetNetVar("ThrustStance") != true or (self.ChoppingAltAttack or self.PummelingAltAttack) then
 					tr.Entity:EmitSound(attacksoundtable["hitbody"][math.random(1, #attacksoundtable["hitbody"])])
 				else
 					tr.Entity:EmitSound(attacksoundtable["althitbody"][math.random(1, #attacksoundtable["althitbody"])])
@@ -544,6 +544,7 @@ end
 
 function GetStabilityModifier(owner)
 	local stabilityModifier = 1
+	local clothesItem = owner:GetClothesEquipped();
 	
 	if cwBeliefs and owner.HasBelief then
 		if owner:HasBelief("fanaticism") then
@@ -560,6 +561,14 @@ function GetStabilityModifier(owner)
 			stabilityModifier = stabilityModifier * 1.10;
 		end
 	end
+	
+	if clothesItem and clothesItem.attributes and table.HasValue(clothesItem.attributes, "godless") then
+		local wep = owner:GetActiveWeapon();
+		
+		if owner:Sanity() <= 40 and wep:GetNW2String("activeShield"):len() <= 0 then
+			stabilityModifier = stabilityModifier * 1.25;
+		end
+	end	
 	
 	if owner.GetCharmEquipped and owner:GetCharmEquipped("ring_pummeler") then
 		stabilityModifier = stabilityModifier * 1.15;
@@ -1210,13 +1219,46 @@ end
 		if swingType == "parry_swing" then
 			if (IsValid(hit) and owner:IsValid() and !owner:IsRagdolled() and owner:Alive()) then
 				local d = DamageInfo()
+				local riposteDamageModifier = 3
 				
 				if cwBeliefs and owner.HasBelief and owner:HasBelief("repulsive_riposte") then
-					d:SetDamage(damage * shield_reduction * 3.5 * hit_reduction);
-				else
-					d:SetDamage(damage * shield_reduction * 3 * hit_reduction);
+					riposteDamageModifier = 3.5
 				end
 				
+				if string.find(weaponClass, "begotten_spear_") or string.find(weaponClass, "begotten_polearm_") or string.find(weaponClass, "begotten_scythe_") then
+					local maxPoleRange = (attacktable["meleerange"]) * 0.1
+					local maxIneffectiveRange = maxPoleRange * 0.65
+				
+					if distance <= maxIneffectiveRange and hit:IsValid() then
+						damage = (attacktable["primarydamage"]) * 0.01
+						damagetype = 128
+						
+						if (hit:IsNPC() or hit:IsNextBot()) or (hit:IsPlayer() and !hit:GetNetVar("Guardening") and !hit:GetNetVar("Parry") and !hit:GetNetVar("Deflect")) and !hit.iFrames then
+							--print "Spear Shaft Hit"
+							damage = math.max(1, (attacktable["primarydamage"]) * 0.01)
+							damagetype = 128
+							
+							-- KNOCKBACK
+							local knockback = owner:GetAngles():Forward() * 100 * riposteDamageModifier;
+							knockback.z = 0
+
+							timer.Simple(0.1, function()
+								if IsValid(hit) then
+									hit:SetVelocity(knockback);
+								end
+							end);
+							
+							if hit:IsPlayer() then
+								hit:TakeStability(10 * riposteDamageModifier * GetStabilityModifier(self.Owner))
+							end
+							
+							d:SetDamage(damage)
+						end
+					end
+				end
+				
+				d:SetDamage(damage * shield_reduction * riposteDamageModifier * hit_reduction);
+								
 				d:SetAttacker( owner )
 				d:SetDamageType( damagetype )
 				d:SetDamagePosition(src)
@@ -1368,6 +1410,8 @@ end
 					end
 				elseif weapon.ChoppingAltAttack == true then
 					damagetype = 4
+				elseif weapon.PummelingAltAttack == true then
+					damagetype = 128
 				end
 				-- Polearm alt attack spear shaft hit system
 				if (IsValid(self)) then

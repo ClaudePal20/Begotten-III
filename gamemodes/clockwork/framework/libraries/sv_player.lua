@@ -232,16 +232,37 @@ function Clockwork.player:CreateCharacterFromData(player, data)
 		return self:SetCreateFault(player, "You did not choose any of the available traits!");
 	end;
 
-	-- Failsafe, should not be removable by the client.
+
+	local mandatoryTraits = {}
+	
 	if factionTable.mandatorytraits then
+		for _, trait in ipairs(factionTable.mandatorytraits) do
+			table.insert(mandatoryTraits, trait)
+		end
+	end
+	
+	if factionTable.subfactions and data.subfaction then
+		for _, subfaction in ipairs(factionTable.subfactions) do
+			if subfaction.name == data.subfaction and istable(subfaction.mandatorytraits) then
+				for _, trait in ipairs(subfaction.mandatorytraits) do
+					if not table.HasValue(mandatoryTraits, trait) then
+						table.insert(mandatoryTraits, trait)
+					end
+				end
+				break
+			end
+		end
+	end
+	
+	if !table.IsEmpty(mandatoryTraits) then
 		if type(data.traits) == "table" and !table.IsEmpty(data.traits) then
-			for i, v in ipairs(factionTable.mandatorytraits) do
-				if !table.HasValue(data.traits, v) then
-					return self:SetCreateFault(player, "You do not have a mandatory trait required for your faction!");
+			for _, requiredTrait in ipairs(mandatoryTraits) do
+				if not table.HasValue(data.traits, requiredTrait) then
+					return self:SetCreateFault(player, "You do not have a mandatory trait required for your faction or subfaction!")
 				end
 			end
 		else
-			return self:SetCreateFault(player, "You do not have a mandatory trait required for your faction!");
+			return self:SetCreateFault(player, "You do not have a mandatory trait required for your faction or subfaction!")
 		end
 	end
 
@@ -3445,8 +3466,8 @@ function Clockwork.player:SaveCharacter(player, bCreate, character, Callback)
 
 				if (k == "recognisedNames") then
 					queryObj:Insert(tableKey, util.TableToJSON(character.recognisedNames))
-				elseif (k == "attributes") then
-					queryObj:Insert(tableKey, util.TableToJSON(character.attributes))
+				--[[elseif (k == "attributes") then
+					queryObj:Insert(tableKey, util.TableToJSON(character.attributes))]]--
 				elseif (k == "traits") then
 					queryObj:Insert(tableKey, util.TableToJSON(character.traits))
 				elseif (k == "inventory") then
@@ -3460,19 +3481,32 @@ function Clockwork.player:SaveCharacter(player, bCreate, character, Callback)
 				end
 			end
 
-			if (system.IsWindows()) then
-				queryObj:Callback(function(result, status, lastID)
-					if (Callback) then
-						Callback(tonumber(lastID))
-					end
-				end)
-			elseif (system.IsLinux()) then
-				queryObj:Callback(function(result, status, lastID)
-					if (Callback) then
-						Callback(tonumber(lastID))
-					end
-				end)
-			end
+			queryObj:Callback(function(result)
+				if (Callback) then
+					local oldCallback = Callback;
+					local selectObj = Clockwork.database:Select(charactersTable)
+					
+						selectObj:Callback(function(result)
+							if result then
+								for k, v in pairs(result) do
+									if v._Key then
+										if not character.data["Key"] then
+											character.data["Key"] = v._Key;
+										end
+										
+										oldCallback(v._Key);
+										
+										break;
+									end
+								end
+							end
+						end)
+							
+						selectObj:Where("_Schema", Clockwork.kernel:GetSchemaFolder())
+						selectObj:Where("_Name", character.name)
+					selectObj:Execute();
+				end
+			end)
 		queryObj:Execute()
 	elseif (player:HasInitialized()) then
 		local currentCharacter = player.cwCharacter

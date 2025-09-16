@@ -15,7 +15,7 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.huntingValue = 3; -- Affects speed of skinning and mutilating corpses as well as the condition of the hides and meat, 1 = terrible, 3 = great
 	
 	ITEM.components = {breakdownType = "meltdown", items = {"steel_chunks"}};
-	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 600, supercrateOnly = true};
+	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 666, supercrateOnly = true};
 	ITEM.repairCostModifier = 0.3;
 ITEM:Register();
 
@@ -37,6 +37,30 @@ local ITEM = Clockwork.item:New("weapon_base");
 	
 	ITEM.components = {breakdownType = "meltdown", items = {"iron_chunks"}};
 	ITEM.repairCostModifier = 0.3;
+ITEM:Register();
+
+local ITEM = Clockwork.item:New("weapon_base");
+	ITEM.name = "Clan Reaver Dagger";
+	ITEM.model = "models/props_sr_weapons/ebony_dagger.mdl";
+	ITEM.weight = 0.5;
+	ITEM.uniqueID = "begotten_dagger_clanreaverdagger";
+	ITEM.category = "Melee";
+	ITEM.description = "A ceremonial dagger of Clan Reaver designed for the torture and ritual killings of slaves in the Hall of Tears. The special runes of Clan Reaver open bloody wounds on the hands of those who were not born under the hateful glare of the Sister.";
+	ITEM.iconoverride = "materials/begotten/ui/itemicons/Ebony_dagger.png"
+	ITEM.meleeWeapon = true;
+	ITEM.isAttachment = true;
+	ITEM.attachmentBone = "ValveBiped.Bip01_R_Thigh";
+	ITEM.attachmentOffsetAngles = Angle(1.11, 180, 1.11);
+	ITEM.attachmentOffsetVector = Vector(-3.433, 0.71, -3);
+	ITEM.canUseOffhand = true;
+	ITEM.huntingValue = 3;
+	
+	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 2220, supercrateOnly = true};
+	
+	ITEM.components = {breakdownType = "meltdown", items = {"steel_chunks"}};
+	ITEM.repairCostModifier = 0.3;
+	ITEM.requiredSubfactions = {"Clan Reaver"};
+	ITEM.kinisgerOverride = true;
 ITEM:Register();
 
 local ITEM = Clockwork.item:New("weapon_base");
@@ -119,7 +143,7 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.huntingValue = 2;
 	
 	ITEM.components = {breakdownType = "meltdown", items = {"iron_chunks"}};
-	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 250, supercrateOnly = true};
+	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 550, supercrateOnly = true};
 	ITEM.repairCostModifier = 0.8;
 ITEM:Register();
 
@@ -157,12 +181,12 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.canUseOffhand = true;
 	ITEM.huntingValue = 3;
 
-	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 1750, supercrateOnly = true};
+	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 2500, supercrateOnly = true};
 	
 	ITEM.components = {breakdownType = "meltdown", items = {"fine_steel_chunks"}};
-	ITEM.requireFaith = {"Faith of the Dark"};
-	ITEM.requireSubfaction = {"Rekh-khet-sa"};
-	ITEM.requireFaction = {"Children of Satan"};
+	ITEM.requiredFaiths = {"Faith of the Dark"};
+	ITEM.requiredSubfactions = {"Rekh-khet-sa"};
+	ITEM.requiredFactions = {"Children of Satan"};
 	ITEM.repairCostModifier = 0.3;
 ITEM:Register();
 
@@ -182,12 +206,12 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.canUseOffhand = true;
 	ITEM.huntingValue = 3;
 
-	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 1750, supercrateOnly = true};
+	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 2500, supercrateOnly = true};
 	
 	ITEM.components = {breakdownType = "meltdown", items = {"fine_steel_chunks"}};
-	ITEM.requireFaith = {"Faith of the Dark"};
-	ITEM.requireSubfaction = {"Varazdat"};
-	ITEM.requireFaction = {"Children of Satan"};
+	ITEM.requiredFaiths = {"Faith of the Dark"};
+	ITEM.requiredSubfactions = {"Varazdat"};
+	ITEM.requiredFactions = {"Children of Satan"};
 	ITEM.repairCostModifier = 0.3;
 ITEM:Register();
 
@@ -207,12 +231,12 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.canUseOffhand = true;
 	ITEM.huntingValue = 3;
 
-	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 1750, supercrateOnly = true};
+	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 2500, supercrateOnly = true};
 	
 	ITEM.components = {breakdownType = "meltdown", items = {"fine_steel_chunks"}};
-	ITEM.requireFaith = {"Faith of the Dark"};
-	ITEM.requireSubfaction = {"Philimaxio"};
-	ITEM.requireFaction = {"Children of Satan"};
+	ITEM.requiredFaiths = {"Faith of the Dark"};
+	ITEM.requiredSubfactions = {"Philimaxio"};
+	ITEM.requiredFactions = {"Children of Satan"};
 	ITEM.repairCostModifier = 0.3;
 ITEM:Register();
 
@@ -228,17 +252,15 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.canUseOffhand = true;
 	ITEM.huntingValue = 3;
 
-	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 2500, supercrateOnly = true};
+	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 3000, supercrateOnly = true};
 	
 	ITEM.attributes = {"concealable"};
 	ITEM.components = {breakdownType = "meltdown", items = {"fine_steel_chunks"}};
-	ITEM.requireFaith = {"Faith of the Dark"};
-	ITEM.requireSubfaction = {"Kinisger"};
-	ITEM.requireFaction = {"Children of Satan"};
+	ITEM.requiredFaiths = {"Faith of the Dark"};
+	ITEM.requiredSubfactions = {"Kinisger"};
+	ITEM.requiredFactions = {"Children of Satan"};
 	ITEM.repairCostModifier = 0.3;
 ITEM:Register();
-
--- Hill shit
 
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "Hill Dagger";
@@ -257,5 +279,54 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.huntingValue = 3;
 	
 	ITEM.components = {breakdownType = "meltdown", items = {"iron_chunks"}};
+	ITEM.repairCostModifier = 0.3;
+ITEM:Register();
+
+local ITEM = Clockwork.item:New("weapon_base");
+	ITEM.name = "Ravenstone Shard";
+	ITEM.model = "models/weapons/cultistdagger.mdl";
+	ITEM.weight = 0.5;
+	ITEM.uniqueID = "begotten_dagger_ravenstoneshard";
+	ITEM.category = "Melee";
+	ITEM.description = "An hand carved serrated dagger of black rock that glistens in the light. The brittle shard holds devastating sharpness, and in the right hands may best even the mightiest steel.";
+	ITEM.iconoverride = "materials/begotten/ui/itemicons/Ebony_dagger.png"
+	ITEM.meleeWeapon = true;
+	ITEM.isAttachment = true;
+	ITEM.attachmentBone = "ValveBiped.Bip01_R_Thigh";
+	ITEM.attachmentOffsetAngles =  Angle(-98.889, -43.333, -100);
+	ITEM.attachmentOffsetVector = Vector(-3.54, 1.41, -2.12);
+	ITEM.canUseOffhand = true;
+	ITEM.huntingValue = 3;
+	
+	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 1730, supercrateOnly = true};
+	
+	ITEM.components = {breakdownType = "breakdown", items = {"human_bone"}};
+	ITEM.repairCostModifier = 0.3;
+	ITEM.requiredSubfactions = {"Old Clan Gotnarh"};
+	ITEM.requiredFactions = {"Goreic Warrior"};
+ITEM:Register();
+
+local ITEM = Clockwork.item:New("weapon_base");
+	ITEM.name = "Masquerade Society Ancestral Dagger";
+	ITEM.model = "models/morrowind/daedric/dagger/w_daedricdagger.mdl";
+	ITEM.weight = 0.5;
+	ITEM.uniqueID = "begotten_dagger_masqueradesocietydagger";
+	ITEM.category = "Melee";
+	ITEM.description = "A tainted dagger formed with the corrupt energy of an Enthralled spirit. Certainly it belong only to the most elusive of Dark servants. A twisted magic prevents anyone not of the correct bloodline from wielding this dagger.";
+	ITEM.iconoverride = "materials/begotten/ui/itemicons/varazdat_dagger.png"
+	ITEM.meleeWeapon = true;
+	ITEM.isAttachment = true;
+	ITEM.attachmentBone = "ValveBiped.Bip01_R_Thigh";
+	ITEM.attachmentOffsetAngles = Angle(252.95, 2.98, 0.95);
+	ITEM.attachmentOffsetVector = Vector(-3.54, 2, 1.41);
+	ITEM.canUseOffhand = true;
+	ITEM.huntingValue = 3;
+
+	ITEM.itemSpawnerInfo = {category = "Melee", rarity = 1750, supercrateOnly = true};
+	
+	ITEM.components = {breakdownType = "meltdown", items = {"fine_steel_chunks"}};
+	ITEM.requiredFaiths = {"Faith of the Dark"};
+	ITEM.requiredSubfactions = {"Varazdat"};
+	ITEM.requiredFactions = {"Children of Satan"};
 	ITEM.repairCostModifier = 0.3;
 ITEM:Register();

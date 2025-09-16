@@ -417,15 +417,15 @@ COMMAND.flags = CMD_DEFAULT;
 COMMAND.arguments = 2;
 COMMAND.alias = {"DW"};
 COMMAND.isChatCommand = true;
-COMMAND.onerequiredbelief = {"soothsayer", "witch"};
+COMMAND.onerequiredbelief = {"soothsayer", "witch", "shedskin"};
 
 -- Called when the command has been run.
 function COMMAND:OnRun(player, arguments)
 	local target = Clockwork.player:FindByID(arguments[1]);
 	
 	if (target) then
-		if player:GetFaith() == "Faith of the Dark" then
-			if player:HasBelief("witch") or player:HasBelief("soothsayer") then
+		if player:GetFaith() == "Faith of the Dark" or player:GetSubfaith() == "Faith of the Sister"  then
+			if player:HasBelief("witch") or player:HasBelief("soothsayer") or player:HasBelief("shedskin") then
 				local curTime = CurTime();
 				local message = "\""..table.concat(arguments, " ", 2).."\"";
 				local targetFaith = target:GetFaith();
@@ -455,7 +455,7 @@ function COMMAND:OnRun(player, arguments)
 				
 				target.lastDarkWhisperer = player;
 			else
-				Schema:EasyText(player, "chocolate", "You must have the 'Witch' or 'Soothsayer' belief before you can darkwhisper!");
+				Schema:EasyText(player, "chocolate", "You must have the 'Witch', 'Soothsayer', or 'Shedskin' belief before you can darkwhisper!");
 			end
 		else
 			Schema:EasyText(player, "firebrick", "You are not the correct faith to do this!");
@@ -474,15 +474,15 @@ COMMAND.flags = CMD_DEFAULT;
 COMMAND.arguments = 1;
 COMMAND.alias = {"DWD"};
 COMMAND.isChatCommand = true;
-COMMAND.onerequiredbelief = {"soothsayer", "witch"};
+COMMAND.onerequiredbelief = {"soothsayer", "witch", "shedskin"};
 
 -- Called when the command has been run.
 function COMMAND:OnRun(player, arguments)
 	local target = Clockwork.entity:GetPlayer(player:GetEyeTraceNoCursor().Entity);
 	
 	if (target) then
-		if player:GetFaith() == "Faith of the Dark" then
-			if player:HasBelief("witch") or player:HasBelief("soothsayer") then
+		if player:GetFaith() == "Faith of the Dark" or player:GetSubfaith() == "Faith of the Sister" then
+			if player:HasBelief("witch") or player:HasBelief("soothsayer") or player:HasBelief("shedskin") then
 				local curTime = CurTime();
 				local message = "\""..table.concat(arguments, " ", 1).."\"";
 				local targetFaith = target:GetFaith();
@@ -512,7 +512,7 @@ function COMMAND:OnRun(player, arguments)
 				
 				target.lastDarkWhisperer = player;
 			else
-				Schema:EasyText(player, "chocolate", "You must have the 'Witch' or 'Soothsayer' belief before you can darkwhisper!");
+				Schema:EasyText(player, "chocolate", "You must have the 'Witch', 'Soothsayer', or 'Shedskin' belief before you can darkwhisper!");
 			end
 		else
 			Schema:EasyText(player, "firebrick", "You are not the correct faith to do this!");
@@ -558,14 +558,14 @@ COMMAND.flags = CMD_DEFAULT;
 COMMAND.arguments = 1;
 COMMAND.alias = {"DWF"};
 COMMAND.isChatCommand = true;
-COMMAND.onerequiredbelief = {"soothsayer", "witch"};
+COMMAND.onerequiredbelief = {"soothsayer", "witch", "shedskin"};
 
 -- Called when the command has been run.
 function COMMAND:OnRun(player, arguments)
 	local faction = player:GetFaction();
 	local faith = player:GetFaith();
 	
-	if faith == "Faith of the Dark" then
+	if faith == "Faith of the Dark" or player:GetSubfaith() == "Faith of the Sister" then
 		if faction == "Children of Satan" then
 			if player:HasBelief("witch") or player:HasBelief("soothsayer") then
 				local message = "\""..table.concat(arguments, " ", 1).."\"";
@@ -585,7 +585,7 @@ function COMMAND:OnRun(player, arguments)
 				Schema:EasyText(player, "chocolate", "You must have the 'Witch' or 'Soothsayer' belief before you can darkwhisper!");
 			end
 		elseif faction == "Goreic Warrior" then
-			if player:HasBelief("witch") or player:HasBelief("soothsayer") then
+			if player:HasBelief("witch") or player:HasBelief("soothsayer") or player:HasBelief("shedskin") then
 				local message = "\""..table.concat(arguments, " ", 1).."\"";
 
 				for _, v in _player.Iterator() do
@@ -604,7 +604,7 @@ function COMMAND:OnRun(player, arguments)
 					end;
 				end;
 			else
-				Schema:EasyText(player, "chocolate", "You must have the 'Witch' or 'Soothsayer' belief before you can darkwhisper!");
+				Schema:EasyText(player, "chocolate", "You must have the 'Witch', 'Soothsayer', or 'Shedskin' belief before you can darkwhisper!");
 			end
 		else
 			Schema:EasyText(player, "firebrick", "You are not the correct faction to do this!");
@@ -630,7 +630,7 @@ function COMMAND:OnRun(player, arguments)
 	local faction = player:GetFaction();
 	local faith = player:GetFaith();
 	
-	if faith == "Faith of the Dark" then
+	if faith == "Faith of the Dark" or player:GetSubfaith() == "Faith of the Sister" then
 		if faction == "Children of Satan" then
 			if player:HasBelief("witch") or player:HasBelief("soothsayer") then
 				if !player:IsAdmin() and !Clockwork.player:HasFlags(player, "P") and Schema:GetRankTier(faction, player:GetCharacterData("rank", 1)) < 3 then
@@ -658,7 +658,7 @@ function COMMAND:OnRun(player, arguments)
 				Schema:EasyText(player, "chocolate", "You must have the 'Witch' or 'Soothsayer' belief before you can darkwhisper!");
 			end
 		elseif faction == "Goreic Warrior" then
-			if player:HasBelief("witch") or player:HasBelief("soothsayer") then
+			if player:HasBelief("witch") or player:HasBelief("soothsayer") or player:HasBelief("shedskin") then
 				if !player:IsAdmin() and !Clockwork.player:HasFlags(player, "P") then
 					Schema:EasyText(player, "peru", "You are not important enough to do this!");
 				
@@ -685,7 +685,7 @@ function COMMAND:OnRun(player, arguments)
 					end;
 				end;
 			else
-				Schema:EasyText(player, "chocolate", "You must have the 'Witch' or 'Soothsayer' belief before you can darkwhisper!");
+				Schema:EasyText(player, "chocolate", "You must have the 'Witch', 'Soothsayer', or 'Shedskin' belief before you can darkwhisper!");
 			end
 		else
 			Schema:EasyText(player, "firebrick", "You are not the correct faction to do this!");
@@ -976,6 +976,19 @@ function COMMAND:OnRun(player, arguments)
 				Schema:EasyText(player, "chocolate", "You must wait another"..-math.ceil(curTime()-player.lastPray).." seconds before praying again!");
 			
 			Clockwork.chatBox:AddInTargetRadius(player, "me", "mumbles a short prayer to the gods.", player:GetPos(), Clockwork.config:Get("talk_radius"):Get() * 2);
+			
+			local nextPrayerBonus = player:GetCharacterData("nextPrayerBonus", 0);
+			
+			if player:GetCharacterData("charPlayTime", 0) >= nextPrayerBonus then
+				-- 15 minutes between prayer bonuses.
+				player:SetCharacterData("nextPrayerBonus", player:GetCharacterData("charPlayTime", 0) + 900);
+				
+				player:HandleXP(10);
+				
+				if cwCharacterNeeds then
+					player:HandleNeed("corruption", -3);
+				end
+			end
 		else
 			Schema:EasyText(player, "chocolate", "You must select a subfaith in the 'Beliefs' menu before you can pray!");
 		end
@@ -1147,7 +1160,7 @@ local COMMAND = Clockwork.command:New("Warcry");
 			end
 		end
 		
-		if player_has_belief or subfaction == "Clan Grock" then
+		if player_has_belief or subfaction == "Clan Grock" or subfaction == "Clan Gotnarh" then
 			local curTime = CurTime();
 			
 			if (!player.lastWarCry) or player.lastWarCry < curTime then
@@ -1161,7 +1174,7 @@ local COMMAND = Clockwork.command:New("Warcry");
 					player:HandleStamina(10);
 					player.ravenBuff = true;
 					
-					timer.Create("RavenTimer_"..player:EntIndex(), 10, 1, function()
+					timer.Create("RavenTimer_"..player:EntIndex(), 15, 1, function()
 						if IsValid(player) then
 							player.ravenBuff = false;
 						end
@@ -1184,13 +1197,37 @@ local COMMAND = Clockwork.command:New("Warcry");
 								
 								table.insert(affected_players, v);
 								
-								timer.Create("RavenTimer_"..v:EntIndex(), 10, 1, function()
+								timer.Create("RavenTimer_"..v:EntIndex(), 15, 1, function()
 									if IsValid(v) then
 										v.ravenBuff = false;
+										Clockwork.hint:Send(v, "'Watchful is the Raven' has worn off...", 10, Color(175, 100, 100), true, true);
 									end
 								end);
 							end
 						end
+						
+						if subfaction == "Clan Grock" or subfaction == "Clan Gotnarh" then
+							local clothesItem = player:GetClothesEquipped()
+					
+							if clothesItem and table.HasValue(clothesItem.attributes, "iconoclast") and !player:GetShieldEquipped() then
+								local targetSubfaction = v:GetNetVar("kinisgerOverrideSubfaction") or v:GetSubfaction();
+								
+								if targetSubfaction == "Clan Grock" or targetSubfaction == "Clan Gotnarh" then
+									v:HandleStamina(25);
+									v.iconoclastBuff = true;
+									hook.Run("RunModifyPlayerSpeed", v, v.cwInfoTable, true);
+								
+									table.insert(affected_players, v);
+									timer.Create("IconoclastTimer_"..v:EntIndex(), 15, 1, function()
+										if IsValid(v) then
+											v.iconoclastBuff = false;
+											hook.Run("RunModifyPlayerSpeed", v, v.cwInfoTable, true);
+											Clockwork.hint:Send(v, "'Iconoclast' has worn off...", 10, Color(175, 100, 100), true, true);
+										end
+									end);
+								end
+							end
+						end 
 						
 						-- Make fearsome wolf damage buff apply to everyone irrespective of faith or faction.
 						if player_has_fearsome_wolf then
@@ -1269,7 +1306,7 @@ local COMMAND = Clockwork.command:New("Warcry");
 										end
 									end
 								
-									if subfaction == "Clan Grock" then
+									if subfaction == "Clan Grock" or subfaction == "Clan Gotnarh" then
 										if !v:HasBelief("saintly_composure") then
 											v:Disorient(1);
 										end
@@ -1319,10 +1356,21 @@ local COMMAND = Clockwork.command:New("Warcry");
 				elseif (subfaction == "Low Ministry") then
 					player:EmitSound("lmcries/lm_cry" .. math.random(1,19) .. ".mp3", 100, math.random(90, 105));
 					Clockwork.chatBox:AddInTargetRadius(player, "me", "lets out a withering scream!", playerPos, radius);
-				elseif subfaction == "Clan Grock" then
-					player:HandleStamina(25);
-					player:EmitSound("warcries/grock_warcry"..math.random(1, 11)..".ogg", 100, math.random(60, 75));
-					Clockwork.chatBox:AddInTargetRadius(player, "me", "barbarically shouts out!", playerPos, radius);
+				elseif subfaction == "Clan Grock" or subfaction == "Clan Gotnarh" then
+					local clothesItem = player:GetClothesEquipped()
+					
+					if clothesItem and table.HasValue(clothesItem.attributes, "iconoclast") and !player:GetShieldEquipped() and cwStamina then
+						player:HandleSanity(-5);
+						local warcrySounds = {"kronos/sawcrazy/random2.wav", "kronos/sawcrazy/random1.wav", "kronos/sawrunner/sawrunner_attack2.wav", "kronos/sawrunner/sawrunner_alert30.wav", "kronos/boss/mace_scream.wav"}
+						local selectedSound = warcrySounds[math.random(#warcrySounds)]
+						player:EmitSound(selectedSound, 100, math.random(60, 75));
+						Clockwork.chatBox:AddInTargetRadius(player, "me", "screams and groans in a mockery of prayer!", playerPos, radius);
+						netstream.Start(player, "UpgradedWarcry", affected_players);
+					else
+						player:HandleStamina(25);
+						player:EmitSound("warcries/grock_warcry"..math.random(1, 11)..".ogg", 100, math.random(60, 75));
+						Clockwork.chatBox:AddInTargetRadius(player, "me", "barbarically shouts out!", playerPos, radius);
+					end
 				-- Kinisgers can FotF warcry if not disguised as a reaver.
 				elseif faith == "Faith of the Family" then
 					local warcryText = "lets out a feral warcry!"
@@ -1370,7 +1418,11 @@ local COMMAND = Clockwork.command:New("Warcry");
 							
 							for i, v in ipairs(player.deceitfulLastDamages) do
 								if v.damageTime >= (curTime - 2) then
-									healthToRestore = healthToRestore + (v.damage / 1.43);
+									if player.abyssalHowlActive then
+										healthToRestore = healthToRestore + (v.damage);
+									else
+										healthToRestore = healthToRestore + (v.damage / 1.43);
+									end
 								end
 							end
 							
@@ -1493,7 +1545,7 @@ function COMMAND:OnRun(player, arguments)
 					
 					if player:HasBelief("wriggle_fucking_eel") then
 						player:StopAllBleeding();
-						player:HandleNeed("corruption", -3);
+						player:HandleNeed("corruption", -2);
 						player:HandleNeed("sleep", -5);
 					end
 					
@@ -1588,10 +1640,6 @@ function COMMAND:OnRun(player, arguments)
 									player:TakeDamage(damage);
 									Clockwork.chatBox:AddInTargetRadius(player, "me", "flagellates "..selfless.." with an unlit lantern!", player:GetPos(), Clockwork.config:Get("talk_radius"):Get() * 2);
 									player.nextFlagellate = curTime + 1;
-									
-									if cwStamina then
-										player:HandleStamina(damage * 2); -- Fix this later (does not account for damage buffs)
-									end
 									return true;
 								else
 									Schema:EasyText(player, "firebrick", "You cannot flagellate yourself to death!");
@@ -1636,14 +1684,6 @@ function COMMAND:OnRun(player, arguments)
 						
 						if attacksoundtable then
 							player:EmitSound(attacksoundtable["hitbody"][math.random(1, #attacksoundtable["hitbody"])]);
-						end
-						
-						if cwStamina then
-							if activeWeapon:GetClass() == "begotten_1h_ironflail" then -- Flails give more stamina when flagellating!
-								player:HandleStamina(d:GetDamage() * 4); -- Fix this later (does not account for damage buffs)
-							else
-								player:HandleStamina(d:GetDamage() * 2); -- Fix this later (does not account for damage buffs)
-							end
 						end
 						
 						if cwSanity then
@@ -1715,6 +1755,10 @@ function COMMAND:OnRun(player, arguments)
 				Schema:EasyText(player, "firebrick", "You cannot do this right now!");
 			
 				return false;
+			--[[elseif player.soulscorchActive then
+				Schema:EasyText(player, "firebrick", "You cannot commit suicide while 'Soulscorch' is active!");
+			
+				return false;]]--
 			end
 
 			player:CommitSuicide()

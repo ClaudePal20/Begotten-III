@@ -4,7 +4,7 @@
 --]]
 
 local map = game.GetMap();
-local bMap = map == "rp_begotten3" or map == "rp_district21";
+local bMap = map == "rp_begotten3" or map == "rp_district21" or map == "bg_district34";
 
 function Schema:ClockworkInitialized()
 	if !self.bountyData then
@@ -539,11 +539,11 @@ function Schema:EntityHandleMenuOption(player, entity, option, arguments)
 								killXP = killXP * math.Clamp(player:GetCharacterData("level", 1), 1, 40);
 								
 								if player:HasBelief("father") then
-									if player:GetCharacterData("level", 1) < entity:GetCharacterData("level", 1) then
+									if player:GetCharacterData("level", 1) < entityPlayer:GetCharacterData("level", 1) then
 										killXP = killXP * 2;
 									end
 								elseif player:HasBelief("sister") then
-									if player:GetCharacterData("level", 1) > entity:GetCharacterData("level", 1) then
+									if player:GetCharacterData("level", 1) > entityPlayer:GetCharacterData("level", 1) then
 										killXP = killXP * 2;
 									end
 								end
@@ -1027,7 +1027,7 @@ function Schema:PlayerAdjustCharacterScreenInfo(player, character, info)
 
 	info.necropolisData = character.data["necropolisData"];
 	
-	if character.subfaction == "Clan Grock" then
+	if character.subfaction == "Clan Grock" or character.subfaction == "Clan Gotnarh" then
 		info.subfaith = "The Old Ways";
 	end
 end;
@@ -1108,6 +1108,49 @@ end;
 
 -- Called when a player presses F3.
 function Schema:ShowSpare1(player)
+	local target = player:GetEyeTraceNoCursor().Entity;
+	local entity = target;
+
+	if (IsValid(target) and target:GetShootPos():Distance(player:GetShootPos()) <= 46) then
+		target = Clockwork.entity:GetPlayer(target);
+		
+		if (target and player:GetNetVar("tied") == 0) then
+			local untieTime = 6;
+		
+			if player.HasBelief and player:HasBelief("dexterity") then
+				untieTime = 4;
+			end
+		
+			if (target:GetNetVar("tied") != 0) then
+				if player:GetMoveType() == MOVETYPE_WALK then
+					for k, v in pairs(ents.FindInSphere(player:GetPos(), Clockwork.config:Get("talk_radius"):Get() * 2)) do
+						if v:IsPlayer() and v:Alive() then
+							Clockwork.chatBox:Add(v, player, "me", "starts untying "..Clockwork.player:FormatRecognisedText(v, "%s", target)..".");
+						end
+					end
+				end
+			
+				Clockwork.player:SetAction(player, "untie", untieTime);
+				
+				Clockwork.player:EntityConditionTimer(player, target, entity, untieTime, 192, function()
+					return player:Alive() and !player:IsRagdolled() and !player:HasGodMode() and player:GetNetVar("tied") == 0;
+				end, function(success)
+					if (success) then
+						self:TiePlayer(target, false);
+						
+						player:GiveItem(item.CreateInstance("bindings"));
+						
+						--player:ProgressAttribute(ATB_DEXTERITY, 15, true);
+					end;
+					
+					Clockwork.player:SetAction(player, "untie", false);
+				end);
+				
+				return;
+			end;
+		end;
+	end;
+	
 	local itemTable = player:FindItemByID("bindings");
 	
 	if (!itemTable) then
@@ -1126,85 +1169,94 @@ end;
 
 -- Called when a player's footstep sound should be played.
 function Schema:PlayerFootstep(player, position, foot, soundString, volume, recipientFilter)
-	-- Moving all of this shit to the client, but the code needs to remain for the wakeup sequence as footsteps can only be forced serverside.
-	if !player.cwWakingUp then
-		if cwPowerArmor and player.wearingPowerArmor then
-			if player:IsRunning() then
-				util.ScreenShake(player:GetPos(), 2, 1, 0.5, 750)
-			else
-				util.ScreenShake(player:GetPos(), 1, 1, 0.5, 750)
-			end
-			
-			return true;
+	local running = player:IsRunning()
+	local isGotnarh = player:GetSubfaction() == "Clan Gotnarh"
+
+	-- Special footsteps: PowerArmor or Gotnarh
+	if (cwPowerArmor and player.wearingPowerArmor) or isGotnarh then
+		local runSounds
+		local walkSounds
+
+		if isGotnarh then
+			runSounds = {
+				"trolls/gotnarh_foot_01.wav",
+				"trolls/gotnarh_foot_02.wav",
+				"trolls/gotnarh_foot_03.wav",
+				"trolls/gotnarh_foot_04.wav"
+			}
+			walkSounds = runSounds
+		else
+			runSounds = {
+				"npc/dog/dog_footstep1.wav",
+				"npc/dog/dog_footstep2.wav",
+				"npc/dog/dog_footstep3.wav",
+				"npc/dog/dog_footstep4.wav"
+			}
+			walkSounds = {
+				"npc/dog/dog_footstep_walk01.wav",
+				"npc/dog/dog_footstep_walk02.wav",
+				"npc/dog/dog_footstep_walk03.wav",
+				"npc/dog/dog_footstep_walk04.wav",
+				"npc/dog/dog_footstep_walk05.wav",
+				"npc/dog/dog_footstep_walk06.wav",
+				"npc/dog/dog_footstep_walk07.wav",
+				"npc/dog/dog_footstep_walk08.wav",
+				"npc/dog/dog_footstep_walk09.wav",
+				"npc/dog/dog_footstep_walk10.wav"
+			}
 		end
-	else
-		local running = false;
-	
-		if (player:IsRunning()) then
-			running = true;
-		end;
-	
-		if cwPowerArmor and player.wearingPowerArmor then
-			if running then
-				local runSounds = {
-					"npc/dog/dog_footstep1.wav",
-					"npc/dog/dog_footstep2.wav",
-					"npc/dog/dog_footstep3.wav",
-					"npc/dog/dog_footstep4.wav",
-				}; 
-				
-				player:EmitSound(runSounds[math.random(1, #runSounds)]);
-				util.ScreenShake(player:GetPos(), 2, 1, 0.5, 750)
-			else
-				local walkSounds = {
-					"npc/dog/dog_footstep_walk01.wav",
-					"npc/dog/dog_footstep_walk02.wav",
-					"npc/dog/dog_footstep_walk03.wav",
-					"npc/dog/dog_footstep_walk04.wav",
-					"npc/dog/dog_footstep_walk05.wav",
-					"npc/dog/dog_footstep_walk06.wav",
-					"npc/dog/dog_footstep_walk07.wav",
-					"npc/dog/dog_footstep_walk08.wav",
-					"npc/dog/dog_footstep_walk09.wav",
-					"npc/dog/dog_footstep_walk10.wav"
-				};
-				
-				player:EmitSound(walkSounds[math.random(1, #walkSounds)]);
-				util.ScreenShake(player:GetPos(), 1, 1, 0.5, 750)
-			end
-			
-			return true;
+
+		if running then
+			player:EmitSound(runSounds[math.random(#runSounds)])
+			util.ScreenShake(player:GetPos(), 2, 1, 0.5, 750)
+		else
+			player:EmitSound(walkSounds[math.random(#walkSounds)])
+			util.ScreenShake(player:GetPos(), 1, 1, 0.5, 750)
 		end
-		
-		if (player:Crouching() and player:HasBelief("nimble")) or player:GetCharmEquipped("urn_silence") or player.cloaked then
-			return true;
-		end;
-		
-		local clothesItem = player:GetClothesEquipped();
-		
-		if (clothesItem) then
-			if (running) then
-				if (clothesItem.runSound) then
-					if (type(clothesItem.runSound) == "table") then
-						player:EmitSound(clothesItem.runSound[math.random(1, #clothesItem.runSound)], 65, math.random(95, 100), 0.5);
-					else
-						player:EmitSound(clothesItem.runSound, 65, math.random(95, 100), 0.50);
-					end;
-				end;
-			elseif (clothesItem.walkSound) then
-				if (type(clothesItem.walkSound) == "table") then
-					player:EmitSound(clothesItem.walkSound[math.random(1, #clothesItem.walkSound)], 65, math.random(95, 100), 0.5);
-				else
-					player:EmitSound(clothesItem.walkSound, 65, math.random(95, 100), 0.5);
-				end;
-			end;
-		end;
-		
-		player:EmitSound(soundString);
-		
-		return true;
+
+		return true
 	end
-end;
+
+	-- If not waking up, block footsteps
+	if not player.cwWakingUp then
+		return true
+	end
+
+	-- Silent cases
+	if (player:Crouching() and player:HasBelief("nimble")) 
+	or player:GetCharmEquipped("urn_silence") 
+	or player.cloaked then
+		return true
+	end
+
+	-- Clothes item sounds
+	local clothesItem = player:GetClothesEquipped()
+	if clothesItem then
+		if running and clothesItem.runSound then
+			if type(clothesItem.runSound) == "table" then
+				player:EmitSound(clothesItem.runSound[math.random(#clothesItem.runSound)], 65, math.random(95, 100), 0.5)
+			else
+				player:EmitSound(clothesItem.runSound, 65, math.random(95, 100), 0.5)
+			end
+			return true
+
+		end
+
+		if not running and clothesItem.walkSound then
+			if type(clothesItem.walkSound) == "table" then
+				player:EmitSound(clothesItem.walkSound[math.random(#clothesItem.walkSound)], 65, math.random(95, 100), 0.5)
+			else
+				player:EmitSound(clothesItem.walkSound, 65, math.random(95, 100), 0.5)
+			end
+			return true
+		end
+	end
+
+	-- Default sound
+	player:EmitSound(soundString)
+	return true
+end
+
 
 -- Called when a player spawns an object.
 function Schema:PlayerSpawnObject(player)
@@ -1292,7 +1344,9 @@ local voltistSounds = {"npc/scanner/combat_scan4.wav", "npc/scanner/combat_scan5
 local voltistYellSounds = {"npc/scanner/scanner_siren2.wav", "npc/scanner/scanner_pain2.wav", "npc/stalker/go_alert2.wav"};
 
 function Schema:PlayerSayICEmitSound(player)
-	if player:GetSubfaith() == "Voltism" then
+	if player:GetModel() == "models/begotten/satanists/darklanderimmortal.mdl" then
+		player:EmitSound("piggysqueals/talk/wretch_tunnels_amb_idle_0"..math.random(1, 5)..".ogg", 90, math.random(95, 110))
+	elseif player:GetSubfaith() == "Voltism" then
 		if cwBeliefs and (player:HasBelief("the_storm") or player:HasBelief("the_paradox_riddle_equation")) then
 			if !Clockwork.player:HasFlags(player, "T") then
 				player:EmitSound(voltistSounds[math.random(1, #voltistSounds)], 90, 150);
@@ -1302,7 +1356,9 @@ function Schema:PlayerSayICEmitSound(player)
 end
 
 function Schema:PlayerYellEmitSound(player)
-	if player:GetSubfaith() == "Voltism" then
+	if player:GetModel() == "models/begotten/satanists/darklanderimmortal.mdl" then
+		player:EmitSound("piggysqueals/yell/wretch_tunnels_amb_alert_0"..math.random(1, 3)..".ogg", 90, math.random(95, 110))
+	elseif player:GetSubfaith() == "Voltism" then
 		if cwBeliefs and (player:HasBelief("the_storm") or player:HasBelief("the_paradox_riddle_equation")) then
 			if !Clockwork.player:HasFlags(player, "T") then
 				player:EmitSound(voltistYellSounds[math.random(1, #voltistYellSounds)], 90, 150);
@@ -1313,47 +1369,7 @@ end
 
 -- Called when a player presses a key.
 function Schema:KeyPress(player, key)
-	if (key == IN_USE) then
-		local untieTime = 6;
-		local target = player:GetEyeTraceNoCursor().Entity;
-		local entity = target;
-		
-		if player.HasBelief and player:HasBelief("dexterity") then
-			untieTime = 4;
-		end
-		
-		if (IsValid(target)) then
-			target = Clockwork.entity:GetPlayer(target);
-			
-			if (target and player:GetNetVar("tied") == 0) then
-				if (target:GetShootPos():Distance(player:GetShootPos()) <= 192) then
-					if (target:GetNetVar("tied") != 0) then
-						for k, v in pairs(ents.FindInSphere(player:GetPos(), 512)) do
-							if (v:GetClass() == "cw_salesman" and v:GetNetworkedString("Name") == "Reaver Despoiler") or (v:GetClass() == "cw_bounty_board" and target:IsWanted()) then
-								return;
-							end
-						end
-					
-						Clockwork.player:SetAction(player, "untie", untieTime);
-						
-						Clockwork.player:EntityConditionTimer(player, target, entity, untieTime, 192, function()
-							return player:Alive() and !player:IsRagdolled() and !player:HasGodMode() and player:GetNetVar("tied") == 0;
-						end, function(success)
-							if (success) then
-								self:TiePlayer(target, false);
-								
-								player:GiveItem(item.CreateInstance("bindings"));
-								
-								--player:ProgressAttribute(ATB_DEXTERITY, 15, true);
-							end;
-							
-							Clockwork.player:SetAction(player, "untie", false);
-						end);
-					end;
-				end;
-			end;
-		end;
-	elseif (key == IN_ATTACK) then
+	if (key == IN_ATTACK) then
 		local action = Clockwork.player:GetAction(player);
 		
 		if (action == "reloading") or (action == "mutilating") or (action == "skinning") or (action == "building") then
@@ -1818,7 +1834,7 @@ function Schema:PlayerThink(player, curTime, infoTable, alive, initialized, plyT
 			end;
 			
 			if (plyTab.bWasInAir) then
-				if (waterLevel >= 1 and waterLevel < 3) then
+				if (waterLevel >= 1) then
 					hook.Run("HitGroundWater", player, plyTab.bWasInAir);
 				end;
 				
@@ -1826,7 +1842,7 @@ function Schema:PlayerThink(player, curTime, infoTable, alive, initialized, plyT
 			end;
 		else
 			if (plyTab.bWasInAir) then
-				if (waterLevel >= 1 and waterLevel < 3) then
+				if (waterLevel >= 1) then
 					hook.Run("HitGroundWater", player, plyTab.bWasInAir);
 					
 					plyTab.bWasInAir = nil;
@@ -1926,8 +1942,9 @@ function Schema:PlayerThink(player, curTime, infoTable, alive, initialized, plyT
 						if ((player:GetPos():WithinAABox(Vector(-4550, 5649, -509), Vector(-4722, 3972, -333))) or (player:GetPos():WithinAABox(Vector(-4621, 4045, -527), Vector(-3337, 3675, -450)))) and player:GetClothesEquipped() ~= "Plague Doctor Robes" and not player.cwObserverMode then
 							if math.random(1, 10) == 1 then
 								if !player:HasDisease("common_cold") then
-									player:GiveDisease("common_cold");
-									Clockwork.player:NotifyAdmins("operator", ""..player:Name().." has contracted the common cold from the corpse field!");
+									if player:GiveDisease("common_cold") then
+										Clockwork.player:NotifyAdmins("operator", ""..player:Name().." has contracted the common cold from the corpse field!");
+									end
 								end
 							end
 						end
@@ -1935,8 +1952,10 @@ function Schema:PlayerThink(player, curTime, infoTable, alive, initialized, plyT
 						plyTab.nextCorpseFieldCheck = curTime + 3;
 					end
 				end
+				
+				local drunk = player:GetNetVar("IsDrunk");
 			
-				if (player:HasTrait("clumsy")) then
+				if (player:HasTrait("clumsy") or (drunk and drunk >= 3)) then
 					if (player:IsRunning()) then
 						if (!plyTab.lastClumsyFallen or plyTab.lastClumsyFallen < curTime) then
 							if (math.random(1, 20) == 20) then
@@ -1996,9 +2015,9 @@ end;
 -- Called when a player hits water.
 function Schema:HitGroundWater(player, airZ)
 	local position = player:GetPos();
-	local difference = math.abs(position.z - airZ);
+	local difference = airZ - position.z
 	
-	if (difference > 512) then
+	if (difference > 192) then
 		local world = GetWorldEntity();
 		local damageInfo = DamageInfo();
 			damageInfo:SetDamageType(DMG_FALL);
@@ -2475,7 +2494,7 @@ function Schema:PlayerCanUseDoor(player, door)
 				
 				return false;
 			end
-		elseif doorName == "castle_bigdoor1" or doorName == "castle_bigdoor2" or doorName == "gate_door" then
+		elseif doorName == "castle_bigdoor1" or doorName == "castle_bigdoor2" or doorName == "gate_door" or (doors["hell"] and table.HasValue(doors["hell"], doorName)) then
 			return false;
 		end
 	end
@@ -3003,6 +3022,10 @@ function Schema:PlayerCharacterLoaded(player)
 		player:SetModelScale(1.12, FrameTime());
 		player:SetViewOffset(Vector(0, 0, 72))
 		player:SetViewOffsetDucked(Vector(0, 0, 32))
+	elseif subfaction == "Clan Gotnarh" then
+		player:SetModelScale(1.35, FrameTime());
+		player:SetViewOffset(Vector(0, 0, 90))
+		player:SetViewOffsetDucked(Vector(0, 0, 32))
 	else
 		player:SetModelScale(1, FrameTime());
 		player:SetViewOffset(Vector(0, 0, 64));
@@ -3289,9 +3312,7 @@ function Schema:EntityTakeDamageNew(entity, damageInfo)
 		elseif damageInfo:IsDamageType(DMG_BULLET) or damageInfo:IsDamageType(DMG_BUCKSHOT) then
 			local subfaction = entity:GetSubfaction();
 		
-			if subfaction == "Knights of Sol" then
-				damageInfo:ScaleDamage(0.3);
-			elseif subfaction == "Philimaxio" then
+			if subfaction == "Knights of Sol" or subfaction == "Philimaxio" then
 				damageInfo:ScaleDamage(0.5);
 			end
 		end;
@@ -3299,9 +3320,14 @@ function Schema:EntityTakeDamageNew(entity, damageInfo)
 		if string.find(entity:GetClass(), "npc_drg_animals_") then
 			local attacker = damageInfo:GetAttacker();
 			
-			if attacker:IsPlayer() and attacker:GetSubfaction() == "Clan Gore" then
-				damageInfo:ScaleDamage(1.5);
+			if attacker:IsPlayer() then
+				if attacker:GetSubfaction() == "Clan Gore" then
+					damageInfo:ScaleDamage(1.5);
+				elseif attacker:GetSubfaction() == "Clan Ghorst" then
+					damageInfo:ScaleDamage(1.25);
+				end
 			end
+			
 		end
 	end
 	
@@ -3490,14 +3516,19 @@ function Schema:EntityTakeDamageNew(entity, damageInfo)
 		end
 		
 		if attacker.banners then
-			for k, v in pairs(attacker.banners) do
-				if v == "glazic" then
-					local faction = attacker:GetFaction();
-					
-					if faction == "Gatekeeper" or faction == "Holy Hierarchy" or faction == "Hillkeeper" or faction == "Pope Adyssa's Gatekeepers" then
-						damageInfo:ScaleDamage(1.15);
+			local attackerWeapon = attacker:GetActiveWeapon();
+			if IsValid(attackerWeapon) then
+				for k, v in pairs(attacker.banners) do
+					if v == "glazic" then
+						local faction = attacker:GetFaction();
+						
+						if faction == "Gatekeeper" or faction == "Holy Hierarchy" or faction == "Hillkeeper" or faction == "Pope Adyssa's Gatekeepers" then
+							if attackerWeapon.Base ~= "begotten_firearm_base" or (attackerWeapon.isMeleeFirearm and player:GetNetVar("ThrustStance")) or attackerWeapon.notPowder then
+								damageInfo:ScaleDamage(1.15);
 
-						break;
+								break;
+							end
+						end
 					end
 				end
 			end
@@ -3560,6 +3591,9 @@ function Schema:ModifyPlayerSpeed(player, infoTable, action)
 		end
 	elseif subfaction == "Watchman" then
 		infoTable.runSpeed = infoTable.runSpeed * 0.95
+
+	elseif subfaction == "Clan Gotnarh" then
+		infoTable.runSpeed = infoTable.runSpeed * 0.90
 	end
 	
 	local shieldItem = player:GetShieldEquipped();
