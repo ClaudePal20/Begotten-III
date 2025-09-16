@@ -27,6 +27,7 @@ Clockwork.flag:Add("L", "Listener", "Listen in to all radio frequencies, darkwhi
 Clockwork.flag:Add("I", "No Limb Damage", "Take no limb damage.")
 Clockwork.flag:Add("N", "No Character Needs", "Character needs (i.e. hunger) will not affect you.")
 Clockwork.flag:Add("M", "No Pain Sounds", "No pain or death sounds from your character.")
+Clockwork.flag:Add("S", "Ignore Item Requirements", "Ignore all requirements (i.e. beliefs, factions) to equip an item.")
 Clockwork.flag:Add("l", "Unholy Blessing Always Active", "Unholy Blessing is always active on weapons that have the attribute.")
 Clockwork.flag:Add("-", "Drop Prevention", "Do not drop items on death. Keep items when perma-killed.")
 
@@ -80,12 +81,12 @@ Clockwork.kernel:IncludePrefixed("cl_schema.lua");
 Clockwork.kernel:IncludePrefixed("cl_theme.lua");
 Clockwork.kernel:IncludePrefixed("cl_hooks.lua");
 Clockwork.kernel:IncludePrefixed("cl_vfx.lua");
-Clockwork.kernel:IncludePrefixed("sh_coms.lua");
 Clockwork.kernel:IncludePrefixed("sh_faiths.lua");
 Clockwork.kernel:IncludePrefixed("sh_zones.lua");
 Clockwork.kernel:IncludePrefixed("sv_schema.lua");
 Clockwork.kernel:IncludePrefixed("sv_hooks.lua");
 Clockwork.kernel:IncludePrefixed("sv_notes.lua");
+Clockwork.kernel:IncludePrefixed("sh_coms.lua");
 
 Clockwork.option:SetKey("default_date", {month = 666, year = 666, day = 666});
 Clockwork.option:SetKey("default_time", {minute = 0, hour = 0, day = 1});

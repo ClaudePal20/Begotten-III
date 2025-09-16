@@ -569,12 +569,12 @@ local ITEM = Clockwork.item:New("bodygroup_base")
 		[HITGROUP_HEAD] = true,
 	}
 
-	ITEM.protection = 28
+	ITEM.protection = 30
 	ITEM.hitParticle = "GlassImpact";
 	ITEM.type = "cloth";
 
 	ITEM.bluntScale = 0.60; -- reduces blunt damage by 40%
-	ITEM.stabilityScale = 0.80; -- reduces stability damage by 20%
+	ITEM.stabilityScale = 0.70; -- reduces stability damage by 30%
 	ITEM.insulation = 40; -- Adds 8% insulation. Helmets account for 20% of total insulation. Body armor covers the other 80%.
 	
 	ITEM.components = {breakdownType = "breakdown", items = {"bearskin", "hide", "hide"}};
@@ -803,4 +803,79 @@ local ITEM = Clockwork.item:New("bodygroup_base")
 	ITEM.insulation = 50;
 	
 	ITEM.components = {breakdownType = "meltdown", items = {"gold_ingot", "fine_steel_chunks", "fine_steel_chunks", "leather"}};
+ITEM:Register();
+
+local ITEM = Clockwork.item:New("bodygroup_base")
+	ITEM.name = "Haralder Ridge Helm"
+	ITEM.model = "models/begotten/misc/gore_sturg_helm.mdl"
+	ITEM.iconoverride = "begotten/ui/itemicons/haralder_ridge_helm.png"
+	ITEM.bodyGroup = 1
+	ITEM.bodyGroupVal = 7
+	ITEM.headSuffix = "_preludegore";
+	ITEM.weight = 2
+	ITEM.uniqueID = "haralder_ridge_helm"
+	ITEM.category = "Helms"
+	ITEM.description = "A finely crafted ridge helm cushioned by boiled leather that smells of the sea. It bears the curse of Clan Harald."
+	ITEM.requiredFactions = {"Goreic Warrior"};
+	ITEM.excludedSubfactions = {"Clan Grock", "Clan Gore", "Clan Crast", "Clan Reaver", "Clan Shagalax"};
+	ITEM.useSound = "armor/plate_damage_02.wav";
+	ITEM.overlay = "begotten/zomboverlay/new/goreridgehelm";
+	ITEM.requiredbeliefs = {"hauberk"};
+	
+	ITEM.conditionScale = 0.8 -- item degrades 1.5x faster with damage related condition loss
+	ITEM.repairCostModifier = 0.5;
+
+	ITEM.effectiveLimbs = {
+		[HITGROUP_HEAD] = true,
+	}
+
+	ITEM.protection = 62
+	ITEM.hitParticle = "MetalSpark";
+	ITEM.type = "plate";
+
+	ITEM.bluntScale = 0.90; -- reduces blunt damage by 10%
+	ITEM.pierceScale = 0.70; -- reduces pierce damage by 30%
+	ITEM.slashScale = 0.60; -- reduces slash damage by 40%
+	ITEM.bulletScale = 0.70; -- reduces bullet damage by 30%
+	ITEM.stabilityScale = 0.60; -- reduces stability damage by 40%
+	ITEM.insulation = 60;
+	
+	ITEM.components = {breakdownType = "meltdown", items = {"fine_steel_chunks", "steel_chunks", "leather"}};
+ITEM:Register();
+
+local ITEM = Clockwork.item:New("bodygroup_base")
+	ITEM.name = "Reaver Slaver Helmet"
+	ITEM.model = "models/begotten/misc/gore_reavereasthelm.mdl"
+	ITEM.iconoverride = "begotten/ui/itemicons/gore_reavereasthelm.png"
+	ITEM.weight = 1.5
+	ITEM.uniqueID = "reaver_slaver_helmet"
+	ITEM.category = "Helms"
+	ITEM.bodyGroup = 1
+	ITEM.bodyGroupVal = 8
+	ITEM.headSuffix = "_preludegore";
+	ITEM.description = "A crudely forged iron spagenhelm with a chainmail aventail underneath, it is feared amongst those in the wasteland for being the last thing they ever see before they're condemned to slavery."
+	ITEM.requiredFactions = {"Goreic Warrior"};
+	ITEM.excludedSubfactions = {"Clan Grock", "Clan Gore", "Clan Crast", "Clan Harald", "Clan Shagalax"};
+	ITEM.useSound = "armor/plate_damage_02.wav";
+	ITEM.overlay = "begotten/zomboverlay/new/genericmask";
+	
+	ITEM.conditionScale = 1.2 -- item degrades 1.5x faster with damage related condition loss
+	ITEM.repairCostModifier = 0.5;
+
+	ITEM.effectiveLimbs = {
+		[HITGROUP_HEAD] = true,
+	}
+
+	ITEM.protection = 55
+	ITEM.hitParticle = "MetalSpark";
+	ITEM.type = "plate";
+
+	ITEM.bluntScale = 0.90; -- reduces blunt damage by 10%
+	ITEM.pierceScale = 0.85; -- reduces pierce damage by 15%
+	ITEM.slashScale = 0.70; -- reduces slash damage by 30%
+	ITEM.stabilityScale = 0.70; -- reduces stability damage by 30%
+	ITEM.bulletScale = 0.80; -- reduces bullet damage by 20%
+	ITEM.insulation = 50; -- Adds 10% insulation. Helmets account for 20% of total insulation. Body armor covers the other 80%.
+	
+	ITEM.components = {breakdownType = "meltdown", items = {"iron_chunks", "iron_chunks", "iron_chunks", "iron_chunks"}};
 ITEM:Register();
