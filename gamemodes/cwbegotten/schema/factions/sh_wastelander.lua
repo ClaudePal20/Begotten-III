@@ -244,8 +244,9 @@ local FACTION = Clockwork.faction:New("Militant Orders of the Villa");
         ["Guildmaster"] = "The Guild",
 		["Physician"] = "The Guild",
 		["General Practicioner"] = "The Guild",
-		["Surveyor"] = "Prole of The Writ",
 		["Waymaster"] = "Prole of The Writ",
+		["Surveyor"] = "Prole of The Writ"
+		
 	};
 	
 	Schema.RanksToCoin["Militant Orders of the Villa"] = {
