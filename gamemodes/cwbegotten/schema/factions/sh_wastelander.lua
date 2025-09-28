@@ -226,8 +226,7 @@ local FACTION = Clockwork.faction:New("Militant Orders of the Villa");
 		[2] = {"Brother", "Laborer", "Surveyor"},
 		[3] = {"Esquire", "Proselyte", "Physician", "Mechanic", "Waymaster"},
 		[4] = {"Prefect", "Reliquarian", "General Practicioner", "Forgewright"},
-		[5] = {"Legate", "Guildmaster"},
-        [6] = {"Writmarshal"}
+		[5] = {"Legate", "Guildmaster"}
 	};
 	
 	Schema.RanksToBuffs["Militant Orders of the Villa"] = {
