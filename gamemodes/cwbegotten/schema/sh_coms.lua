@@ -511,183 +511,178 @@ local COMMAND = Clockwork.command:New("Initiate")
 COMMAND:Register()
 
 local COMMAND = Clockwork.command:New("SetCustomRank")
-	COMMAND.tip = "Set a character's custom rank. If blank, it will be reset. The optional rank index should correspond to what their actual rank would be (i.e. 2 for Acolyte)."
-	COMMAND.text = "<string Character> [string Rank] [number RankIndex]"
-	COMMAND.access = "o"
-	COMMAND.arguments = 2;
-	COMMAND.optionalArguments = 1;
-	COMMAND.alias = {"CharSetCustomRank", "PlySetCustomRank", "PromoteCustom", "SetRankOverride", "SetRankCustom"};
-	
-	-- Called when the command has been run.
-	function COMMAND:OnRun(player, arguments)
-		local target = Clockwork.player:FindByID(arguments[1]);
-		local rankOverride = arguments[2];
-		local rank;
-		
-		if arguments[3] then
-			rank = string.lower(tostring(arguments[3]));
-		end
-		
-		if (target) then
-			local faction = target:GetNetVar("kinisgerOverride") or target:GetFaction();
-			local factionTable = Clockwork.faction:FindByID(faction);
-			local playerFaction = player:GetNetVar("kinisgerOverride") or player:GetFaction();
-			local isMasterFaction = (factionTable and factionTable.masterfactions and table.HasValue(factionTable.masterfactions, playerFaction));
-		
-			if player:IsAdmin() or ((playerFaction == faction and Schema:GetRankTier(playerFaction, player:GetCharacterData("rank", 1)) >= 3) or isMasterFaction) then
-				local name = target:Name();
-				local ranks = Schema.Ranks;
+COMMAND.tip = "Set a character's custom rank. If blank, it will be reset. The optional rank index should correspond to what their actual rank would be (i.e. 2 for Acolyte)."
+COMMAND.text = "<string Character> [string Rank] [number RankIndex]"
+COMMAND.access = "o"
+COMMAND.arguments = 2
+COMMAND.optionalArguments = 1
+COMMAND.alias = {"CharSetCustomRank", "PlySetCustomRank", "PromoteCustom", "SetRankOverride", "SetRankCustom"}
 
-				if (!ranks[faction]) then
-					Schema:EasyText(player, "darkgrey", target:Name().." does not belong to a faction with ranks!");
-					return;
-				end;
-				
-				if rank then
-					for k, v in pairs (ranks[faction]) do
-						if (string.lower(v) == tostring(rank) or k == tonumber(rank)) then
-							rank = k;
-						end;
-					end;
-				end;
+function COMMAND:OnRun(player, arguments)
+    local target = Clockwork.player:FindByID(arguments[1])
+    local rankOverride = arguments[2]
+    local rank
 
-				if !rank or ranks[faction][rank] then
-					if !isMasterFaction and Schema:GetRankTier(faction, rank) >= Schema:GetRankTier(faction, player:GetCharacterData("rank", 1)) then
-						if !player:IsAdmin() then
-							Schema:EasyText(player, "grey", "You cannot change the rank of "..target:Name().."!");
-							
-							return false;
-						end
-					end
-					
-					if !isMasterFaction and Schema:GetRankTier(faction, target:GetCharacterData("rank", 1)) >= Schema:GetRankTier(faction, player:GetCharacterData("rank", 1)) then
-						if !player:IsAdmin() then
-							Schema:EasyText(player, "grey", "You cannot change the rank of "..target:Name().."!");
-							
-							return false;
-						end
-					end
-					
-					if factionTable.CanPromote and factionTable:CanPromote(player, target, faction, targetSubfaction) == false then
-						Schema:EasyText(player, "grey", "You cannot change the rank of "..target:Name().."!");
-					
-						return false;
-					end
-					
-					if factionTable.RanksToSubfaction and !factionTable.promoteAcrossSubfactions then
-						local subfaction = target:GetNetVar("kinisgerOverrideSubfaction") or target:GetSubfaction();
-						
-						if Schema.RanksToSubfaction[faction][ranks[faction][rank]] and Schema.RanksToSubfaction[faction][ranks[faction][rank]] ~= subfaction then
-							Schema:EasyText(player, "grey", "You cannot change the rank of "..target:Name().." to this rank as it is not valid for their subfaction!");
-						
-							return false;
-						end
-					end
-				
-					if rank then
-						target:SetCharacterData("rank", rank);
-					end
-					
-					target:SetCharacterData("rankOverride", rankOverride);
-					hook.Run("PlayerChangedRanks", target);
-					
-					if Schema.RanksToSubfaction and Schema.RanksToSubfaction[faction] then
-						local subfaction = Schema.RanksToSubfaction[faction][ranks[faction][rank]];
-						
-						if subfaction then
-							if target:GetNetVar("kinisgerOverride") then
-								target:SetCharacterData("kinisgerOverrideSubfaction", subfaction);
-								target:SetNetVar("kinisgerOverrideSubfaction", subfaction);
-							else
-								target:SetCharacterData("Subfaction", subfaction, true);
-								
-								if cwBeliefs then
-									-- Remove any subfaction locked beliefs.
-									local beliefsTab = cwBeliefs:GetBeliefs();
-									local targetBeliefs = target:GetCharacterData("beliefs");
-									local targetEpiphanies = target:GetCharacterData("points", 0);
-									
-									for k, v in pairs(beliefsTab) do
-										if v.lockedSubfactions and table.HasValue(v.lockedSubfactions, subfaction) then
-											if targetBeliefs[k] then
-												targetBeliefs[k] = false;
-												
-												targetEpiphanies = targetEpiphanies + 1;
-												
-												local beliefTree = cwBeliefs:FindBeliefTreeByBelief(k);
-												
-												if beliefTree.hasFinisher and targetBeliefs[beliefTree.uniqueID.."_finisher"] then
-													targetBeliefs[beliefTree.uniqueID.."_finisher"] = false;
-												end
-											end
-										end
-									end
-									
-									target:SetCharacterData("beliefs", targetBeliefs);
-									target:SetLocalVar("points", targetEpiphanies);
-									target:SetCharacterData("points", targetEpiphanies);
-									
-									--local max_poise = target:GetMaxPoise();
-									--local poise = target:GetNWInt("meleeStamina");
-									local max_stamina = target:GetMaxStamina();
-									local max_stability = target:GetMaxStability();
-									local stamina = target:GetNWInt("Stamina", 100);
-									
-									target:SetMaxHealth(target:GetMaxHealth());
-									target:SetLocalVar("maxStability", max_stability);
-									--target:SetLocalVar("maxMeleeStamina", max_poise);
-									--target:SetNWInt("meleeStamina", math.min(poise, max_poise));
-									target:SetLocalVar("Max_Stamina", max_stamina);
-									target:SetCharacterData("Max_Stamina", max_stamina);
-									target:SetNWInt("Stamina", math.min(stamina, max_stamina));
-									target:SetCharacterData("Stamina", math.min(stamina, max_stamina));
-									
-									hook.Run("RunModifyPlayerSpeed", target, target.cwInfoTable, true)
-									
-									target:NetworkBeliefs();
-								end
-							end
-							
-							local targetAngles = target:EyeAngles();
-							local targetPos = target:GetPos();
-							
-							Clockwork.player:LoadCharacter(target, Clockwork.player:GetCharacterID(target));
-							
-							target:SetPos(targetPos);
-							target:SetEyeAngles(targetAngles);
-						end
-					end
-					
-					local notifyTarget = true;
-					
-					if (target == player) then
-						name = "yourself";
-						notifyTarget = false;
-					end;
-					
-					if rankOverride then
-						if (notifyTarget) then
-							Schema:EasyText(target, "olivedrab", "You have been promoted to the rank of \""..rankOverride.."\".")
-						end;
-						
-						Schema:EasyText(player, "cornflowerblue", "You have promoted "..name.." to the rank of \""..rankOverride.."\".");
-						
-						if target == player then
-							Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." has promoted themself to the custom rank of \""..rankOverride.."\".");
-						else
-							Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." has promoted "..name.." to the custom rank of \""..rankOverride.."\".");
-						end
-					end
-				else
-					Schema:EasyText(player, "darkgrey", "The rank index specified is not valid!");
-				end;
-			else
-				Schema:EasyText(player, "grey", "You do not have permissions to change the rank of "..target:Name().."!");
-			end;
-		else
-			Schema:EasyText(player, "grey", arguments[1].." is not a valid character!");
-		end;
-	end
+    if arguments[3] then
+        rank = string.lower(tostring(arguments[3]))
+    end
+
+    if not target then
+        Schema:EasyText(player, "grey", arguments[1].." is not a valid character!")
+        return
+    end
+
+    local faction = target:GetNetVar("kinisgerOverride") or target:GetFaction()
+    local factionTable = Clockwork.faction:FindByID(faction)
+    local playerFaction = player:GetNetVar("kinisgerOverride") or player:GetFaction()
+    local isMasterFaction = (factionTable and factionTable.masterfactions and table.HasValue(factionTable.masterfactions, playerFaction))
+
+    if not (player:IsAdmin() or ((playerFaction == faction and Schema:GetRankTier(playerFaction, player:GetCharacterData("rank", 1)) >= 3) or isMasterFaction)) then
+        Schema:EasyText(player, "grey", "You do not have permissions to change the rank of "..target:Name().."!")
+        return
+    end
+
+    local name = target:Name()
+    local ranks = Schema.Ranks
+
+    if not ranks[faction] then
+        Schema:EasyText(player, "darkgrey", target:Name().." does not belong to a faction with ranks!")
+        return
+    end
+
+    if rank then
+        for k, v in pairs(ranks[faction]) do
+            if string.lower(v) == tostring(rank) or k == tonumber(rank) then
+                rank = k
+            end
+        end
+    end
+
+    if not rank or ranks[faction][rank] then
+        -- Check rank tiers
+        if not isMasterFaction and Schema:GetRankTier(faction, rank) >= Schema:GetRankTier(faction, player:GetCharacterData("rank", 1)) and not player:IsAdmin() then
+            Schema:EasyText(player, "grey", "You cannot change the rank of "..target:Name().."!")
+            return false
+        end
+
+        if not isMasterFaction and Schema:GetRankTier(faction, target:GetCharacterData("rank", 1)) >= Schema:GetRankTier(faction, player:GetCharacterData("rank", 1)) and not player:IsAdmin() then
+            Schema:EasyText(player, "grey", "You cannot change the rank of "..target:Name().."!")
+            return false
+        end
+
+        if factionTable.CanPromote and factionTable:CanPromote(player, target, faction) == false then
+            Schema:EasyText(player, "grey", "You cannot change the rank of "..target:Name().."!")
+            return false
+        end
+
+        -- Multiple subfaction support
+        if Schema.RanksToSubfaction and Schema.RanksToSubfaction[faction] and not factionTable.promoteAcrossSubfactions then
+            local targetSubfaction = target:GetNetVar("kinisgerOverrideSubfaction") or target:GetSubfaction()
+            local validSubfactions = Schema.RanksToSubfaction[faction][ranks[faction][rank]]
+
+            if validSubfactions then
+                if type(validSubfactions) ~= "table" then
+                    validSubfactions = {validSubfactions} -- convert single subfaction to table
+                end
+
+                if not table.HasValue(validSubfactions, targetSubfaction) then
+                    Schema:EasyText(player, "grey", "You cannot change the rank of "..target:Name().." to this rank as it is not valid for their subfaction!")
+                    return false
+                end
+            end
+        end
+
+        -- Apply rank
+        if rank then
+            target:SetCharacterData("rank", rank)
+        end
+
+        target:SetCharacterData("rankOverride", rankOverride)
+        hook.Run("PlayerChangedRanks", target)
+
+        -- Handle subfaction assignment if rank maps to one or more subfactions
+        if Schema.RanksToSubfaction and Schema.RanksToSubfaction[faction] then
+            local assignedSubfaction = Schema.RanksToSubfaction[faction][ranks[faction][rank]]
+            if assignedSubfaction then
+                if type(assignedSubfaction) == "table" then
+                    assignedSubfaction = assignedSubfaction[1] -- choose first if multiple (can adjust if needed)
+                end
+
+                if target:GetNetVar("kinisgerOverride") then
+                    target:SetCharacterData("kinisgerOverrideSubfaction", assignedSubfaction)
+                    target:SetNetVar("kinisgerOverrideSubfaction", assignedSubfaction)
+                else
+                    target:SetCharacterData("Subfaction", assignedSubfaction, true)
+
+                    if cwBeliefs then
+                        -- Reset locked beliefs for new subfaction
+                        local beliefsTab = cwBeliefs:GetBeliefs()
+                        local targetBeliefs = target:GetCharacterData("beliefs")
+                        local targetEpiphanies = target:GetCharacterData("points", 0)
+
+                        for k, v in pairs(beliefsTab) do
+                            if v.lockedSubfactions and table.HasValue(v.lockedSubfactions, assignedSubfaction) then
+                                if targetBeliefs[k] then
+                                    targetBeliefs[k] = false
+                                    targetEpiphanies = targetEpiphanies + 1
+                                    local beliefTree = cwBeliefs:FindBeliefTreeByBelief(k)
+                                    if beliefTree.hasFinisher and targetBeliefs[beliefTree.uniqueID.."_finisher"] then
+                                        targetBeliefs[beliefTree.uniqueID.."_finisher"] = false
+                                    end
+                                end
+                            end
+                        end
+
+                        target:SetCharacterData("beliefs", targetBeliefs)
+                        target:SetLocalVar("points", targetEpiphanies)
+                        target:SetCharacterData("points", targetEpiphanies)
+
+                        -- Update stamina and other attributes
+                        local max_stamina = target:GetMaxStamina()
+                        local max_stability = target:GetMaxStability()
+                        local stamina = target:GetNWInt("Stamina", 100)
+
+                        target:SetLocalVar("maxStability", max_stability)
+                        target:SetLocalVar("Max_Stamina", max_stamina)
+                        target:SetCharacterData("Max_Stamina", max_stamina)
+                        target:SetNWInt("Stamina", math.min(stamina, max_stamina))
+                        target:SetCharacterData("Stamina", math.min(stamina, max_stamina))
+
+                        hook.Run("RunModifyPlayerSpeed", target, target.cwInfoTable, true)
+                        target:NetworkBeliefs()
+                    end
+                end
+
+                local targetAngles = target:EyeAngles()
+                local targetPos = target:GetPos()
+                Clockwork.player:LoadCharacter(target, Clockwork.player:GetCharacterID(target))
+                target:SetPos(targetPos)
+                target:SetEyeAngles(targetAngles)
+            end
+        end
+
+        -- Notifications
+        local notifyTarget = target ~= player
+        if not notifyTarget then name = "yourself" end
+
+        if rankOverride then
+            if notifyTarget then
+                Schema:EasyText(target, "olivedrab", "You have been promoted to the rank of \""..rankOverride.."\".")
+            end
+
+            Schema:EasyText(player, "cornflowerblue", "You have promoted "..name.." to the rank of \""..rankOverride.."\".")
+
+            if target == player then
+                Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." has promoted themself to the custom rank of \""..rankOverride.."\".")
+            else
+                Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." has promoted "..name.." to the custom rank of \""..rankOverride.."\".")
+            end
+        end
+    else
+        Schema:EasyText(player, "darkgrey", "The rank index specified is not valid!")
+    end
+end
+
 COMMAND:Register()
 
 local COMMAND = Clockwork.command:New("Promote")
