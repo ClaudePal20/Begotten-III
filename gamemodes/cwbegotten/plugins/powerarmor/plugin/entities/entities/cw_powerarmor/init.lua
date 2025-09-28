@@ -52,13 +52,11 @@ function ENT:Use(activator, caller)
 			if subfaction ~= "Inquisition" then
 				netstream.Start(caller, "OpenPowerArmorMenu", "Knight");
 			end
-		end;
-	elseif faction == "Aristocracy Of Light" then
+		elseif faction == "Aristocracy Of Light" then
 			local subfaction = caller:GetSubfaction();
 
 			if subfaction ~= "Order Of The Writ" then
 				netstream.Start(caller, "OpenPowerArmorMenu", "Knight");
 			end
 		end;
-	end;
 end;
