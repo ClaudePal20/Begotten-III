@@ -403,16 +403,15 @@ local FACTION = Clockwork.faction:New("Aristocracy Of Light");
 		[3] = "Chronologist",
         [4] = "Chamberlain",
 		[5] = "Bailiff",
-		[6] = "Count Caelvora",
-		[7] = "Count Herrera",
-		[8] = "Writmarshal Glazelight",
-		[9] = "Senator"
+		[6] = "Count",
+		[7] = "Writmarshal Glazelight",
+		[8] = "Senator"
 	};
 	
 	Schema.RankTiers["Aristocracy Of Light"] = {
 		[1] = {"Ser Knight", "Manhunter", "Chronologist"},
 		[2] = {"Chamberlain", "Bailiff"},
-		[3] = {"Count Caelvora", "Count Herrera", "Writmarshal Glazelight"},
+		[3] = {"Count", "Writmarshal"},
 		[4] = {"Senator"}
 	};
 	
@@ -422,8 +421,7 @@ local FACTION = Clockwork.faction:New("Aristocracy Of Light");
 		["Chronologist"] = "Order of the Writ",
 		["Chamberlain"] = {"House Caelvora", "House Herrera"},
 		["Bailiff"] = "Order of the Writ",
-		["Count Caelvora"] = {"House Caelvora"},
-		["Count Herrera"] = {"House Herrera"},
+		["Count"] = {"House Caelvora", "House Herrera"},
 		["Writmarshal Glazelight"] = "Order of the Writ",
 		["Senator"] = "Ministry"
 	};
